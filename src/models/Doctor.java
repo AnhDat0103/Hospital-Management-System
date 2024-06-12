@@ -21,6 +21,63 @@ public class Doctor {
         this.patients = new HashMap();
     }
 
+    public int getYearsOfExperience() {
+        return yearsOfExperience;
+    }
 
+    public void setYearsOfExperience(int yearsOfExperience) {
+        this.yearsOfExperience = yearsOfExperience;
+    }
 
+    public int getClinicHours() {
+        return clinicHours;
+    }
+
+    public void setClinicHours(int clinicHours) {
+        this.clinicHours = clinicHours;
+    }
+
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    public Specialization getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(Specialization specialization) {
+        this.specialization = specialization;
+    }
+
+    public double getConsultationFee() {
+        return consultationFee;
+    }
+
+    public void setConsultationFee(double consultationFee) {
+        this.consultationFee = consultationFee;
+    }
+
+    public HashMap getPatients() {
+        return patients;
+    }
+
+    public void setPatients(HashMap patients) {
+        this.patients = patients;
+    }
+
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "clinicHours=" + clinicHours +
+                ", yearsOfExperience=" + yearsOfExperience +
+                ", education='" + education + '\'' +
+                ", specialization=" + specialization +
+                ", consultationFee=" + consultationFee +
+                ", patients=" + patients +
+                '}';
+    }
 }
