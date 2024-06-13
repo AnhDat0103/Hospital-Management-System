@@ -2,7 +2,7 @@ package models;
 
 import java.util.HashMap;
 
-public class Doctor {
+public class Doctor extends Person {
     private int yearsOfExperience;
     private int clinicHours;
     private String education;
