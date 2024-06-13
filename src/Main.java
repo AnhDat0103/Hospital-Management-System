@@ -1,4 +1,5 @@
 import exception.HandlingException;
+import models.Medicine;
 
 import java.text.ParseException;
 import java.util.Scanner;
@@ -13,6 +14,8 @@ public class Main {
         System.out.println("Hi Minh Cao");
         System.out.println("hello everyone!");
 
-
+        //test medicine
+        Medicine med1 = new Medicine("001", "Panadol", "Tablet", "1 lit");
+        System.out.println(med1.toString());
     }
 }
