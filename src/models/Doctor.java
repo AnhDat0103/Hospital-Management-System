@@ -80,4 +80,7 @@ public class Doctor extends Person {
                 ", patients=" + patients +
                 '}';
     }
+    public void addNewPatient(Patient patient){
+
+    }
 }
