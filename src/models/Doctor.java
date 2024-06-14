@@ -1,16 +1,20 @@
 package models;
 
+import com.sun.org.apache.bcel.internal.classfile.StackMapEntry;
+
 import java.util.HashMap;
+import java.util.Map;
 
 public class Doctor extends Person {
-    private int yearsOfExperience;
+    private int yearsOfExperience; //nam kinh nghiem
     private int clinicHours;
     private String education;
     private Specialization specialization;
     private double consultationFee;
-    private HashMap patients;
+    private HashMap<String, Patient> patients;
 
     public Doctor(){
+        this.patients = new HashMap<>();
     }
     public Doctor(int yearsOfExperience, int clinicHours,String education, Specialization specialization, double consultationFee, HashMap patients){
         this.yearsOfExperience = yearsOfExperience;
@@ -18,7 +22,7 @@ public class Doctor extends Person {
         this.education = education;
         this.specialization = specialization;
         this.consultationFee = consultationFee;
-        this.patients = new HashMap();
+        this.patients = new HashMap<>();
     }
 
     public int getYearsOfExperience() {
@@ -61,11 +65,11 @@ public class Doctor extends Person {
         this.consultationFee = consultationFee;
     }
 
-    public HashMap getPatients() {
+    public HashMap<String, Patient> getPatients() {
         return patients;
     }
 
-    public void setPatients(HashMap patients) {
+    public void setPatients(HashMap<String, Patient> patients) {
         this.patients = patients;
     }
 
@@ -80,7 +84,33 @@ public class Doctor extends Person {
                 ", patients=" + patients +
                 '}';
     }
-    public void addNewPatient(Patient patient){
-
+    //Ham them benh nhan
+    public void addNewPatient(Patient patient) {
+        if (patient == null || patient.getIDNumber() == null || patient.getIDNumber().isEmpty()) {
+            throw new IllegalArgumentException("Patient or Patient ID cannot be null or empty");
+        }
+        patients.put(patient.getIDNumber(), patient);
     }
+    //Ham tim kiem benh nhan
+    public Patient findPatient(String IDNumber) {
+        try{
+            patients.get(IDNumber);
+        }
+        return patients.get(IDNumber);
+    }
+    public Patient listPatient(Patient patients){
+        if(getPatients().isEmpty()){
+            System.out.println("No patient found.");
+        }else {
+            for (Map.Entry<String, Patient> entry : patients.entrySet()) {
+                System.out.println(entry.getValue());
+            }
+        }
+    }
+    public Patient removePatient(String IDNumber){
+        return patients.remove(IDNumber);
+    }
+
+
+
 }
