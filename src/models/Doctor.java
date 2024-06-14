@@ -96,25 +96,25 @@ public class Doctor extends Person {
         return patients.get(IDNumber);
     }
     public void listPatient(HashMap<String, Patient> patients){
-        if(getPatients().isEmpty()){
+        if(getPatients().isEmpty()){//check neu benh nhan khong co thi in ra No patient found
             System.out.println("No patient found.");
         }else {
-            for (Map.Entry<String, Patient> entry : patients.entrySet()) {
+            for (Map.Entry<String, Patient> entry : patients.entrySet()) { //chay 1 vong foreach voi 'entry' đại diện cho một cặp khóa-giá trị. tu day in ra danh sach patients
                 System.out.println(entry.getValue());
             }
         }
     }
-    public Patient removePatient(String IDNumber){
+    public Patient removePatient(String IDNumber){//xoa benh nhan
         return patients.remove(IDNumber);
     }
     public Medicine findMedicine(String IDNumber,Medicine medicines){
-        if(patients.containsKey(IDNumber)){
+        if(patients.containsKey(IDNumber)){//check benh nhan bang idnumber
             Patient patient = patients.get(IDNumber);
-            patient.addMedicine(medicines);
+            patient.addMedicine(medicines);//neu co thi add thuoc vao cua nguoi benh day
             return medicines;
 
         }else{
-            throw new IllegalArgumentException("Patient with ID" + IDNumber + " not found.");
+            throw new IllegalArgumentException("Patient with ID" + IDNumber + " not found.");//xu ly ngoai te neu khong co benh nhan day
         }
     }
 }

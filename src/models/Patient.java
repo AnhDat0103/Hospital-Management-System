@@ -72,7 +72,7 @@ public class Patient extends Person {
                 ", specialization=" + specialization +
                 '}';
     }
-    public Medicine addMedicine(Medicine medicine){
+    public Medicine addMedicine(Medicine medicine){ //add them thuoc moi bang cach getMedicine
         medicines.put(medicine.getMedicineID(), medicine);
         return medicine;
     }

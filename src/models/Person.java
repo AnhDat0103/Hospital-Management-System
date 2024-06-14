@@ -87,9 +87,11 @@ public class Person {
                 ", telephoneNumber='" + telephoneNumber + '\'' +
                 '}';
     }
+    //in ra fullname
     public String getFullName(){
         return FirstName + " " + LastName;
     }
+    //in ra tuoi
     public int toAge(){
         return age;
     }
