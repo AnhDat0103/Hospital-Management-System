@@ -16,7 +16,7 @@ public class Doctor extends Person {
     public Doctor(){
         this.patients = new HashMap<>();
     }
-    public Doctor(int yearsOfExperience, int clinicHours,String education, Specialization specialization, double consultationFee, HashMap patients){
+    public Doctor(int yearsOfExperience, int clinicHours,String education, Specialization specialization, double consultationFee, HashMap<String, Patient>patients){
         this.yearsOfExperience = yearsOfExperience;
         this.clinicHours = clinicHours;
         this.education = education;
@@ -93,12 +93,9 @@ public class Doctor extends Person {
     }
     //Ham tim kiem benh nhan
     public Patient findPatient(String IDNumber) {
-        try{
-            patients.get(IDNumber);
-        }
         return patients.get(IDNumber);
     }
-    public Patient listPatient(Patient patients){
+    public void listPatient(HashMap<String, Patient> patients){
         if(getPatients().isEmpty()){
             System.out.println("No patient found.");
         }else {
@@ -110,7 +107,14 @@ public class Doctor extends Person {
     public Patient removePatient(String IDNumber){
         return patients.remove(IDNumber);
     }
+    public Medicine findMedicine(String IDNumber,Medicine medicines){
+        if(patients.containsKey(IDNumber)){
+            Patient patient = patients.get(IDNumber);
+            patient.addMedicine(medicines);
+            return medicines;
 
-
-
+        }else{
+            throw new IllegalArgumentException("Patient with ID" + IDNumber + " not found.");
+        }
+    }
 }

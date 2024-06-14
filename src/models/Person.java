@@ -87,5 +87,11 @@ public class Person {
                 ", telephoneNumber='" + telephoneNumber + '\'' +
                 '}';
     }
+    public String getFullName(){
+        return FirstName + " " + LastName;
+    }
+    public int toAge(){
+        return age;
+    }
 
 }
