@@ -16,7 +16,9 @@ public class Doctor extends Person {
     public Doctor(){
         this.patients = new HashMap<>();
     }
-    public Doctor(int yearsOfExperience, int clinicHours,String education, Specialization specialization, double consultationFee, HashMap<String, Patient>patients){
+
+    public Doctor(String IdNumber, String FirstName, String LastName, String yob, int age, String gender, String address, String telephoneNumber, int yearsOfExperience, int clinicHours, String education, Specialization specialization, double consultationFee, HashMap<String, Patient>patients) {
+        super(IdNumber, FirstName, LastName, yob, age, gender, address, telephoneNumber);
         this.yearsOfExperience = yearsOfExperience;
         this.clinicHours = clinicHours;
         this.education = education;
