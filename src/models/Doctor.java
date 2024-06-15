@@ -1,14 +1,17 @@
 package models;
 
-import com.sun.org.apache.bcel.internal.classfile.StackMapEntry;
+import models.enums.Education;
+import models.enums.Gender;
+import models.enums.Specialization;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Doctor extends Person {
     private int yearsOfExperience; //nam kinh nghiem
     private int clinicHours;
-    private String education;
+    private Education education;
     private Specialization specialization;
     private double consultationFee;
     private HashMap<String, Patient> patients;
@@ -17,14 +20,17 @@ public class Doctor extends Person {
         this.patients = new HashMap<>();
     }
 
-    public Doctor(String IdNumber, String FirstName, String LastName, String yob, int age, String gender, String address, String telephoneNumber, int yearsOfExperience, int clinicHours, String education, Specialization specialization, double consultationFee, HashMap<String, Patient>patients) {
+    public Doctor(String IdNumber, String FirstName, String LastName, String yob, int age, Gender gender, String address, String telephoneNumber,
+                  int yearsOfExperience, int clinicHours, Education education,
+                  Specialization specialization, double consultationFee,
+                  HashMap<String, Patient> patients) throws ParseException {
         super(IdNumber, FirstName, LastName, yob, age, gender, address, telephoneNumber);
         this.yearsOfExperience = yearsOfExperience;
         this.clinicHours = clinicHours;
         this.education = education;
         this.specialization = specialization;
         this.consultationFee = consultationFee;
-        this.patients = new HashMap<>();
+        this.patients = new HashMap<>(patients);
     }
 
     public int getYearsOfExperience() {
@@ -43,11 +49,11 @@ public class Doctor extends Person {
         this.clinicHours = clinicHours;
     }
 
-    public String getEducation() {
+    public Education getEducation() {
         return education;
     }
 
-    public void setEducation(String education) {
+    public void setEducation(Education education) {
         this.education = education;
     }
 
@@ -97,6 +103,8 @@ public class Doctor extends Person {
     public Patient findPatient(String IDNumber) {
         return patients.get(IDNumber);
     }
+
+
     public void listPatient(HashMap<String, Patient> patients){
         if(getPatients().isEmpty()){//check neu benh nhan khong co thi in ra No patient found
             System.out.println("No patient found.");
@@ -106,9 +114,13 @@ public class Doctor extends Person {
             }
         }
     }
+
+
     public Patient removePatient(String IDNumber){//xoa benh nhan
         return patients.remove(IDNumber);
     }
+
+
     public Medicine findMedicine(String IDNumber,Medicine medicines){
         if(patients.containsKey(IDNumber)){//check benh nhan bang idnumber
             Patient patient = patients.get(IDNumber);

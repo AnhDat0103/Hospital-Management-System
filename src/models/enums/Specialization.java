@@ -1,4 +1,4 @@
-package models;
+package models.enums;
 
 public enum Specialization {
     // CÁC KHOA CÓ TRONG BỆNH VIỆN

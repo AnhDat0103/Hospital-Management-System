@@ -45,45 +45,18 @@ public class HandlingException {
         }
     }
 
-    // Calculate age from birthdate
-    public static int toAge(String date) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        formatter.setLenient(false);
-        long diff = new Date().getTime() - formatter.parse(date).getTime();
-        return (int) (TimeUnit.MILLISECONDS.toDays(diff) / 365.25);
-    }
-
-    // Format name properly
-    public static String formatName(String name) {
-        String[] words = name.toLowerCase().trim().split("\\s+");
-        StringBuilder sb = new StringBuilder();
-
-        for (String word : words) {
-            if (!word.isEmpty()) {
-                sb.append(Character.toUpperCase(word.charAt(0)))
-                        .append(word.substring(1))
-                        .append(" ");
-            }
-        }
-        return sb.toString().trim();
-    }
-
-    // Get valid telephone number
-    public static String getTelephoneNumber(Scanner scanner) {
+    // Checking ID for Doctor's IDNumber, Patient's IDNumber
+    public static String checkID (Scanner scanner) throws ParseException {
         while (true) {
-            String telephone = scanner.nextLine();
-            if (checkTelephone(telephone)) {
-                return telephone;
+            String id = scanner.nextLine();
+            String pattern = "^(?:CDL|DML|ENT|NRL|GIT|PDL|PDML|PENT|PNRL|PGIT)\\d{4}$";
+            if (id.matches(pattern)) {
+                return id;
             } else {
-                System.out.println("Invalid telephone number. Please enter a valid telephone number in the format +XXX-XXXXXXXX.");
+                throw new ParseException("Invalid ID. Please enter a valid ID.", 0);
             }
         }
     }
 
-    // Check if telephone number is valid
-    private static boolean checkTelephone(String telephone) {
-        String pattern = "\\+\\d{3}-\\d{8}";
-        return telephone != null && telephone.matches(pattern);
-    }
 
 }

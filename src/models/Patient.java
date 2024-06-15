@@ -1,34 +1,41 @@
 package models;
 
+import models.enums.Gender;
+import models.enums.Specialization;
+
+import java.text.ParseException;
 import java.util.HashMap;
 
 public class Patient extends Person {
     private int height;
     private int weight;
     private String bloodType;
-    private boolean allerigies;
+    private boolean allergies;
     private HashMap<String, Medicine> medicines;
     private Specialization specialization;
 
     public Patient() {
 
     }
-    public Patient(String IdNumber, String FirstName, String LastName, String yob, int age, String gender, String address, String telephoneNumber, boolean allerigies, int height, int weight, String bloodType, HashMap<String, Medicine> medicines, Specialization specialization) {
+    public Patient(String IdNumber, String FirstName, String LastName, String yob, int age, Gender gender,
+                   String address, String telephoneNumber, boolean allergies, int height,
+                   int weight, String bloodType, HashMap<String,
+                   Medicine> medicines, Specialization specialization) throws ParseException {
         super(IdNumber, FirstName, LastName, yob, age, gender, address, telephoneNumber);
-        this.allerigies = allerigies;
+        this.allergies = allergies;
         this.height = height;
         this.weight = weight;
         this.bloodType = bloodType;
-        this.medicines = new HashMap<>();
+        this.medicines = new HashMap<>(medicines);
         this.specialization = specialization;
     }
 
-    public boolean isAllerigies() {
-        return allerigies;
+    public boolean isAllergies() {
+        return allergies;
     }
 
-    public void setAllerigies(boolean allerigies) {
-        this.allerigies = allerigies;
+    public void setAllergies(boolean allergies) {
+        this.allergies = allergies;
     }
     public int getHeight() {
         return height;
@@ -64,7 +71,7 @@ public class Patient extends Person {
     @Override
     public String toString() {
         return "Patient{" +
-                "allerigies=" + allerigies +
+                "allergies=" + allergies +
                 ", height=" + height +
                 ", weight=" + weight +
                 ", bloodType='" + bloodType + '\'' +
@@ -72,9 +79,11 @@ public class Patient extends Person {
                 ", specialization=" + specialization +
                 '}';
     }
-    public Medicine addMedicine(Medicine medicine){ //add them thuoc moi bang cach getMedicine
+
+
+    public void addMedicine(Medicine medicine){ //add them thuoc moi bang cach getMedicine
         medicines.put(medicine.getMedicineID(), medicine);
-        return medicine;
+        System.out.println("Medicine " + medicine.getMedicineID() + " has been added");
     }
 
 }

@@ -1,24 +1,33 @@
 package models;
 
+import exception.HandlingException;
+import models.enums.Gender;
+import validation.Validate;
+
+import java.text.ParseException;
+
 public class Person {
     private String IDNumber;
     private String FirstName;
     private String LastName;
+    private String fullName;
     private String yob;
     private int age;
-    private String gender;
+    private Gender gender;
     private String address;
     private String telephoneNumber;
+
 
     public Person() {
 
     }
-    public Person(String IdNumber, String FirstName, String LastName, String yob, int age, String gender, String address, String telephoneNumber) {
+    public Person(String IdNumber, String FirstName, String LastName, String yob, int age, Gender gender, String address, String telephoneNumber) throws ParseException {
         this.IDNumber = IdNumber;
         this.FirstName = FirstName;
         this.LastName = LastName;
+        this.fullName = getFullName();
         this.yob = yob;
-        this.age = age;
+        this.age = toAge(yob);
         this.gender = gender;
         this.address = address;
         this.telephoneNumber = telephoneNumber;
@@ -58,19 +67,19 @@ public class Person {
     public String getYob() {
         return yob;
     }
-    public void setYob(String yob) {
+    public void setYob(String yob) throws ParseException {
         this.yob = yob;
+        this.age = toAge(yob);
     }
     public int getAge() {
         return age;
     }
-    public void setAge(int age) {
-        this.age = age;
-    }
-    public String getGender() {
+
+    public Gender getGender() {
         return gender;
     }
-    public void setGender(String gender) {
+
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -79,8 +88,7 @@ public class Person {
         return "Person{" +
                 "address='" + address + '\'' +
                 ", IDNumber='" + IDNumber + '\'' +
-                ", FirstName='" + FirstName + '\'' +
-                ", LastName='" + LastName + '\'' +
+                ", FullName='" + fullName + '\'' +
                 ", yob='" + yob + '\'' +
                 ", age=" + age +
                 ", gender='" + gender + '\'' +
@@ -89,11 +97,12 @@ public class Person {
     }
     //in ra fullname
     public String getFullName(){
-        return FirstName + " " + LastName;
+        String fullName = FirstName + " " + LastName;
+        return Validate.formatName(fullName);
     }
     //in ra tuoi
-    public int toAge(){
-        return age;
+    public int toAge(String yob) throws ParseException {
+       return Validate.toAge(yob);
     }
 
 }
