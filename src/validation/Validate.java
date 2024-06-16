@@ -49,6 +49,14 @@ public class Validate {
         return (int) (TimeUnit.MILLISECONDS.toDays(diff) / 365.25);
     }
 
+    // clinic Hours
+    public static int getClinicHours(int  clinicHours) throws ParseException {
+        if (clinicHours > 0 && clinicHours <= 24) {
+            return clinicHours;
+        } else {
+            throw new ParseException("Invalid clinic hours.", 0);
+        }
+    }
 
 
 }

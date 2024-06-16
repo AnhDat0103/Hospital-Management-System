@@ -49,7 +49,7 @@ public class HandlingException {
     public static String checkID (Scanner scanner) throws ParseException {
         while (true) {
             String id = scanner.nextLine();
-            String pattern = "^(?:CDL|DML|ENT|NRL|GIT|PDL|PDML|PENT|PNRL|PGIT)\\d{4}$";
+            String pattern = "^(?:CDL|DML|ENT|NRL|GIT|PCDL|PDML|PENT|PNRL|PGIT)\\d{4}$";
             if (id.matches(pattern)) {
                 return id;
             } else {
