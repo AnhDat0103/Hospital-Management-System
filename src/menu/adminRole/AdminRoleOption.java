@@ -42,7 +42,8 @@ public class AdminRoleOption {
         System.out.println("3. Find a doctor by IDNumber");
         System.out.println("4.Update a doctor by IDNumber");
         System.out.println("5. Delete a doctor by IDNumber");
-        System.out.println("6. Exit");
-        System.out.print("Your choice: ");
+        System.out.println("6. Show the list of Patients.");
+        System.out.println("7. Find a patient by IDNumber");
+        System.out.println("9. Exit");
     }
 }

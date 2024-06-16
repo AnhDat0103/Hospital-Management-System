@@ -11,6 +11,7 @@ public class Validate {
     // Get valid telephone number
     public static String getTelephoneNumber(Scanner scanner) {
         while (true) {
+            System.out.print("Enter doctor's phone number(+XXX-XXXXXXXX): ");
             String telephone = scanner.nextLine();
             if (checkTelephone(telephone)) {
                 return telephone;
@@ -50,12 +51,14 @@ public class Validate {
     }
 
     // clinic Hours
-    public static int getClinicHours(int  clinicHours) throws ParseException {
-        if (clinicHours > 0 && clinicHours <= 24) {
-            return clinicHours;
-        } else {
-            throw new ParseException("Invalid clinic hours.", 0);
-        }
+    public static int getClinicHours(int  clinicHours)  {
+       while (true) {
+           if (clinicHours > 0 && clinicHours <= 24) {
+               return clinicHours;
+           } else {
+               System.out.println("Invalid clinic hours. Please enter a valid clinic hours.");
+           }
+       }
     }
 
 

@@ -36,6 +36,7 @@ public class HandlingException {
         formatter.setLenient(false);
         while (true) {
             try {
+                System.out.println("Enter doctor's birth date(DD/MM/YYYY): ");
                 String date = scanner.nextLine();
                 formatter.parse(date);
                 return date;
@@ -48,15 +49,14 @@ public class HandlingException {
     // Checking ID for Doctor's IDNumber, Patient's IDNumber
     public static String checkID (Scanner scanner) throws ParseException {
         while (true) {
+            System.out.print("Enter doctor's ID((CDL/DML/ENT/NRL/GIT) + XXXX): ");
             String id = scanner.nextLine();
             String pattern = "^(?:CDL|DML|ENT|NRL|GIT|PCDL|PDML|PENT|PNRL|PGIT)\\d{4}$";
             if (id.matches(pattern)) {
                 return id;
             } else {
-                throw new ParseException("Invalid ID. Please enter a valid ID.", 0);
+                System.out.println("Invalid ID. Please enter a valid ID.");
             }
         }
     }
-
-
 }

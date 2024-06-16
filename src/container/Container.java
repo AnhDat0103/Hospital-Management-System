@@ -52,7 +52,6 @@ public class Container {
           Gender gender = null;
           Education education = null;
 
-          System.out.print("Enter Doctor's ID((CDL/DML/ENT/NRL/GIT)XXXX): ");
           String IDNumber = HandlingException.checkID(sc);
 
           System.out.print("Enter Doctor's fist name: ");
@@ -61,12 +60,12 @@ public class Container {
           System.out.print("Enter Doctor's last name: ");
           String lastName = sc.nextLine();
 
-          System.out.println("Enter doctor's birth date(DD/MM/YYYY): ");
           String yob = HandlingException.getBirthOfDay(sc);
 
-          System.out.printf("Gender?: %10s"," ");
-          System.out.printf("%10s|%10s", "1.MALE", "2.FEMALE");
+
           do {
+               System.out.printf("Gender?: %10s"," ");
+               System.out.printf("%10s|%10s", "1.MALE", "2.FEMALE");
                choiceGender = HandlingException.getInteger(sc);
                if (choiceGender == 1) {
                     gender = Gender.MALE;
@@ -81,7 +80,6 @@ public class Container {
           System.out.print("Enter doctor's address: ");
           String address = sc.nextLine();
 
-          System.out.print("Enter doctor's phone number(+XXX-XXXXXXXX): ");
           String telephone = Validate.getTelephoneNumber(sc);
 
           System.out.print("Enter doctor's years of experience: ");
@@ -90,9 +88,10 @@ public class Container {
           System.out.print("Enter doctor's clinic hours: ");
           int clinicHours = Validate.getClinicHours(HandlingException.getInteger(sc));
 
-          System.out.printf("Choose doctor's education:%10s", " ");
-          System.out.printf("%10s|%10s|%10s", "1. DOCTOR", "2. PROFESSOR", "3. ASSOCIATE_PROFESSOR" );
+
           do {
+               System.out.printf("Choose doctor's education:%10s", " ");
+               System.out.printf("%10s|%10s|%10s", "1. DOCTOR", "2. PROFESSOR", "3. ASSOCIATE_PROFESSOR" );
                choiceDoctorEducation = HandlingException.getInteger(sc);
                if (choiceDoctorEducation == 1) {
                     education = Education.DOCTOR;
@@ -107,6 +106,7 @@ public class Container {
 
           System.out.print("Enter doctor's consultationFee: ");
           double consultationFee = HandlingException.getDouble(sc);
+
           switch (choice) {
                case 1:
                     personListOfCARDIOLOGY.add(new Doctor(IDNumber, firstName, lastName, yob,
