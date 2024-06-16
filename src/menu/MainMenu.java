@@ -3,6 +3,7 @@ package menu;
 import container.Container;
 import exception.HandlingException;
 import menu.adminRole.AdminRoleOption;
+import menu.doctorRole.DoctorRoleOptions;
 
 import java.text.ParseException;
 import java.util.Scanner;
@@ -32,17 +33,26 @@ public class MainMenu {
                         System.out.print("password: ");
                         String password = sc.nextLine();
                         if (container.checkAdministration(userName,password)) {
-                            int choice2 = 0;
+                            int choice1 = 0;
                             menuTitleForAdministration();
-                            choice2 = HandlingException.getInteger(sc);
-                            AdminRoleOption.adminRoleOptions(choice2);
+                            choice1 = HandlingException.getInteger(sc);
+                            AdminRoleOption.adminRoleOptions(choice1);
                         }
                     } catch (
                             ParseException e) {
                         System.out.println("username or password is incorrect");;
                     }
                     break;
-                case 2: break;
+                case 2:
+                    try{
+                        int choice2 = 0;
+                        menuTitleForAdministration();
+                        choice2 = HandlingException.getInteger(sc);
+                        DoctorRoleOptions.doctorRoleOptions(choice2);
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
                 case 3: break;
                 default: break;
 

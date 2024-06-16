@@ -39,11 +39,11 @@ public class AdminRoleOption {
     public static void menuDetailsSpecialization() {
         System.out.println("1. Add the new doctor.");
         System.out.println("2. Show the list of doctors.");
-        System.out.println("3. Find a doctor by IDNumber");
-        System.out.println("4.Update a doctor by IDNumber");
-        System.out.println("5. Delete a doctor by IDNumber");
+        System.out.println("3. Find a doctor by IDNumber.");
+        System.out.println("4. Update a doctor by IDNumber.");
+        System.out.println("5. Delete a doctor by IDNumber.");
         System.out.println("6. Show the list of Patients.");
-        System.out.println("7. Find a patient by IDNumber");
-        System.out.println("9. Exit");
+        System.out.println("7. Find a patient by IDNumber.");
+        System.out.println("8. Exit.");
     }
 }

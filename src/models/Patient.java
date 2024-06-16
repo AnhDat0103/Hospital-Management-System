@@ -7,14 +7,14 @@ import java.text.ParseException;
 import java.util.HashMap;
 
 public class Patient extends Person {
-    private int height;
-    private int weight;
-    private String bloodType;
-    private boolean allergies;
-    private HashMap<String, Medicine> medicines;
-    private Specialization specialization;
+    private static int height;
+    private static int weight;
+    private static String bloodType;
+    private static boolean allergies;
+    private static HashMap<String, Medicine> medicines;
+    private static Specialization specialization;
 
-    public Patient() {
+    public Patient(String IDNumber, String firstName, String lastName, String yob, Gender gender, String address, String telephone, double height, double weight, String bloodType, Specialization cardiology, HashMap<String, Patient> patientListOfCARDIOLOGY) {
         this.medicines = new HashMap<>();
     }
 
@@ -85,7 +85,7 @@ public class Patient extends Person {
                 ", height=" + height +
                 ", weight=" + weight +
                 ", bloodType='" + bloodType + '\'' +
-                ", Medicine=" + medicines +
+                ", medicines=" + medicines +
                 ", specialization=" + specialization +
                 '}';
     }
