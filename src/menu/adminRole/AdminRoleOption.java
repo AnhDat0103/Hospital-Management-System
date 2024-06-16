@@ -29,14 +29,9 @@ public class AdminRoleOption {
                     break;
                 case 4:
                     break;
-                case 5:
-                    break;
-                case 6:
-                    break;
-                case 7:
-                    break;
+
             }
-        } while (choice1 >= 1 && choice1 <= 7);
+        } while (choice1 >= 1 && choice1 <= 5);
     }
 
     // Detail option for all specialization
@@ -46,8 +41,7 @@ public class AdminRoleOption {
         System.out.println("3. Find a doctor by IDNumber");
         System.out.println("4.Update a doctor by IDNumber");
         System.out.println("5. Delete a doctor by IDNumber");
-        System.out.println("6. Show the list of Patients."); // TA
-        System.out.println("7. Find a patient by IDNumber"); // TA
+
         System.out.println("9. Exit");
     }
 }
