@@ -51,14 +51,20 @@ public class Validate {
     }
 
     // clinic Hours
-    public static int getClinicHours(int  clinicHours)  {
-       while (true) {
-           if (clinicHours > 0 && clinicHours <= 24) {
-               return clinicHours;
-           } else {
-               System.out.println("Invalid clinic hours. Please enter a valid clinic hours.");
-           }
-       }
+    public static int getClinicHours(Scanner scanner) {
+        while (true) {
+            try {
+                System.out.print("Enter doctor's clinic hours: ");
+                int clinicHours = Integer.parseInt(scanner.nextLine());
+                if (clinicHours > 0 && clinicHours <= 24) {
+                    return clinicHours;
+                } else {
+                    System.out.println("Invalid clinic hours. Please enter a valid clinic hours between 1 and 24.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter an integer.");
+            }
+        }
     }
 
 

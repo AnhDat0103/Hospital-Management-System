@@ -36,10 +36,11 @@ public class MainMenu {
                             menuTitleForAdministration();
                             choice2 = HandlingException.getInteger(sc);
                             AdminRoleOption.adminRoleOptions(choice2);
+                        } else {
+                            System.out.println("Invalid username or password");
                         }
-                    } catch (
-                            ParseException e) {
-                        System.out.println("username or password is incorrect");;
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
                     }
                     break;
                 case 2: break;
