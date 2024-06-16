@@ -21,7 +21,7 @@ public class Person {
     public Person() {
 
     }
-    public Person(String IdNumber, String FirstName, String LastName, String yob, int age, Gender gender, String address, String telephoneNumber) throws ParseException {
+    public Person(String IdNumber, String FirstName, String LastName, String yob, Gender gender, String address, String telephoneNumber) throws ParseException {
         this.IDNumber = IdNumber;
         this.FirstName = FirstName;
         this.LastName = LastName;

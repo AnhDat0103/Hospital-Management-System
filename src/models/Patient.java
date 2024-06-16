@@ -18,10 +18,10 @@ public class Patient extends Person {
         this.medicines = new HashMap<>();
     }
 
-    public Patient(String IdNumber, String FirstName, String LastName, String yob, int age, Gender gender,
+    public Patient(String IdNumber, String FirstName, String LastName, String yob, Gender gender,
                    String address, String telephoneNumber, boolean allergies, int height,
                    int weight, String bloodType, HashMap<String, Medicine> medicines, Specialization specialization) throws ParseException {
-        super(IdNumber, FirstName, LastName, yob, age, gender, address, telephoneNumber);
+        super(IdNumber, FirstName, LastName, yob, gender, address, telephoneNumber);
         this.allergies = allergies;
         this.height = height;
         this.weight = weight;

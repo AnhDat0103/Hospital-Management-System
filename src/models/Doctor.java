@@ -16,15 +16,15 @@ public class Doctor extends Person {
     private double consultationFee;
     private HashMap<String, Patient> patients;
 
-    public Doctor(){
+    public Doctor() {
         this.patients = new HashMap<>();
     }
 
-    public Doctor(String IdNumber, String FirstName, String LastName, String yob, int age, Gender gender, String address, String telephoneNumber,
+    public Doctor(String IdNumber, String FirstName, String LastName, String yob, Gender gender, String address, String telephoneNumber,
                   int yearsOfExperience, int clinicHours, Education education,
                   Specialization specialization, double consultationFee,
                   HashMap<String, Patient> patients) throws ParseException {
-        super(IdNumber, FirstName, LastName, yob, age, gender, address, telephoneNumber);
+        super(IdNumber, FirstName, LastName, yob, gender, address, telephoneNumber);
         this.yearsOfExperience = yearsOfExperience;
         this.clinicHours = clinicHours;
         this.education = education;
@@ -32,6 +32,7 @@ public class Doctor extends Person {
         this.consultationFee = consultationFee;
         this.patients = new HashMap<>(patients);
     }
+
 
     public int getYearsOfExperience() {
         return yearsOfExperience;
@@ -92,6 +93,7 @@ public class Doctor extends Person {
                 ", patients=" + patients +
                 '}';
     }
+
     //Ham them benh nhan
     public void addNewPatient(Patient patient) {
         if (patient == null || patient.getIDNumber() == null || patient.getIDNumber().isEmpty()) {
@@ -99,16 +101,17 @@ public class Doctor extends Person {
         }
         patients.put(patient.getIDNumber(), patient);
     }
+
     //Ham tim kiem benh nhan
     public Patient findPatient(String IDNumber) {
         return patients.get(IDNumber);
     }
 
 
-    public void listPatient(HashMap<String, Patient> patients){
-        if(getPatients().isEmpty()){//check neu benh nhan khong co thi in ra No patient found
+    public void listPatient(HashMap<String, Patient> patients) {
+        if (getPatients().isEmpty()) {//check neu benh nhan khong co thi in ra No patient found
             System.out.println("No patient found.");
-        }else {
+        } else {
             for (Map.Entry<String, Patient> entry : patients.entrySet()) { //chay 1 vong foreach voi 'entry' đại diện cho một cặp khóa-giá trị. tu day in ra danh sach patients
                 System.out.println(entry.getValue());
             }
@@ -116,19 +119,20 @@ public class Doctor extends Person {
     }
 
 
-    public Patient removePatient(String IDNumber){//xoa benh nhan
+    public Patient removePatient(String IDNumber) {//xoa benh nhan
         return patients.remove(IDNumber);
     }
 
 
-    public Medicine findMedicine(String IDNumber,Medicine medicines){
-        if(patients.containsKey(IDNumber)){//check benh nhan bang idnumber
+    public Medicine findMedicine(String IDNumber, Medicine medicines) {
+        if (patients.containsKey(IDNumber)) {//check benh nhan bang idnumber
             Patient patient = patients.get(IDNumber);
             patient.addMedicine(medicines);//neu co thi add thuoc vao cua nguoi benh day
             return medicines;
 
-        }else{
+        } else {
             throw new IllegalArgumentException("Patient with ID" + IDNumber + " not found.");//xu ly ngoai te neu khong co benh nhan day
         }
     }
 }
+

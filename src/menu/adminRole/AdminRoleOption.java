@@ -8,15 +8,10 @@ import java.util.Scanner;
 
 public class AdminRoleOption {
 
-    Scanner sc = new Scanner(System.in);
-    String userName = sc.nextLine();
-    String password = sc.nextLine();
-    Container container;
+    static Scanner sc = new Scanner(System.in);
+    static Container container = new Container();
 
-    public AdminRoleOption() {
-    }
-
-    public  void adminRoleOptions(int choice) throws ParseException {
+    public static void adminRoleOptions(int choice) throws ParseException {
         int choice1;
         do {
             menuDetailsSpecialization();
@@ -41,7 +36,7 @@ public class AdminRoleOption {
     }
 
     // Detail option for all specialization
-    public void menuDetailsSpecialization() {
+    public static void menuDetailsSpecialization() {
         System.out.println("1. Add the new doctor.");
         System.out.println("2. Show the list of doctors.");
         System.out.println("3. Find a doctor by IDNumber");

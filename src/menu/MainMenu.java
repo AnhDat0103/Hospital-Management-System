@@ -35,7 +35,7 @@ public class MainMenu {
                             int choice2 = 0;
                             menuTitleForAdministration();
                             choice2 = HandlingException.getInteger(sc);
-
+                            AdminRoleOption.adminRoleOptions(choice2);
                         }
                     } catch (
                             ParseException e) {
