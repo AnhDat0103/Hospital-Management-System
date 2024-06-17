@@ -2,7 +2,9 @@ package menu.adminRole;
 
 import container.Container;
 import exception.HandlingException;
+import models.Doctor;
 
+import java.sql.SQLOutput;
 import java.text.ParseException;
 import java.util.Scanner;
 
@@ -25,7 +27,14 @@ public class AdminRoleOption {
                     container.showDoctorsList(choice);
                     break;
                 case 3:
-
+                    System.out.print("Enter ID number you want to find: ");
+                    String IDNumberFind = HandlingException.checkID(sc);
+                    Doctor findDoctorByID = container.FindDoctorByID(IDNumberFind, choice);
+                    if ( findDoctorByID == null) {
+                        System.out.println("Doctor not found");
+                    } else {
+                        System.out.println(findDoctorByID.toString());
+                    }
                     break;
                 case 4:
                     break;

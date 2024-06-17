@@ -85,10 +85,10 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
+        return
+                ", FullName='" + fullName + '\'' +
                 "address='" + address + '\'' +
                 ", IDNumber='" + IDNumber + '\'' +
-                ", FullName='" + fullName + '\'' +
                 ", yob='" + yob + '\'' +
                 ", age=" + age +
                 ", gender='" + gender + '\'' +

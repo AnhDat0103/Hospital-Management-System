@@ -11,7 +11,9 @@ import models.enums.Specialization;
 import validation.Validate;
 
 
+import javax.print.Doc;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -20,24 +22,23 @@ public class Container {
 
 
      Scanner sc = new Scanner(System.in);
-     private List<Person> personListOfCARDIOLOGY;  // list of CARDIOLOGY. The list has information of doctors, patient in CARDIOLOGY.
-     private List<Person> personListOfDERMATOLOGY; // list of DERMATOLOGY. The list has information of doctors, patient in DERMATOLOGY.
-     private List<Person> personListOfENT;         // list of ENT. The list has information of doctors, patient in ENT.
-     private List<Person> personListOfNEUROLOGY;   // list of NEUROLOGY. The list has information of doctors, patient in NEUROLOGY.
-     private List<Person> personListOfGERIATRIC;   // list of GERIATRIC. The list has information of doctors, patient in GERIATRIC.
+     private List<Person> personListOfCARDIOLOGY = new ArrayList<>();  // list of CARDIOLOGY. The list has information of doctors, patient in CARDIOLOGY.
+     private List<Person> personListOfDERMATOLOGY = new ArrayList<>(); // list of DERMATOLOGY. The list has information of doctors, patient in DERMATOLOGY.
+     private List<Person> personListOfENT = new ArrayList<>();         // list of ENT. The list has information of doctors, patient in ENT.
+     private List<Person> personListOfNEUROLOGY = new ArrayList<>();   // list of NEUROLOGY. The list has information of doctors, patient in NEUROLOGY.
+     private List<Person> personListOfGERIATRIC = new ArrayList<>();   // list of GERIATRIC. The list has information of doctors, patient in GERIATRIC.
 
-     private List<Person> persons;
-     private HashMap<String, Patient> patientListOfCARDIOLOGY ;
-     private HashMap<String, Patient> patientListOfDERMATOLOGY;
-     private HashMap<String, Patient> patientListOfENT;
-     private HashMap<String, Patient> patientListOfNEUROLOGY;
-     private HashMap<String, Patient> patientListOfGERIATRIC;
+     private HashMap<String, Patient> patientListOfCARDIOLOGY = new HashMap<>();
+     private HashMap<String, Patient> patientListOfDERMATOLOGY = new HashMap<>();
+     private HashMap<String, Patient> patientListOfENT = new HashMap<>();
+     private HashMap<String, Patient> patientListOfNEUROLOGY = new HashMap<>();
+     private HashMap<String, Patient> patientListOfGERIATRIC = new HashMap<>();
 
-     private HashMap<String, Medicine> medicineListOfCARDIOLOGY;
-     private HashMap<String, Medicine> medicineListOfDERMATOLOGY;
-     private HashMap<String, Medicine> medicineListOfENT;
-     private HashMap<String, Medicine> medicineListOfNEUROLOGY;
-     private HashMap<String, Medicine> medicineListOfGERIATRIC;
+     private HashMap<String, Medicine> medicineListOfCARDIOLOGY = new HashMap<>();
+     private HashMap<String, Medicine> medicineListOfDERMATOLOGY = new HashMap<>();
+     private HashMap<String, Medicine> medicineListOfENT = new HashMap<>();
+     private HashMap<String, Medicine> medicineListOfNEUROLOGY = new HashMap<>();
+     private HashMap<String, Medicine> medicineListOfGERIATRIC = new HashMap<>();
 
      public boolean checkAdministration(String userName, String password) throws ParseException {
           if (userName.matches("admin") && password.matches("admin")) {
@@ -65,7 +66,7 @@ public class Container {
 
           do {
                System.out.printf("Gender?: %10s"," ");
-               System.out.printf("%10s|%10s", "1.MALE", "2.FEMALE");
+               System.out.printf("%10s|%10s|%10s|%10s", "1.MALE", "2.FEMALE", "Your choice:", " ");
                choiceGender = HandlingException.getInteger(sc);
                if (choiceGender == 1) {
                     gender = Gender.MALE;
@@ -85,13 +86,11 @@ public class Container {
           System.out.print("Enter doctor's years of experience: ");
           int yearOfExperience = HandlingException.getInteger(sc);
 
-          System.out.print("Enter doctor's clinic hours: ");
-          int clinicHours = Validate.getClinicHours(HandlingException.getInteger(sc));
-
+          int clinicHours = Validate.getClinicHours(sc);
 
           do {
                System.out.printf("Choose doctor's education:%10s", " ");
-               System.out.printf("%10s|%10s|%10s", "1. DOCTOR", "2. PROFESSOR", "3. ASSOCIATE_PROFESSOR" );
+               System.out.printf("%10s|%10s|%10s|%10s", "1. DOCTOR", "2. PROFESSOR", "3. ASSOCIATE_PROFESSOR", " ");
                choiceDoctorEducation = HandlingException.getInteger(sc);
                if (choiceDoctorEducation == 1) {
                     education = Education.DOCTOR;
@@ -109,10 +108,10 @@ public class Container {
 
           switch (choice) {
                case 1:
-                    personListOfCARDIOLOGY.add(new Doctor(IDNumber, firstName, lastName, yob,
-                                                          gender, address, telephone, yearOfExperience,
-                                                          clinicHours, education, Specialization.CARDIOLOGY,
-                                                          consultationFee,patientListOfCARDIOLOGY));
+                    personListOfCARDIOLOGY.add(new Doctor(IDNumber, firstName, lastName, yob, gender, address, telephone,
+                                               yearOfExperience, clinicHours, education, Specialization.CARDIOLOGY ,
+                                               consultationFee, patientListOfCARDIOLOGY));
+                    System.out.println("added new doctor.");
                     break;
                case 2:
                     personListOfDERMATOLOGY.add(new Doctor(IDNumber, firstName, lastName, yob,
@@ -159,6 +158,32 @@ public class Container {
                     personListOfGERIATRIC.forEach(Doctor -> System.out.println(Doctor.toString()));
                     break;
           }
+     }
+
+     public Doctor FindDoctorByID(String IDNumber, int choice) {
+          switch (choice) {
+               case 1:
+                    personListOfCARDIOLOGY.stream().filter(d -> d.getIDNumber().equals(IDNumber))
+                            .findFirst().get();
+                    break;
+               case 2:
+                    personListOfDERMATOLOGY.stream().filter(d -> d.getIDNumber().equals(IDNumber))
+                            .findFirst().get();
+                    break;
+               case 3:
+                    personListOfENT.stream().filter(d -> d.getIDNumber().equals(IDNumber))
+                            .findFirst().get();
+                    break;
+               case 4:
+                    personListOfNEUROLOGY.stream().filter(d -> d.getIDNumber().equals(IDNumber))
+                            .findFirst().get();
+                    break;
+               case 5:
+                    personListOfGERIATRIC.stream().filter(d -> d.getIDNumber().equals(IDNumber))
+                            .findFirst().get();
+                    break;
+          }
+          return null;
      }
 
 
