@@ -166,7 +166,7 @@ public class Container {
     public void showPatientsList(int choice) {
          switch (choice) {
               case 1:
-                   for (Patient patient : patientListOfCARDIOLOGY.valies()) {
+                   for (Patient patient : patientListOfCARDIOLOGY.values()) {
                         System.out.println(patient.tostring());
                    }
                    break;
