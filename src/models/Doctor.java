@@ -86,6 +86,7 @@ public class Doctor extends Person {
     @Override
     public String toString() {
         return "Doctor{" +
+                super.toString() +
                 "clinicHours=" + clinicHours +
                 ", yearsOfExperience=" + yearsOfExperience +
                 ", education='" + education + '\'' +

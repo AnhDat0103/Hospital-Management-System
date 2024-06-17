@@ -11,6 +11,7 @@ import models.enums.Specialization;
 import validation.Validate;
 
 
+import javax.print.Doc;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -157,6 +158,32 @@ public class Container {
                     personListOfGERIATRIC.forEach(Doctor -> System.out.println(Doctor.toString()));
                     break;
           }
+     }
+
+     public Doctor FindDoctorByID(String IDNumber, int choice) {
+          switch (choice) {
+               case 1:
+                    personListOfCARDIOLOGY.stream().filter(d -> d.getIDNumber().equals(IDNumber))
+                            .findFirst().get();
+                    break;
+               case 2:
+                    personListOfDERMATOLOGY.stream().filter(d -> d.getIDNumber().equals(IDNumber))
+                            .findFirst().get();
+                    break;
+               case 3:
+                    personListOfENT.stream().filter(d -> d.getIDNumber().equals(IDNumber))
+                            .findFirst().get();
+                    break;
+               case 4:
+                    personListOfNEUROLOGY.stream().filter(d -> d.getIDNumber().equals(IDNumber))
+                            .findFirst().get();
+                    break;
+               case 5:
+                    personListOfGERIATRIC.stream().filter(d -> d.getIDNumber().equals(IDNumber))
+                            .findFirst().get();
+                    break;
+          }
+          return null;
      }
 
 
