@@ -162,38 +162,7 @@ public class Container {
      }
 
 
-     // method hiện information của patient
-    public void showPatientsList(int choice) {
-         switch (choice) {
-              case 1:
-                   for (Patient patient : patientListOfCARDIOLOGY.values()) {
-                        System.out.println(patient.tostring());
-                   }
-                   break;
-              case 2:
-                   for (Patient patient : patientListOfDERMATOLOGY.values()) {
-                        System.out.println(patient.toString());
-                   }
-                   break;
-              case 3:
-                   for (Patient patient : patientListOfENT.values()) {
-                        System.out.println(patient.toString());
-                   }
-                   break;
-              case 4:
-                   for (Patient patient : patientListOfNEUROLOGY.values()) {
-                        System.out.println(patient.toString());
-                   }
-                   break;
-              case 5:
-                   for (Patient patient : patientListOfGERIATRIC.values()) {
-                        System.out.println(patient.toString());
-                   }
-                   break;
 
-
-         }
-    }
 
 
 
