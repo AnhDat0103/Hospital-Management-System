@@ -14,7 +14,7 @@ public class Patient extends Person {
     private HashMap<String, Medicine> medicines;
     private Specialization specialization;
 
-    public Patient(String IDNumber, String firstName, String lastName, String yob, Gender gender, String address, String telephone, double height, double weight, String bloodType, int allergiesChoice, Specialization cardiology) {
+    public Patient(String IDNumber, String firstName, String lastName, String yob, Gender gender, String address, String telephone, double height, double weight, String bloodType, int allergiesChoice) {
         this.medicines = new HashMap<>();
     }
 
@@ -80,16 +80,19 @@ public class Patient extends Person {
 
     @Override
     public String toString() {
-        return "Patient{" + " " +
+        return "Patient {" +
                 super.toString() +
-                "allergies=" + allergies +
+                "allergies='" + allergies + '\'' +
                 ", height=" + height +
                 ", weight=" + weight +
                 ", bloodType='" + bloodType + '\'' +
-                ", Medicine=" + medicines +
+                ", medicines=" + medicines +
                 ", specialization=" + specialization +
                 '}';
     }
+
+
+
 
     public void addMedicine(Medicine medicine) {
         medicines.put(medicine.getMedicineID(), medicine);

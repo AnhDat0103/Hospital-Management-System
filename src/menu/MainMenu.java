@@ -47,10 +47,10 @@ public class MainMenu {
                     break;
                 case 2:
                     try {
-                            int choice2 = 0;
+                            int choice3 = 0;
                             menuTitleForAdministration();
-                            choice2 = HandlingException.getInteger(sc);
-                            DoctorRoleOptions.doctorRoleOptions(choice2);
+                            choice3 = HandlingException.getInteger(sc);
+                            DoctorRoleOptions.doctorRoleOptions(choice3);
                             break;
                     } catch (ParseException e) {
                         throw new RuntimeException(e);
