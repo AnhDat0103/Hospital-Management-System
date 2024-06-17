@@ -3,6 +3,7 @@ package menu;
 import container.Container;
 import exception.HandlingException;
 import menu.adminRole.AdminRoleOption;
+import menu.doctorRole.DoctorRoleOptions;
 
 import java.text.ParseException;
 import java.util.Scanner;
@@ -44,7 +45,16 @@ public class MainMenu {
                         System.out.println(e.getMessage());
                     }
                     break;
-                case 2: break;
+                case 2:
+                    try {
+                            int choice2 = 0;
+                            menuTitleForAdministration();
+                            choice2 = HandlingException.getInteger(sc);
+                            DoctorRoleOptions.doctorRoleOptions(choice2);
+                            break;
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
                 case 3: break;
                 default: break;
 

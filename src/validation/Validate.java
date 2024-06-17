@@ -11,7 +11,7 @@ public class Validate {
     // Get valid telephone number
     public static String getTelephoneNumber(Scanner scanner) {
         while (true) {
-            System.out.print("Enter doctor's phone number(+XXX-XXXXXXXX): ");
+            System.out.print("Enter phone number(+XXX-XXXXXXXX): ");
             String telephone = scanner.nextLine();
             if (checkTelephone(telephone)) {
                 return telephone;

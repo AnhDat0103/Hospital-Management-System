@@ -34,7 +34,7 @@ public class HandlingException {
             try {
                 SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
                 formatter.setLenient(false);
-                System.out.print("Enter doctor's birth date(DD-MM-YYYY): ");
+                System.out.print("Enter birth date(DD-MM-YYYY): ");
                 String date = scanner.nextLine();
                 formatter.parse(date);
                 return date;

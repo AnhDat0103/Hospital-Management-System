@@ -10,16 +10,16 @@ public class Patient extends Person {
     private int height;
     private int weight;
     private String bloodType;
-    private boolean allergies;
+    private String allergies;
     private HashMap<String, Medicine> medicines;
     private Specialization specialization;
 
-    public Patient() {
+    public Patient(String IDNumber, String firstName, String lastName, String yob, Gender gender, String address, String telephone, double height, double weight, String bloodType, int allergiesChoice, Specialization cardiology) {
         this.medicines = new HashMap<>();
     }
 
     public Patient(String IdNumber, String FirstName, String LastName, String yob, Gender gender,
-                   String address, String telephoneNumber, boolean allergies, int height,
+                   String address, String telephoneNumber, String allergies, int height,
                    int weight, String bloodType, HashMap<String, Medicine> medicines, Specialization specialization) throws ParseException {
         super(IdNumber, FirstName, LastName, yob, gender, address, telephoneNumber);
         this.allergies = allergies;
@@ -30,11 +30,11 @@ public class Patient extends Person {
         this.specialization = specialization;
     }
 
-    public boolean isAllergies() {
+    public String isAllergies() {
         return allergies;
     }
 
-    public void setAllergies(boolean allergies) {
+    public void setAllergies(String allergies) {
         this.allergies = allergies;
     }
 
@@ -80,7 +80,8 @@ public class Patient extends Person {
 
     @Override
     public String toString() {
-        return "Patient{" +
+        return "Patient{" + " " +
+                super.toString() +
                 "allergies=" + allergies +
                 ", height=" + height +
                 ", weight=" + weight +
