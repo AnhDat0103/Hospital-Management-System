@@ -65,7 +65,7 @@ public class Container {
 
           do {
                System.out.printf("Gender?: %10s"," ");
-               System.out.printf("%10s|%10s|%10s", "1.MALE", "2.FEMALE", "Your choice: ");
+               System.out.printf("%10s|%10s|%10s|%10s", "1.MALE", "2.FEMALE", "Your choice:", " ");
                choiceGender = HandlingException.getInteger(sc);
                if (choiceGender == 1) {
                     gender = Gender.MALE;
@@ -89,7 +89,7 @@ public class Container {
 
           do {
                System.out.printf("Choose doctor's education:%10s", " ");
-               System.out.printf("%10s|%10s|%10s", "1. DOCTOR", "2. PROFESSOR", "3. ASSOCIATE_PROFESSOR" );
+               System.out.printf("%10s|%10s|%10s|%10s", "1. DOCTOR", "2. PROFESSOR", "3. ASSOCIATE_PROFESSOR", " ");
                choiceDoctorEducation = HandlingException.getInteger(sc);
                if (choiceDoctorEducation == 1) {
                     education = Education.DOCTOR;
@@ -110,6 +110,7 @@ public class Container {
                     personListOfCARDIOLOGY.add(new Doctor(IDNumber, firstName, lastName, yob, gender, address, telephone,
                                                yearOfExperience, clinicHours, education, Specialization.CARDIOLOGY ,
                                                consultationFee, patientListOfCARDIOLOGY));
+                    System.out.println("added new doctor.");
                     break;
                case 2:
                     personListOfDERMATOLOGY.add(new Doctor(IDNumber, firstName, lastName, yob,
