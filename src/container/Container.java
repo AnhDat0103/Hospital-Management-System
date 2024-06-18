@@ -21,11 +21,11 @@ public class Container {
 
 
      Scanner sc = new Scanner(System.in);
-     private final List<Person> personListOfCARDIOLOGY = new ArrayList<>();  // list of CARDIOLOGY. The list has information of doctors, patient in CARDIOLOGY.
-     private final List<Person> personListOfDERMATOLOGY = new ArrayList<>(); // list of DERMATOLOGY. The list has information of doctors, patient in DERMATOLOGY.
-     private final List<Person> personListOfENT = new ArrayList<>();         // list of ENT. The list has information of doctors, patient in ENT.
-     private final List<Person> personListOfNEUROLOGY = new ArrayList<>();   // list of NEUROLOGY. The list has information of doctors, patient in NEUROLOGY.
-     private final List<Person> personListOfGERIATRIC = new ArrayList<>();   // list of GERIATRIC. The list has information of doctors, patient in GERIATRIC.
+     private final List<Doctor> doctorListOfCARDIOLOGY = new ArrayList<>();  // list of CARDIOLOGY. The list has information of doctors, patient in CARDIOLOGY.
+     private final List<Doctor> doctorListOfDERMATOLOGY = new ArrayList<>(); // list of DERMATOLOGY. The list has information of doctors, patient in DERMATOLOGY.
+     private final List<Doctor> doctorListOfENT = new ArrayList<>();         // list of ENT. The list has information of doctors, patient in ENT.
+     private final List<Doctor> doctorListOfNEUROLOGY = new ArrayList<>();   // list of NEUROLOGY. The list has information of doctors, patient in NEUROLOGY.
+     private final List<Doctor> doctorListOfGERIATRIC = new ArrayList<>();   // list of GERIATRIC. The list has information of doctors, patient in GERIATRIC.
 
      private final List<Medicine> medicinesOfCARDIOLOGY = new ArrayList<>();    // list of CARDIOLOGY. The list has information of medicines in CARDIOLOGY.
      private final List<Medicine> medicinesOfDERMATOLOGY = new ArrayList<>();   // list of DERMATOLOGY. The list has information of medicines in DERMATOLOGY.
@@ -115,34 +115,38 @@ public class Container {
 
           switch (choice) {
                case 1:
-                    personListOfCARDIOLOGY.add(new Doctor(IDNumber, firstName, lastName, yob, gender, address, telephone,
+                    doctorListOfCARDIOLOGY.add(new Doctor(IDNumber, firstName, lastName, yob, gender, address, telephone,
                                                yearOfExperience, clinicHours, education, Specialization.CARDIOLOGY ,
                                                consultationFee, patientListOfCARDIOLOGY));
                     System.out.println("added new doctor.");
                     break;
                case 2:
-                    personListOfDERMATOLOGY.add(new Doctor(IDNumber, firstName, lastName, yob,
+                    doctorListOfDERMATOLOGY.add(new Doctor(IDNumber, firstName, lastName, yob,
                                                            gender, address, telephone, yearOfExperience,
                                                            clinicHours, education, Specialization.DERMATOLOGY,
                                                            consultationFee,patientListOfDERMATOLOGY));
+                    System.out.println("added new doctor.");
                     break;
                case 3:
-                    personListOfENT.add(new Doctor(IDNumber, firstName, lastName, yob,
+                    doctorListOfENT.add(new Doctor(IDNumber, firstName, lastName, yob,
                                                         gender, address, telephone, yearOfExperience,
                                                         clinicHours, education, Specialization.ENT,
                                                         consultationFee,patientListOfENT));
+                    System.out.println("added new doctor.");
                     break;
                case 4:
-                    personListOfNEUROLOGY.add(new Doctor(IDNumber, firstName, lastName, yob,
+                    doctorListOfNEUROLOGY.add(new Doctor(IDNumber, firstName, lastName, yob,
                                                         gender, address, telephone, yearOfExperience,
                                                         clinicHours, education, Specialization.NEUROLOGY,
                                                         consultationFee,patientListOfNEUROLOGY));
+                    System.out.println("added new doctor.");
                     break;
                case 5:
-                    personListOfGERIATRIC.add(new Doctor(IDNumber, firstName, lastName, yob,
+                    doctorListOfGERIATRIC.add(new Doctor(IDNumber, firstName, lastName, yob,
                                                    gender, address, telephone, yearOfExperience,
                                                    clinicHours, education, Specialization.GERIATRIC,
                                                    consultationFee,patientListOfGERIATRIC));
+                    System.out.println("added new doctor.");
                     break;
           }
      }
@@ -150,19 +154,19 @@ public class Container {
      public void showDoctorsList(int choice) {
           switch (choice) {
                case 1:
-                    personListOfCARDIOLOGY.forEach(Doctor -> System.out.println(Doctor.toString()));
+                    doctorListOfCARDIOLOGY.forEach(Doctor -> System.out.println(Doctor.toString()));
                     break;
                case 2:
-                    personListOfDERMATOLOGY.forEach(Doctor -> System.out.println(Doctor.toString()));
+                    doctorListOfDERMATOLOGY.forEach(Doctor -> System.out.println(Doctor.toString()));
                     break;
                case 3:
-                    personListOfENT.forEach(Doctor -> System.out.println(Doctor.toString()));
+                    doctorListOfENT.forEach(Doctor -> System.out.println(Doctor.toString()));
                     break;
                case 4:
-                    personListOfNEUROLOGY.forEach(Doctor -> System.out.println(Doctor.toString()));
+                    doctorListOfNEUROLOGY.forEach(Doctor -> System.out.println(Doctor.toString()));
                     break;
                case 5:
-                    personListOfGERIATRIC.forEach(Doctor -> System.out.println(Doctor.toString()));
+                    doctorListOfGERIATRIC.forEach(Doctor -> System.out.println(Doctor.toString()));
                     break;
           }
      }
@@ -170,27 +174,22 @@ public class Container {
      public Doctor findDoctorByID(String IDNumber, int choice) {
           switch (choice) {
                case 1:
-                    personListOfCARDIOLOGY.stream().filter(d -> d.getIDNumber().equals(IDNumber)).forEach(System.out::println);
-                    break;
+                    return doctorListOfCARDIOLOGY.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
                case 2:
-                    personListOfDERMATOLOGY.stream().filter(d -> d.getIDNumber().equals(IDNumber)).forEach(System.out::println);
-                    break;
+                     return doctorListOfDERMATOLOGY.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
                case 3:
-                    personListOfENT.stream().filter(d -> d.getIDNumber().equals(IDNumber)).forEach(System.out::println);
-                    break;
+                    return doctorListOfENT.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
                case 4:
-                    personListOfNEUROLOGY.stream().filter(d -> d.getIDNumber().equals(IDNumber)).forEach(System.out::println);
-                    break;
+                    return doctorListOfNEUROLOGY.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
                case 5:
-                    personListOfGERIATRIC.stream().filter(d -> d.getIDNumber().equals(IDNumber)).forEach(System.out::println);
-                    break;
+                    return doctorListOfGERIATRIC.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
           }
           return null;
      }
 
-     public Doctor updateDoctor(String IDNumber, int choice) {
+     public Doctor updateDoctor(String IDNumber, int choice) throws Exception {
           int choiceGender, choiceDoctorEducation;
-          if (findDoctorByID(IDNumber, choice) != null) {
+          if (findDoctorByID(IDNumber, choice) == null) {
                System.out.println("Not found!!!");
           } else {
                System.out.print("Enter Doctor's fist name: ");
@@ -199,8 +198,10 @@ public class Container {
                System.out.print("Enter Doctor's last name: ");
                findDoctorByID(IDNumber, choice).setLastName(sc.nextLine());
 
+               findDoctorByID(IDNumber,choice).setFullName();
 
-               findDoctorByID(IDNumber, choice).setLastName(HandlingException.getBirthOfDay(sc));
+
+               findDoctorByID(IDNumber, choice).setYob(HandlingException.getBirthOfDay(sc));
 
 
                do {
@@ -250,28 +251,28 @@ public class Container {
      }
 
      public void removeDoctor(String IDNumber, int choice) {
-          if (findDoctorByID(IDNumber, choice) != null) {
+          if (findDoctorByID(IDNumber, choice) == null) {
                System.out.println("Not found!!!");
           } else {
                switch (choice) {
                     case 1:
-                         personListOfCARDIOLOGY.remove(findDoctorByID(IDNumber, choice));
+                         doctorListOfCARDIOLOGY.remove(findDoctorByID(IDNumber, choice));
                          System.out.println("Remove is successful");
                          break;
                     case 2:
-                         personListOfDERMATOLOGY.remove(findDoctorByID(IDNumber, choice));
+                         doctorListOfDERMATOLOGY.remove(findDoctorByID(IDNumber, choice));
                          System.out.println("Remove is successful");
                          break;
                     case 3:
-                         personListOfENT.remove(findDoctorByID(IDNumber, choice));
+                         doctorListOfENT.remove(findDoctorByID(IDNumber, choice));
                          System.out.println("Remove is successful");
                          break;
                     case 4:
-                         personListOfNEUROLOGY.remove(findDoctorByID(IDNumber, choice));
+                         doctorListOfNEUROLOGY.remove(findDoctorByID(IDNumber, choice));
                          System.out.println("Remove is successful");
                          break;
                     case 5:
-                         personListOfGERIATRIC.remove(findDoctorByID(IDNumber, choice));
+                         doctorListOfGERIATRIC.remove(findDoctorByID(IDNumber, choice));
                          System.out.println("Remove is successful");
                          break;
                }
@@ -307,7 +308,7 @@ public class Container {
                     default:
                          System.out.println("Invalid choice");
                }
-          } while (choice2 <= 1 || choice2 >= 4);
+          } while (choice2 < 1 || choice2 > 4);
 
           System.out.print("Medicine's strength: ");
           String strength = sc.nextLine();
@@ -339,19 +340,19 @@ public class Container {
      public void showMedicineList(int choice) {
           switch (choice) {
                case 1:
-                    medicinesOfCARDIOLOGY.forEach(Medicine::toString);
+                    medicinesOfCARDIOLOGY.forEach(Medicine ->System.out.println(Medicine.toString()));
                     break;
                case 2:
-                    medicinesOfDERMATOLOGY.forEach(Medicine::toString);
+                    medicinesOfDERMATOLOGY.forEach(Medicine ->System.out.println(Medicine.toString()));
                     break;
                case 3:
-                    medicinesOfENT.forEach(Medicine::toString);
+                    medicinesOfENT.forEach(Medicine ->System.out.println(Medicine.toString()));
                     break;
                case 4:
-                    medicinesOfNEUROLOGY.forEach(Medicine::toString);
+                    medicinesOfNEUROLOGY.forEach(Medicine ->System.out.println(Medicine.toString()));
                     break;
                case 5:
-                    medicinesOfGERIATRIC.forEach(Medicine::toString);
+                    medicinesOfGERIATRIC.forEach(Medicine ->System.out.println(Medicine.toString()));
                     break;
           }
      }
@@ -359,20 +360,15 @@ public class Container {
      public Medicine findMedicine(String IDNumber, int choice) {
           switch (choice) {
                case 1:
-                    medicinesOfCARDIOLOGY.stream().filter(medicine ->  medicine.getMedicineID().equals(IDNumber)).findFirst().get();
-                    break;
+                    return medicinesOfCARDIOLOGY.stream().filter(medicine ->  medicine.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
                case 2:
-                    medicinesOfDERMATOLOGY.stream().filter(medicine ->  medicine.getMedicineID().equals(IDNumber)).findFirst().get();
-                    break;
+                    return medicinesOfDERMATOLOGY.stream().filter(medicine ->  medicine.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
                case 3:
-                    medicinesOfENT.stream().filter(medicine ->  medicine.getMedicineID().equals(IDNumber)).findFirst().get();
-                    break;
+                    return medicinesOfENT.stream().filter(medicine ->  medicine.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
                case 4:
-                    medicinesOfNEUROLOGY.stream().filter(medicine ->  medicine.getMedicineID().equals(IDNumber)).findFirst().get();
-                    break;
+                    return medicinesOfNEUROLOGY.stream().filter(medicine ->  medicine.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
                case 5:
-                    medicinesOfGERIATRIC.stream().filter(medicine ->  medicine.getMedicineID().equals(IDNumber)).findFirst().get();
-                    break;
+                    return medicinesOfGERIATRIC.stream().filter(medicine ->  medicine.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
           }
           return null;
      }
@@ -407,7 +403,7 @@ public class Container {
                          default:
                               System.out.println("Invalid choice");
                     }
-               } while (choice2 <= 1 || choice2 >= 4);
+               } while (choice2 < 1 || choice2 > 4);
 
                System.out.print("Medicine's strength: ");
                findMedicine(IDNumber, choice).setStrength(sc.nextLine());

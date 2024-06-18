@@ -42,7 +42,12 @@ public class AdminRoleOption {
                     if (container.findDoctorByID(IDNumberFind2, choice) == null) {
                         System.out.println("Doctor not found");
                     } else {
-                        Doctor doctorUpdate = container.updateDoctor(IDNumberFind2, choice);
+                        Doctor doctorUpdate = null;
+                        try {
+                            doctorUpdate = container.updateDoctor(IDNumberFind2, choice);
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
                         System.out.println("Doctor's information after update: " + doctorUpdate.toString());
                     }
                     break;
@@ -93,8 +98,11 @@ public class AdminRoleOption {
                         container.removeMedicine(medicineID3, choice);
                     }
                     break;
+                case 13: break;
+                default:
+                    System.out.println("Invalid choice");
             }
-        } while (choice1 >= 1 && choice1 <= 13);
+        } while (choice1 >= 1 && choice1 <= 12);
     }
 
     // Detail option for all specialization
