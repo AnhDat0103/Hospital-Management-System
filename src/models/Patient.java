@@ -7,19 +7,19 @@ import java.text.ParseException;
 import java.util.HashMap;
 
 public class Patient extends Person {
-    private int height;
-    private int weight;
-    private String bloodType;
-    private boolean allergies;
-    private HashMap<String, Medicine> medicines;
-    private Specialization specialization;
+    private static int height;
+    private static int weight;
+    private static String bloodType;
+    private static boolean allergies;
+    private static HashMap<String, Medicine> medicines;
+    private static Specialization specialization;
 
-    public Patient() {
+    public Patient(String IDNumber, String firstName, String lastName, String yob, Gender gender, String address, String telephone, double height, double weight, String bloodType, Specialization cardiology, HashMap<String, Patient> patientListOfCARDIOLOGY) {
         this.medicines = new HashMap<>();
     }
 
     public Patient(String IdNumber, String FirstName, String LastName, String yob, Gender gender,
-                   String address, String telephoneNumber, String allergies, int height,
+                   String address, String telephoneNumber, boolean allergies, int height,
                    int weight, String bloodType, HashMap<String, Medicine> medicines, Specialization specialization) throws ParseException {
         super(IdNumber, FirstName, LastName, yob, gender, address, telephoneNumber);
         this.allergies = allergies;
@@ -30,7 +30,7 @@ public class Patient extends Person {
         this.specialization = specialization;
     }
 
-    public String isAllergies() {
+    public boolean isAllergies() {
         return allergies;
     }
 
@@ -38,7 +38,7 @@ public class Patient extends Person {
         this.allergies = allergies;
     }
 
-    public int getHeight() {
+    public double getHeight() {
         return height;
     }
 
@@ -46,7 +46,7 @@ public class Patient extends Person {
         this.height = height;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
@@ -96,4 +96,3 @@ public class Patient extends Person {
         System.out.println("Medicine " + medicine.getMedicineID() + " has been added");
     }
 }
-

@@ -55,5 +55,6 @@ public class DoctorRoleOptions {
         System.out.println("6. Add a Medicine to the Patient.");
         System.out.println("6. Exit.");
     }
+}
 
 }
