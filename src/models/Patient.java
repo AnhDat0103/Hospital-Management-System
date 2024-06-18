@@ -7,19 +7,19 @@ import java.text.ParseException;
 import java.util.HashMap;
 
 public class Patient extends Person {
-    private static int height;
-    private static int weight;
-    private static String bloodType;
-    private static boolean allergies;
-    private static HashMap<String, Medicine> medicines;
-    private static Specialization specialization;
+    private int height;
+    private int weight;
+    private String bloodType;
+    private String allergies;
+    private HashMap<String, Medicine> medicines;
+    private Specialization specialization;
 
-    public Patient(String IDNumber, String firstName, String lastName, String yob, Gender gender, String address, String telephone, double height, double weight, String bloodType, Specialization cardiology, HashMap<String, Patient> patientListOfCARDIOLOGY) {
+    public Patient(String IDNumber, String firstName, String lastName, String yob, Gender gender, String address, String telephone, double height, double weight, String bloodType, int allergiesChoice) {
         this.medicines = new HashMap<>();
     }
 
     public Patient(String IdNumber, String FirstName, String LastName, String yob, Gender gender,
-                   String address, String telephoneNumber, boolean allergies, int height,
+                   String address, String telephoneNumber, String allergies, int height,
                    int weight, String bloodType, HashMap<String, Medicine> medicines, Specialization specialization) throws ParseException {
         super(IdNumber, FirstName, LastName, yob, gender, address, telephoneNumber);
         this.allergies = allergies;
@@ -30,7 +30,7 @@ public class Patient extends Person {
         this.specialization = specialization;
     }
 
-    public boolean isAllergies() {
+    public String isAllergies() {
         return allergies;
     }
 

@@ -69,7 +69,7 @@ public class Container {
 
           do {
                System.out.printf("Gender?: %10s"," ");
-               System.out.printf("%10s|%10s", "1.MALE", "2.FEMALE");
+               System.out.printf("%10s|%10s|%10s|%10s", "1.MALE", "2.FEMALE ", " Your choice:", " ");
                choiceGender = HandlingException.getInteger(sc);
                if (choiceGender == 1) {
                     gender = Gender.MALE;
@@ -165,6 +165,32 @@ public class Container {
                     break;
           }
      }
+
+     public Doctor FindDoctorByID(String IDNumber, int choice) {
+          switch (choice) {
+               case 1:
+                    personListOfCARDIOLOGY.stream().filter(d -> d.getIDNumber().equals(IDNumber))
+                            .findFirst().get();
+                    break;
+               case 2:
+                    personListOfDERMATOLOGY.stream().filter(d -> d.getIDNumber().equals(IDNumber))
+                            .findFirst().get();
+                    break;
+               case 3:
+                    personListOfENT.stream().filter(d -> d.getIDNumber().equals(IDNumber))
+                            .findFirst().get();
+                    break;
+               case 4:
+                    personListOfNEUROLOGY.stream().filter(d -> d.getIDNumber().equals(IDNumber))
+                            .findFirst().get();
+                    break;
+               case 5:
+                    personListOfGERIATRIC.stream().filter(d -> d.getIDNumber().equals(IDNumber))
+                            .findFirst().get();
+                    break;
+          }
+          return null;
+     }
      public void addNewPatient(int choice) throws ParseException {
           int choiceGender;
           Gender gender = null;
@@ -212,56 +238,96 @@ public class Container {
           System.out.println("Enter the BloodType of Patient: ");
           String bloodType = sc.nextLine();
 
-          choice = sc.nextInt();
+          do{
+               System.out.printf("Allergies?: %10s"," ");
+               System.out.printf("%10s|%10s|%10s|%10s","1.YES","2.NO","YOU CHOICE:"," ");
+               allergies = HandlingException.getInteger(sc);
+
+               if (allergies == 1) {
+                    System.out.print("Show the allergies: ");
+                    sc.nextLine();
+               } else if (allergies == 2) {
+                    System.out.println("The patient has no allergies!!!");
+               } else {
+                    System.out.println("Invalid allergiesChoice");
+               }
+          } while ( allergies != 1 && allergies != 2);
+
+          Patient newPatient = new Patient(IDNumber, firstName, lastName, yob,
+                  gender, address, telephone, height, weight, bloodType,
+                  allergies);
           switch (choice) {
                case 1:
-                    personListOfCARDIOLOGY.add(new Patient(IDNumber, firstName, lastName, yob,
-                            gender, address, telephone, height, weight, bloodType,
-                            Specialization.CARDIOLOGY
-                            ,patientListOfCARDIOLOGY));
+                    patientListOfCARDIOOGY.put(IDNumber, newPatient);
+                    System.out.println("Add New Patient Successfully to Cardioogy.");
                     break;
                case 2:
-                    personListOfDERMATOLOGY.add(new Patient(IDNumber, firstName, lastName, yob,
-                            gender, address, telephone, height, weight, bloodType,
-                            Specialization.DERMATOLOGY
-                            ,patientListOfDERMATOLOGY));
+                    patientListOfDERMATOLOGY.put(IDNumber, newPatient);
+                    System.out.println("Add New Patient Successfully to Dermatology.");
                     break;
                case 3:
-                    personListOfENT.add(new Patient(IDNumber, firstName, lastName, yob,
-                            gender, address, telephone, height, weight, bloodType,
-                            Specialization.ENT
-                            ,patientListOfENT));
+                    patientListOfENT.put(IDNumber, newPatient);
+                    System.out.println("Add New Patient Successfully to Entrepreneur.");
                     break;
                case 4:
-                    personListOfNEUROLOGY.add(new Patient(IDNumber, firstName, lastName, yob,
-                            gender, address, telephone, height, weight, bloodType,
-                            Specialization.NEUROLOGY
-                            ,patientListOfNEUROLOGY));
+                    patientListOfNEUROLOGY.put(IDNumber, newPatient);
+                    System.out.println("Add New Patient Successfully to Neurology.");
                     break;
                case 5:
-                    personListOfGERIATRIC.add(new Patient(IDNumber, firstName, lastName, yob,
-                            gender, address, telephone, height, weight, bloodType,
-                            Specialization.GERIATRIC
-                            ,patientListOfGERIATRIC));
+                    patientListOfGERIATRIC.put(IDNumber, newPatient);
+                    System.out.println("Add New Patient Successfully to Geriatric.");
                     break;
           }
      }
      public void showPatientsList(int choice) {
           switch (choice) {
                case 1:
-                    personListOfCARDIOLOGY.forEach(Patient -> System.out.println(Patient.toString()));
+                    if (patientListOfCARDIOOGY.isEmpty()) {
+                         System.out.println("No patients in CARDIOLOGY.");
+                    } else {
+                         for (Patient newPatien : patientListOfCARDIOOGY.values()) {
+                              System.out.println(newPatien.toString());
+                         }
+                    }
                     break;
                case 2:
-                    personListOfDERMATOLOGY.forEach(Patient -> System.out.println(Patient.toString()));
+                    if(patientListOfDERMATOLOGY.isEmpty()) {
+                         System.out.println("No patients in DERMATOLOGY.");
+                    } else{
+                         for (Patient newPatien : patientListOfCARDIOOGY.values()) {
+                              System.out.println(newPatien.toString());
+                         }
+                    }
                     break;
                case 3:
-                    personListOfENT.forEach(Patient -> System.out.println(Patient.toString()));
+                    if(patientListOfENT.isEmpty()) {
+                         System.out.println("No patients in ENT.");
+                    } else{
+                         for (Patient newPatien : patientListOfCARDIOOGY.values()) {
+                              System.out.println(newPatien.toString());
+                         }
+                    }
                     break;
                case 4:
-                    personListOfNEUROLOGY.forEach(Patient -> System.out.println(Patient.toString()));
+                    if(patientListOfNEUROLOGY.isEmpty()) {
+                         System.out.println("No patients in NEUROLOGY.");
+                    } else{
+                         for (Patient newPatien : patientListOfCARDIOOGY.values()) {
+                              System.out.println(newPatien.toString());
+                         }
+                    }
                     break;
                case 5:
-                    personListOfGERIATRIC.forEach(Patient -> System.out.println(Patient.toString()));
+                    if(patientListOfGERIATRIC.isEmpty()) {
+                         System.out.println("No patients in GERIATRIC.");
+                    } else{
+                         for (Patient newPatien : patientListOfCARDIOOGY.values()) {
+                              System.out.println(newPatien.toString());
+                         }
+                    }
+                    break;
+               default:
+                    System.out.println("Invalid choice");
                     break;
           }
      }
@@ -270,28 +336,32 @@ public class Container {
           String result = "Patient not found in the selected department.";
           switch (choice) {
                case 1:
-                    if (patientListOfCARDIOLOGY.containsKey(IDNumber)) {
-                         result = patientListOfCARDIOLOGY.get(IDNumber).toString();
+                    if (patientListOfCARDIOOGY.containsKey(IDNumber)) {
+                         result = patientListOfCARDIOOGY.get(IDNumber).toString();
                     }
                     break;
                case 2:
                     if (patientListOfDERMATOLOGY.containsKey(IDNumber)) {
                          result = patientListOfDERMATOLOGY.get(IDNumber).toString();
+                         System.out.println("Patient: "+ result);
                     }
                     break;
                case 3:
                     if (patientListOfENT.containsKey(IDNumber)) {
                          result = patientListOfENT.get(IDNumber).toString();
+                         System.out.println("Patient: "+ result);
                     }
                     break;
                case 4:
                     if (patientListOfNEUROLOGY.containsKey(IDNumber)) {
                          result = patientListOfNEUROLOGY.get(IDNumber).toString();
+                         System.out.println("Patient: "+ result);
                     }
                     break;
                case 5:
                     if (patientListOfGERIATRIC.containsKey(IDNumber)) {
                          result = patientListOfGERIATRIC.get(IDNumber).toString();
+                         System.out.println("Patient: "+ result);
                     }
                     break;
                default:
