@@ -7,20 +7,20 @@ import java.text.ParseException;
 import java.util.HashMap;
 
 public class Patient extends Person {
-    private int height;
-    private int weight;
+    private double height;
+    private double weight;
     private String bloodType;
-    private boolean allergies;
+    private String allergies;
     private HashMap<String, Medicine> medicines;
     private Specialization specialization;
 
-    public Patient() {
-        this.medicines = new HashMap<>();
+    public Patient(String IDNumber, String firstName, String lastName, String yob, Gender gender, String address, String telephone, double height, double weight, String bloodType, int allergies){
+
     }
 
     public Patient(String IdNumber, String FirstName, String LastName, String yob, Gender gender,
-                   String address, String telephoneNumber, boolean allergies, int height,
-                   int weight, String bloodType, HashMap<String, Medicine> medicines, Specialization specialization) throws ParseException {
+                   String address, String telephoneNumber, String allergies, double height,
+                   double weight, String bloodType, HashMap<String, Medicine> medicines, Specialization specialization) throws ParseException {
         super(IdNumber, FirstName, LastName, yob, gender, address, telephoneNumber);
         this.allergies = allergies;
         this.height = height;
@@ -30,15 +30,18 @@ public class Patient extends Person {
         this.specialization = specialization;
     }
 
-    public boolean isAllergies() {
+
+
+
+    public String isAllergies() {
         return allergies;
     }
 
-    public void setAllergies(boolean allergies) {
+    public void setAllergies(String allergies) {
         this.allergies = allergies;
     }
 
-    public int getHeight() {
+    public double getHeight() {
         return height;
     }
 
@@ -46,7 +49,7 @@ public class Patient extends Person {
         this.height = height;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
@@ -80,15 +83,19 @@ public class Patient extends Person {
 
     @Override
     public String toString() {
-        return "Patient{" +
-                "allergies=" + allergies +
+        return "Patient {" +
+                super.toString() +
+                "allergies='" + allergies + '\'' +
                 ", height=" + height +
                 ", weight=" + weight +
                 ", bloodType='" + bloodType + '\'' +
-                ", Medicine=" + medicines +
+                ", medicines=" + medicines +
                 ", specialization=" + specialization +
                 '}';
     }
+
+
+
 
     public void addMedicine(Medicine medicine) {
         medicines.put(medicine.getMedicineID(), medicine);
