@@ -56,7 +56,8 @@ public class MainMenu {
                         throw new RuntimeException(e);
                     }
                 case 3: break;
-                default: break;
+                case 4: break;
+                default: System.out.println("Invalid choice");
 
             }
         } while (choice >= 1 && choice <= 3);

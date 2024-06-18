@@ -1,7 +1,11 @@
 package exception;
 
+import container.Container;
+import models.Doctor;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class HandlingException {
@@ -57,4 +61,5 @@ public class HandlingException {
             }
         }
     }
+
 }

@@ -83,10 +83,14 @@ public class Person {
         this.gender = gender;
     }
 
+    public void setFullName() {
+        this.fullName = getFullName();
+    }
+
     @Override
     public String toString() {
         return
-                ", FullName='" + fullName + '\'' +
+                ", FullName='" + getFullName() + '\'' +
                 "address='" + address + '\'' +
                 ", IDNumber='" + IDNumber + '\'' +
                 ", yob='" + yob + '\'' +
@@ -97,7 +101,7 @@ public class Person {
     }
     //in ra fullname
     public String getFullName(){
-        String fullName = FirstName + " " + LastName;
+        String fullName = this.FirstName + " " + this.LastName;
         return Validate.formatName(fullName);
     }
     //in ra tuoi
