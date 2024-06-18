@@ -15,14 +15,14 @@ public class MainMenu {
     // Main menu
     public void authenticationMenuTitle() {
         int choice = 0;
-        System.out.println("Welcome to the hospital management system");
-        System.out.println("Please  choose one of type role: ");
-        System.out.println("1. Admin role");
-        System.out.println("2. Doctor role");
-        System.out.println("3. Patient role.");
-        System.out.println("4. Exit");
 
         do {
+            System.out.println("Welcome to the hospital management system");
+            System.out.println("Please  choose one of type role: ");
+            System.out.println("1. Admin role");
+            System.out.println("2. Doctor role");
+            System.out.println("3. Patient role.");
+            System.out.println("4. Exit");
             System.out.print("Your choice: ");
             choice = HandlingException.getInteger(sc);
             switch (choice) {
@@ -33,26 +33,16 @@ public class MainMenu {
                         System.out.print("password: ");
                         String password = sc.nextLine();
                         if (container.checkAdministration(userName,password)) {
-                            int choice1 = 0;
+                            int choice2 = 0;
                             menuTitleForAdministration();
-                            choice1 = HandlingException.getInteger(sc);
-                            AdminRoleOption.adminRoleOptions(choice1);
+                            choice2 = HandlingException.getInteger(sc);
+                            AdminRoleOption.adminRoleOptions(choice2);
                         }
-                    } catch (
-                            ParseException e) {
-                        System.out.println("username or password is incorrect");;
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
                     }
                     break;
-                case 2:
-                    try{
-                        int choice2 = 0;
-                        menuTitleForAdministration();
-                        choice2 = HandlingException.getInteger(sc);
-                        DoctorRoleOptions.doctorRoleOptions(choice2);
-                    } catch (ParseException e) {
-                        throw new RuntimeException(e);
-                    }
-                    break;
+                case 2: break;
                 case 3: break;
                 default: break;
 

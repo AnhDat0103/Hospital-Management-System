@@ -2,9 +2,7 @@ package exception;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 public class HandlingException {
 
@@ -32,11 +30,11 @@ public class HandlingException {
 
     // Checking if the entered date is in the correct format dd-MM-yyyy
     public static String getBirthOfDay(Scanner scanner) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        formatter.setLenient(false);
         while (true) {
             try {
-                System.out.println("Enter doctor's birth date(DD/MM/YYYY): ");
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+                formatter.setLenient(false);
+                System.out.print("Enter birth date(DD-MM-YYYY): ");
                 String date = scanner.nextLine();
                 formatter.parse(date);
                 return date;
