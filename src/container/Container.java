@@ -192,7 +192,7 @@ public class Container {
           return null;
      }
      public void addNewPatient(int choice) throws ParseException {
-          int choiceGender;
+          int choiceGender, allergies;
           Gender gender = null;
 
           String IDNumber = HandlingException.checkID(sc);
@@ -258,7 +258,7 @@ public class Container {
                   allergies);
           switch (choice) {
                case 1:
-                    patientListOfCARDIOOGY.put(IDNumber, newPatient);
+                    patientListOfCARDIOLOGY.put(IDNumber, newPatient);
                     System.out.println("Add New Patient Successfully to Cardioogy.");
                     break;
                case 2:
@@ -282,10 +282,10 @@ public class Container {
      public void showPatientsList(int choice) {
           switch (choice) {
                case 1:
-                    if (patientListOfCARDIOOGY.isEmpty()) {
+                    if (patientListOfCARDIOLOGY.isEmpty()) {
                          System.out.println("No patients in CARDIOLOGY.");
                     } else {
-                         for (Patient newPatien : patientListOfCARDIOOGY.values()) {
+                         for (Patient newPatien : patientListOfCARDIOLOGY.values()) {
                               System.out.println(newPatien.toString());
                          }
                     }
@@ -294,7 +294,7 @@ public class Container {
                     if(patientListOfDERMATOLOGY.isEmpty()) {
                          System.out.println("No patients in DERMATOLOGY.");
                     } else{
-                         for (Patient newPatien : patientListOfCARDIOOGY.values()) {
+                         for (Patient newPatien : patientListOfCARDIOLOGY.values()) {
                               System.out.println(newPatien.toString());
                          }
                     }
@@ -303,7 +303,7 @@ public class Container {
                     if(patientListOfENT.isEmpty()) {
                          System.out.println("No patients in ENT.");
                     } else{
-                         for (Patient newPatien : patientListOfCARDIOOGY.values()) {
+                         for (Patient newPatien : patientListOfCARDIOLOGY.values()) {
                               System.out.println(newPatien.toString());
                          }
                     }
@@ -312,7 +312,7 @@ public class Container {
                     if(patientListOfNEUROLOGY.isEmpty()) {
                          System.out.println("No patients in NEUROLOGY.");
                     } else{
-                         for (Patient newPatien : patientListOfCARDIOOGY.values()) {
+                         for (Patient newPatien : patientListOfCARDIOLOGY.values()) {
                               System.out.println(newPatien.toString());
                          }
                     }
@@ -321,7 +321,7 @@ public class Container {
                     if(patientListOfGERIATRIC.isEmpty()) {
                          System.out.println("No patients in GERIATRIC.");
                     } else{
-                         for (Patient newPatien : patientListOfCARDIOOGY.values()) {
+                         for (Patient newPatien : patientListOfCARDIOLOGY.values()) {
                               System.out.println(newPatien.toString());
                          }
                     }
@@ -336,8 +336,8 @@ public class Container {
           String result = "Patient not found in the selected department.";
           switch (choice) {
                case 1:
-                    if (patientListOfCARDIOOGY.containsKey(IDNumber)) {
-                         result = patientListOfCARDIOOGY.get(IDNumber).toString();
+                    if (patientListOfCARDIOLOGY.containsKey(IDNumber)) {
+                         result = patientListOfCARDIOLOGY.get(IDNumber).toString();
                     }
                     break;
                case 2:
@@ -371,6 +371,12 @@ public class Container {
           return result;
      }
 
+     //update tình tình trạng bệnh nhân đã có sẵn theo id
+     public void UpdatePatientByID(String idNumber, int choice) {
+     }
 
+     //xóa bệnh nhân theo id
+     public void RemovePatientByID(String idNumber, int choice) {
+     }
 
 }
