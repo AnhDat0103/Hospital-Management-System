@@ -48,18 +48,6 @@ public class HandlingException {
         }
     }
 
-    // Checking ID for Doctor's IDNumber, Patient's IDNumber
-    public static String checkID (Scanner scanner) throws ParseException {
-        while (true) {
-            System.out.print("Enter doctor's ID((CDL/DML/ENT/NRL/GIT) + XXXX): ");
-            String id = scanner.nextLine();
-            String pattern = "^(?:CDL|DML|ENT|NRL|GIT|PCDL|PDML|PENT|PNRL|PGIT)\\d{4}$";
-            if (id.matches(pattern)) {
-                return id;
-            } else {
-                System.out.println("Invalid ID. Please enter a valid ID.");
-            }
-        }
-    }
+
 
 }
