@@ -12,39 +12,29 @@ import validation.Validate;
 
 
 import java.text.ParseException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Container {
 
 
      Scanner sc = new Scanner(System.in);
-     private List<Person> personListOfCARDIOLOGY;  // list of CARDIOLOGY. The list has information of doctors, patient in CARDIOLOGY.
-     private List<Person> personListOfDERMATOLOGY; // list of DERMATOLOGY. The list has information of doctors, patient in DERMATOLOGY.
-     private List<Person> personListOfENT;         // list of ENT. The list has information of doctors, patient in ENT.
-     private List<Person> personListOfNEUROLOGY;   // list of NEUROLOGY. The list has information of doctors, patient in NEUROLOGY.
-     private List<Person> personListOfGERIATRIC;   // list of GERIATRIC. The list has information of doctors, patient in GERIATRIC.
+     private List<Person> personListOfCARDIOLOGY = new ArrayList<>();  // list of CARDIOLOGY. The list has information of doctors, patient in CARDIOLOGY.
+     private List<Person> personListOfDERMATOLOGY = new ArrayList<>(); // list of DERMATOLOGY. The list has information of doctors, patient in DERMATOLOGY.
+     private List<Person> personListOfENT = new ArrayList<>();         // list of ENT. The list has information of doctors, patient in ENT.
+     private List<Person> personListOfNEUROLOGY = new ArrayList<>();   // list of NEUROLOGY. The list has information of doctors, patient in NEUROLOGY.
+     private List<Person> personListOfGERIATRIC = new ArrayList<>();   // list of GERIATRIC. The list has information of doctors, patient in GERIATRIC.
 
+     private HashMap<String, Patient> patientListOfCARDIOOGY = new HashMap<>();
+     private HashMap<String, Patient> patientListOfDERMATOLOGY = new HashMap<>();
+     private HashMap<String, Patient> patientListOfENT = new HashMap<>();
+     private HashMap<String, Patient> patientListOfNEUROLOGY = new HashMap<>();
+     private HashMap<String, Patient> patientListOfGERIATRIC = new HashMap<>();
 
-     private List<Person> persons;
-     private HashMap<String, Patient> doctorListOfCARDIOLOGY ;
-     private HashMap<String, Patient> doctorListOfDERMATOLOGY;
-     private HashMap<String, Patient> doctorListOfENT;
-     private HashMap<String, Patient> doctorListOfNEUROLOGY;
-     private HashMap<String, Patient> doctorListOfGERIATRIC;
-
-     private HashMap<String, Patient> patientListOfCARDIOLOGY ;
-     private HashMap<String, Patient> patientListOfDERMATOLOGY;
-     private HashMap<String, Patient> patientListOfENT;
-     private HashMap<String, Patient> patientListOfNEUROLOGY;
-     private HashMap<String, Patient> patientListOfGERIATRIC;
-
-     private HashMap<String, Medicine> medicineListOfCARDIOLOGY;
-     private HashMap<String, Medicine> medicineListOfDERMATOLOGY;
-     private HashMap<String, Medicine> medicineListOfENT;
-     private HashMap<String, Medicine> medicineListOfNEUROLOGY;
-     private HashMap<String, Medicine> medicineListOfGERIATRIC;
+     private HashMap<String, Medicine> medicineListOfCARDIOLOGY = new HashMap<>();
+     private HashMap<String, Medicine> medicineListOfDERMATOLOGY = new HashMap<>();
+     private HashMap<String, Medicine> medicineListOfENT = new HashMap<>();
+     private HashMap<String, Medicine> medicineListOfNEUROLOGY = new HashMap<>();
+     private HashMap<String, Medicine> medicineListOfGERIATRIC = new HashMap<>();
 
      public boolean checkAdministration(String userName, String password) throws ParseException {
           if (userName.matches("admin") && password.matches("admin")) {
@@ -72,7 +62,7 @@ public class Container {
 
           do {
                System.out.printf("Gender?: %10s"," ");
-               System.out.printf("%10s|%10s", "1.MALE", "2.FEMALE");
+               System.out.printf("%10s|%10s|%10s|%10s", "1.MALE", "2.FEMALE ", " Your choice:", " ");
                choiceGender = HandlingException.getInteger(sc);
                if (choiceGender == 1) {
                     gender = Gender.MALE;
@@ -92,13 +82,11 @@ public class Container {
           System.out.print("Enter doctor's years of experience: ");
           int yearOfExperience = HandlingException.getInteger(sc);
 
-          System.out.print("Enter doctor's clinic hours: ");
-          int clinicHours = Validate.getClinicHours(HandlingException.getInteger(sc));
-
+          int clinicHours = Validate.getClinicHours(sc);
 
           do {
                System.out.printf("Choose doctor's education:%10s", " ");
-               System.out.printf("%10s|%10s|%10s", "1. DOCTOR", "2. PROFESSOR", "3. ASSOCIATE_PROFESSOR" );
+               System.out.printf("%10s|%10s|%10s|%10s", "1. DOCTOR", "2. PROFESSOR", "3. ASSOCIATE_PROFESSOR", " ");
                choiceDoctorEducation = HandlingException.getInteger(sc);
                if (choiceDoctorEducation == 1) {
                     education = Education.DOCTOR;
@@ -117,36 +105,34 @@ public class Container {
 
           switch (choice) {
                case 1:
-                    personListOfCARDIOLOGY.add(new Doctor(IDNumber, firstName, lastName, yob,
-                                                          gender, address, telephone, yearOfExperience,
-                                                          clinicHours, education, Specialization.CARDIOLOGY,
-                                                          consultationFee,doctorListOfCARDIOLOGY));
+                    personListOfCARDIOLOGY.add(new Doctor(IDNumber, firstName, lastName, yob, gender, address, telephone,
+                            yearOfExperience, clinicHours, education, Specialization.CARDIOLOGY ,
+                            consultationFee, patientListOfCARDIOOGY));
+                    System.out.println("added new doctor.");
                     break;
                case 2:
                     personListOfDERMATOLOGY.add(new Doctor(IDNumber, firstName, lastName, yob,
-                                                           gender, address, telephone, yearOfExperience,
-                                                           clinicHours, education, Specialization.DERMATOLOGY,
-                                                           consultationFee,doctorListOfDERMATOLOGY));
+                            gender, address, telephone, yearOfExperience,
+                            clinicHours, education, Specialization.DERMATOLOGY,
+                            consultationFee,patientListOfDERMATOLOGY));
                     break;
                case 3:
                     personListOfENT.add(new Doctor(IDNumber, firstName, lastName, yob,
-                                                        gender, address, telephone, yearOfExperience,
-                                                        clinicHours, education, Specialization.ENT,
-                                                        consultationFee,doctorListOfENT));
+                            gender, address, telephone, yearOfExperience,
+                            clinicHours, education, Specialization.ENT,
+                            consultationFee,patientListOfENT));
                     break;
                case 4:
                     personListOfNEUROLOGY.add(new Doctor(IDNumber, firstName, lastName, yob,
-                                                        gender, address, telephone, yearOfExperience,
-                                                        clinicHours, education, Specialization.NEUROLOGY,
-                                                        consultationFee,doctorListOfNEUROLOGY));
+                            gender, address, telephone, yearOfExperience,
+                            clinicHours, education, Specialization.NEUROLOGY,
+                            consultationFee,patientListOfNEUROLOGY));
                     break;
                case 5:
                     personListOfGERIATRIC.add(new Doctor(IDNumber, firstName, lastName, yob,
-                                                   gender, address, telephone, yearOfExperience,
-                                                   clinicHours, education, Specialization.GERIATRIC,
-                                                   consultationFee,doctorListOfGERIATRIC));
-                    break;
-               default:
+                            gender, address, telephone, yearOfExperience,
+                            clinicHours, education, Specialization.GERIATRIC,
+                            consultationFee,patientListOfGERIATRIC));
                     break;
           }
      }
@@ -170,8 +156,35 @@ public class Container {
                     break;
           }
      }
+
+     public Doctor FindDoctorByID(String IDNumber, int choice) {
+          switch (choice) {
+               case 1:
+                    personListOfCARDIOLOGY.stream().filter(d -> d.getIDNumber().equals(IDNumber))
+                            .findFirst().get();
+                    break;
+               case 2:
+                    personListOfDERMATOLOGY.stream().filter(d -> d.getIDNumber().equals(IDNumber))
+                            .findFirst().get();
+                    break;
+               case 3:
+                    personListOfENT.stream().filter(d -> d.getIDNumber().equals(IDNumber))
+                            .findFirst().get();
+                    break;
+               case 4:
+                    personListOfNEUROLOGY.stream().filter(d -> d.getIDNumber().equals(IDNumber))
+                            .findFirst().get();
+                    break;
+               case 5:
+                    personListOfGERIATRIC.stream().filter(d -> d.getIDNumber().equals(IDNumber))
+                            .findFirst().get();
+                    break;
+          }
+          return null;
+     }
      public void addNewPatient(int choice) throws ParseException {
-          int choiceGender;
+          int choiceGender, allergies = 0;
+
           Gender gender = null;
 
           String IDNumber = HandlingException.checkID(sc);
@@ -189,7 +202,7 @@ public class Container {
 
           do {
                System.out.printf("Gender?: %10s"," ");
-               System.out.printf("%10s|%10s", "1.MALE", "2.FEMALE");
+               System.out.printf("%10s|%10s|%10s|%10s", "1.MALE", "2.FEMALE ", " Your choice:", " ");
                choiceGender = HandlingException.getInteger(sc);
                if (choiceGender == 1) {
                     gender = Gender.MALE;
@@ -207,66 +220,113 @@ public class Container {
 
           String telephone = Validate.getTelephoneNumber(sc);
 
-          System.out.println("Enter Height of Patient: ");
+          System.out.print("Enter Height of Patient(DV: Centimet): ");
           double height = HandlingException.getDouble(sc);
 
 
-          System.out.println("Enter Weight of Patient: ");
+          System.out.print("Enter Weight of Patient(DV: Kilogram): ");
           double weight = HandlingException.getDouble(sc);
 
-          System.out.println("Enter the BloodType of Patient: ");
+          System.out.print("Enter the BloodType of Patient: ");
           String bloodType = sc.nextLine();
 
-          choice = sc.nextInt();
+          do{
+               System.out.printf("Allergies?: %10s"," ");
+               System.out.printf("%10s|%10s|%10s|%10s","1.YES","2.NO","YOU CHOICE:"," ");
+               allergies = HandlingException.getInteger(sc);
+
+               if (allergies == 1) {
+                    System.out.print("Show the allergies: ");
+                    sc.nextLine();
+               } else if (allergies == 2) {
+                    System.out.println("The patient has no allergies!!!");
+               } else {
+                    System.out.println("Invalid allergiesChoice");
+               }
+          } while ( allergies != 1 && allergies != 2);
+
           switch (choice) {
                case 1:
-                    personListOfCARDIOLOGY.add(new Patient(IDNumber, firstName, lastName, yob,
+                    patientListOfCARDIOOGY.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob,
                             gender, address, telephone, height, weight, bloodType,
-                            Specialization.CARDIOLOGY
-                            ,patientListOfCARDIOLOGY));
+                            allergies));
+                    System.out.println("Add New Patient Successfully to Cardioogy.");
                     break;
                case 2:
-                    personListOfDERMATOLOGY.add(new Patient(IDNumber, firstName, lastName, yob,
+                    patientListOfDERMATOLOGY.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob,
                             gender, address, telephone, height, weight, bloodType,
-                            Specialization.DERMATOLOGY
-                            ,patientListOfDERMATOLOGY));
+                            allergies));
+                    System.out.println("Add New Patient Successfully to Dermatology.");
                     break;
                case 3:
-                    personListOfENT.add(new Patient(IDNumber, firstName, lastName, yob,
+                    patientListOfENT.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob,
                             gender, address, telephone, height, weight, bloodType,
-                            Specialization.ENT
-                            ,patientListOfENT));
+                            allergies));
+                    System.out.println("Add New Patient Successfully to Entrepreneur.");
                     break;
                case 4:
-                    personListOfNEUROLOGY.add(new Patient(IDNumber, firstName, lastName, yob,
+                    patientListOfNEUROLOGY.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob,
                             gender, address, telephone, height, weight, bloodType,
-                            Specialization.NEUROLOGY
-                            ,patientListOfNEUROLOGY));
+                            allergies));
+                    System.out.println("Add New Patient Successfully to Neurology.");
                     break;
                case 5:
-                    personListOfGERIATRIC.add(new Patient(IDNumber, firstName, lastName, yob,
+                    patientListOfGERIATRIC.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob,
                             gender, address, telephone, height, weight, bloodType,
-                            Specialization.GERIATRIC
-                            ,patientListOfGERIATRIC));
+                            allergies));
+                    System.out.println("Add New Patient Successfully to Geriatric.");
                     break;
           }
      }
      public void showPatientsList(int choice) {
           switch (choice) {
                case 1:
-                    personListOfCARDIOLOGY.forEach(Patient -> System.out.println(Patient.toString()));
+                    if (patientListOfCARDIOOGY.isEmpty()) {
+                         System.out.println("No patients in CARDIOLOGY.");
+                    } else {
+                         for (Patient newPatient : patientListOfCARDIOOGY.values()) {
+                              System.out.println(newPatient.toString());
+                         }
+                    }
                     break;
                case 2:
-                    personListOfDERMATOLOGY.forEach(Patient -> System.out.println(Patient.toString()));
+                    if(patientListOfDERMATOLOGY.isEmpty()) {
+                         System.out.println("No patients in DERMATOLOGY.");
+                    } else{
+                         for (Patient newPatient : patientListOfCARDIOOGY.values()) {
+                              System.out.println(newPatient.toString());
+                         }
+                    }
                     break;
                case 3:
-                    personListOfENT.forEach(Patient -> System.out.println(Patient.toString()));
+                    if(patientListOfENT.isEmpty()) {
+                         System.out.println("No patients in ENT.");
+                    } else{
+                         for (Patient newPatient : patientListOfCARDIOOGY.values()) {
+                              System.out.println(newPatient.toString());
+                         }
+                    }
                     break;
                case 4:
-                    personListOfNEUROLOGY.forEach(Patient -> System.out.println(Patient.toString()));
+                    if(patientListOfNEUROLOGY.isEmpty()) {
+                         System.out.println("No patients in NEUROLOGY.");
+                    } else{
+                         for (Patient newPatient : patientListOfCARDIOOGY.values()) {
+                              System.out.println(newPatient.toString());
+                         }
+                    }
                     break;
                case 5:
-                    personListOfGERIATRIC.forEach(Patient -> System.out.println(Patient.toString()));
+                    if(patientListOfGERIATRIC.isEmpty()) {
+                         System.out.println("No patients in GERIATRIC.");
+                    } else{
+                         for (Patient newPatient : patientListOfCARDIOOGY.values()) {
+                              System.out.println(newPatient.toString());
+                         }
+                    }
+                    break;
+               default:
+                    System.out.println("Invalid choice");
                     break;
           }
      }
@@ -275,28 +335,33 @@ public class Container {
           String result = "Patient not found in the selected department.";
           switch (choice) {
                case 1:
-                    if (patientListOfCARDIOLOGY.containsKey(IDNumber)) {
-                         result = patientListOfCARDIOLOGY.get(IDNumber).toString();
+                    if (patientListOfCARDIOOGY.containsKey(IDNumber)) {
+                         result = patientListOfCARDIOOGY.get(IDNumber).toString();
+                         System.out.println("Patient: "+ result);
                     }
                     break;
                case 2:
                     if (patientListOfDERMATOLOGY.containsKey(IDNumber)) {
                          result = patientListOfDERMATOLOGY.get(IDNumber).toString();
+                         System.out.println("Patient: "+ result);
                     }
                     break;
                case 3:
                     if (patientListOfENT.containsKey(IDNumber)) {
                          result = patientListOfENT.get(IDNumber).toString();
+                         System.out.println("Patient: "+ result);
                     }
                     break;
                case 4:
                     if (patientListOfNEUROLOGY.containsKey(IDNumber)) {
                          result = patientListOfNEUROLOGY.get(IDNumber).toString();
+                         System.out.println("Patient: "+ result);
                     }
                     break;
                case 5:
                     if (patientListOfGERIATRIC.containsKey(IDNumber)) {
                          result = patientListOfGERIATRIC.get(IDNumber).toString();
+                         System.out.println("Patient: "+ result);
                     }
                     break;
                default:
@@ -305,6 +370,89 @@ public class Container {
           }
           return result;
      }
+     public void UpdatePatientByID(String IDNumber, int choice) {
+          switch (choice){
+               case 1:
+                    for (Map.Entry<String, Patient> entry : patientListOfCARDIOOGY.entrySet()) {
+                         if (entry.getValue().getIDNumber().equals(IDNumber)){
+                              String allergies = sc.nextLine();
+                              entry.getValue().setAllergies(allergies);
+                              patientListOfGERIATRIC.get(entry.setValue(entry.getValue()));
+
+                         }
+                    }
+               case 2:
+                    for (Map.Entry<String, Patient> entry : patientListOfDERMATOLOGY.entrySet()){
+                         if (entry.getValue().getIDNumber().equals(IDNumber)){
+                              String allergies = sc.nextLine();
+                              entry.getValue().setAllergies(allergies);
+                              patientListOfDERMATOLOGY.get(entry.setValue(entry.getValue()));
+                         }
+                    }
+               case 3:
+                    for (Map.Entry<String, Patient> entry : patientListOfENT.entrySet()){
+                         if (entry.getValue().getIDNumber().equals(IDNumber)){
+                              String allergies = sc.nextLine();
+                              entry.getValue().setAllergies(allergies);
+                              patientListOfENT.get(entry.setValue(entry.getValue()));
+                         }
+                    }
+               case 4:
+                    for (Map.Entry<String, Patient> entry : patientListOfNEUROLOGY.entrySet()){
+                         if (entry.getValue().getIDNumber().equals(IDNumber)){
+                              String allergies = sc.nextLine();
+                              entry.getValue().setAllergies(allergies);
+                              patientListOfNEUROLOGY.get(entry.setValue(entry.getValue()));
+                         }
+                    }
+               case 5:
+                    for (Map.Entry<String, Patient> entry : patientListOfGERIATRIC.entrySet()){
+                         if (entry.getValue().getIDNumber().equals(IDNumber)){
+                              String allergies = sc.nextLine();
+                              entry.getValue().setAllergies(allergies);
+                              patientListOfGERIATRIC.get(entry.setValue(entry.getValue()));
+                         }
+                    }
+               default:
+                    System.out.println("Invalid choice. Please choose a valid department.");
+                    break;
+          }
+     }
+     public void RemovePatientByID(String IDNumber, int choice){
+          switch(choice){
+               case 1:
+                    if(patientListOfCARDIOOGY.containsKey(IDNumber)){
+                         patientListOfCARDIOOGY.remove(IDNumber);
+                    }
+                    break;
+               case 2:
+                    if(patientListOfDERMATOLOGY.containsKey(IDNumber)){
+                         patientListOfDERMATOLOGY.remove(IDNumber);
+                    }
+                    break;
+               case 3:
+                    if(patientListOfENT.containsKey(IDNumber)){
+                         patientListOfENT.remove(IDNumber);
+                    }
+                    break;
+               case 4:
+                    if(patientListOfNEUROLOGY.containsKey(IDNumber)){
+                         patientListOfNEUROLOGY.remove(IDNumber);
+                    }
+                    break;
+               case 5:
+                    if(patientListOfGERIATRIC.containsKey(IDNumber)){
+                         patientListOfGERIATRIC.remove(IDNumber);
+                    }
+                    break;
+               default:
+                    System.out.println("Invalid choice. Please choose a valid department.");
+                    break;
+          }
+     }
+
+
+
 
 
 
