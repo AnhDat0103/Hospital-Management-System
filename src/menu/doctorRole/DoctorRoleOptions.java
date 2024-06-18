@@ -3,8 +3,6 @@ package menu.doctorRole;
 import container.Container;
 import exception.HandlingException;
 
-import javax.imageio.stream.ImageInputStream;
-import java.sql.SQLOutput;
 import java.text.ParseException;
 import java.util.Scanner;
 
