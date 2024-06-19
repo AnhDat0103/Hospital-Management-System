@@ -13,6 +13,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        MainMenu.authenticationMenuTitle();
+        try {
+            MainMenu.authenticationMenuTitle();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
