@@ -83,21 +83,23 @@ public class Person {
         this.gender = gender;
     }
 
+    public void setFullName() {
+        this.fullName = getFullName();
+    }
+
     @Override
     public String toString() {
-        return
-                ", FullName='" + fullName + '\'' +
-                "address='" + address + '\'' +
-                ", IDNumber='" + IDNumber + '\'' +
-                ", yob='" + yob + '\'' +
+        return ", FullName='" + getFullName() +
+                "address='" + address +
+                ", IDNumber='" + IDNumber +
+                ", yob='" + yob +
                 ", age=" + age +
-                ", gender='" + gender + '\'' +
-                ", telephoneNumber='" + telephoneNumber + '\'' +
-                '}';
+                ", gender='" + gender +
+                ", telephoneNumber='" + telephoneNumber;
     }
     //in ra fullname
     public String getFullName(){
-        String fullName = FirstName + " " + LastName;
+        String fullName = this.FirstName + " " + this.LastName;
         return Validate.formatName(fullName);
     }
     //in ra tuoi

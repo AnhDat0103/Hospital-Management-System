@@ -16,7 +16,7 @@ public class Patient extends Person {
     private Specialization specialization;
 
 
-    public Patient(String IdNumber, String FirstName, String LastName, String yob, Gender gender, String address, String telephoneNumber,String bloodType, double height, double weight,String allergies) throws ParseException {
+    public Patient() {
 
     }
 
@@ -24,7 +24,7 @@ public class Patient extends Person {
         super(idNumber, firstName, lastName, yob, gender, address, telephone);
         this.specialization = specialization;
         this.allergyDetails = allergyDetails;
-        this.allergies = allergies;
+        this.allergies = allergyDetails;
         this.height = height;
         this.weight = weight;
         this.bloodType = bloodType;
@@ -93,10 +93,9 @@ public class Patient extends Person {
                 "allergyDetials='" + allergyDetails + '\'' +
                 ", height=" + height +
                 ", weight=" + weight +
-                ", bloodType='" + bloodType + '\'' +
+                ", bloodType='" + bloodType +
                 ", medicines=" + medicines +
-                ", specialization=" + specialization +
-                '}';
+                ", specialization=" + specialization;
     }
 
 

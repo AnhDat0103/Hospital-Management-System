@@ -1,20 +1,23 @@
 package models;
 
+import models.enums.DosageForm;
+
+import java.util.UUID;
+
 public class Medicine {
     private String medicineID;
     private String name;
-    private String dosageForm;
+    private DosageForm dosageForm;
     private String strength;
 
     public Medicine() {
-        this.medicineID = "";
+        this.medicineID = UUID.randomUUID().toString();
         this.name = "";
-        this.dosageForm = "";
         this.strength = "";
     }
 
-    public Medicine(String medicineID, String name, String dosageForm, String strength) {
-        this.medicineID = medicineID;
+    public Medicine( String name, DosageForm dosageForm, String strength) {
+        this.medicineID = UUID.randomUUID().toString();
         this.name = name;
         this.dosageForm = dosageForm;
         this.strength = strength;
@@ -28,34 +31,29 @@ public class Medicine {
         return name;
     }
 
-    public String getDosageForm() {
-        return dosageForm;
-    }
-
     public String getStrength() {
         return strength;
-    }
-
-    public void setMedicineID(String medicineID) {
-        this.medicineID = medicineID;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setDosageForm(String dosageForm) {
-        this.dosageForm = dosageForm;
-    }
-
     public void setStrength(String strength) {
         this.strength = strength;
     }
 
+    public DosageForm getDosageForm() {
+        return dosageForm;
+    }
+
+    public void setDosageForm(DosageForm dosageForm) {
+        this.dosageForm = dosageForm;
+    }
+
     @Override
     public String toString() {
-        return "Medicine: " +
-                "Medicine ID = " + medicineID +
+        return "Medicine ID = " + medicineID +
                 "; Name = " + name +
                 "; Dosage Form = " + dosageForm +
                 "; Strength = " + strength;
