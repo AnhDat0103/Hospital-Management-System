@@ -13,7 +13,7 @@ public class MainMenu {
     static Container container = new Container();
 
     // Main menu
-    public void authenticationMenuTitle() throws ParseException {
+    public static void authenticationMenuTitle() throws ParseException {
         int choice = 0;
         do {
             System.out.println("Welcome to the hospital management system");
