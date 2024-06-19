@@ -85,15 +85,13 @@ public class Doctor extends Person {
 
     @Override
     public String toString() {
-        return "Doctor{" +
-                super.toString() +
+        return  super.toString() +
                 "clinicHours=" + clinicHours +
                 ", yearsOfExperience=" + yearsOfExperience +
-                ", education='" + education + '\'' +
+                ", education='" + education +
                 ", specialization=" + specialization +
                 ", consultationFee=" + consultationFee +
-                ", patients=" + patients +
-                '}';
+                ", patients=" + patients;
     }
 
     //Ham them benh nhan

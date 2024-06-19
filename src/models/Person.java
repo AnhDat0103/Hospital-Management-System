@@ -89,15 +89,13 @@ public class Person {
 
     @Override
     public String toString() {
-        return
-                ", FullName='" + getFullName() + '\'' +
-                "address='" + address + '\'' +
-                ", IDNumber='" + IDNumber + '\'' +
-                ", yob='" + yob + '\'' +
+        return ", FullName='" + getFullName() +
+                "address='" + address +
+                ", IDNumber='" + IDNumber +
+                ", yob='" + yob +
                 ", age=" + age +
-                ", gender='" + gender + '\'' +
-                ", telephoneNumber='" + telephoneNumber + '\'' +
-                '}';
+                ", gender='" + gender +
+                ", telephoneNumber='" + telephoneNumber;
     }
     //in ra fullname
     public String getFullName(){
