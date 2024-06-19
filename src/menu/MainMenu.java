@@ -13,7 +13,7 @@ public class MainMenu {
     Container container = new Container();
 
     // Main menu
-    public void authenticationMenuTitle() {
+    public void authenticationMenuTitle() throws ParseException {
         int choice = 0;
 
         do {
@@ -42,7 +42,12 @@ public class MainMenu {
                         System.out.println(e.getMessage());
                     }
                     break;
-                case 2: break;
+                case 2:
+                    int choice2 = 0;
+                    menuTitleForAdministration();
+                    choice2 = HandlingException.getInteger(sc);
+                    DoctorRoleOptions.doctorRoleOptions(choice2);
+                    break;
                 case 3: break;
                 default: break;
 
