@@ -56,7 +56,7 @@ public class MainMenu {
                     DoctorRoleOptions.doctorRoleOptions(choice2);
                     break;
                 case 3: break;
-                case 4: return;
+                case 4: break;
                 default: System.out.println("Invalid choice");
             }
         } while (choice < 1 || choice > 4);

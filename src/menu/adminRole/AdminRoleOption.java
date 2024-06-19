@@ -100,11 +100,13 @@ public class AdminRoleOption {
                         container.removeMedicine(medicineID3, choice);
                     }
                     break;
-                case 13: MainMenu.authenticationMenuTitle();
+                case 13:
+                    choice1 = 0;
+                    MainMenu.authenticationMenuTitle();
                 default:
                     System.out.println("Invalid choice");
             }
-        } while (choice1 <1 || choice1 > 13);
+        } while (choice1 >= 1 && choice1 <= 13);
     }
 
     // Detail option for all specialization
