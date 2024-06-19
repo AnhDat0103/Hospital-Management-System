@@ -93,10 +93,9 @@ public class Patient extends Person {
                 "allergyDetials='" + allergyDetails + '\'' +
                 ", height=" + height +
                 ", weight=" + weight +
-                ", bloodType='" + bloodType + '\'' +
+                ", bloodType='" + bloodType +
                 ", medicines=" + medicines +
-                ", specialization=" + specialization +
-                '}';
+                ", specialization=" + specialization;
     }
 
 
