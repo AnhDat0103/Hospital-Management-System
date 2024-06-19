@@ -95,13 +95,13 @@ public class Doctor extends Person {
     }
 
     //Ham them benh nhan
-    public void addNewPatient(Patient patient) {
-        if (patient == null || patient.getIDNumber() == null || patient.getIDNumber().isEmpty()) {
-            throw new IllegalArgumentException("Patient or Patient ID cannot be null or empty");
-        }
-        patients.put(patient.getIDNumber(), patient);
-    }
-
+//    public void addNewPatient(Patient patient) {
+//        if (patient == null || patient.getIDNumber() == null || patient.getIDNumber().isEmpty()) {
+//            throw new IllegalArgumentException("Patient or Patient ID cannot be null or empty");
+//        }
+//        patients.put(patient.getIDNumber(), patient);
+//    }
+//
     //Ham tim kiem benh nhan
     public Patient findPatient(String IDNumber) {
         return patients.get(IDNumber);

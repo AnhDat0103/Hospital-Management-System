@@ -16,7 +16,7 @@ import java.util.*;
 public class Container {
 
      Scanner sc = new Scanner(System.in);
-  
+
      private final List<Doctor> doctorListOfCARDIOLOGY = new ArrayList<>();  // list of CARDIOLOGY. The list has information of doctors, patient in CARDIOLOGY.
      private final List<Doctor> doctorListOfDERMATOLOGY = new ArrayList<>(); // list of DERMATOLOGY. The list has information of doctors, patient in DERMATOLOGY.
      private final List<Doctor> doctorListOfENT = new ArrayList<>();         // list of ENT. The list has information of doctors, patient in ENT.
@@ -470,7 +470,10 @@ public class Container {
 
 
      public void addNewPatient(int choice) throws ParseException {
-          int allergies;
+          int choiceGender;
+          String allergies = "";
+          String allergyDetails = " ";
+          int allergiesInt = 0;
 
           Gender gender;
 
@@ -505,59 +508,58 @@ public class Container {
           do{
                System.out.printf("Allergies?: %10s"," ");
                System.out.printf("%10s|%10s|%10s|%10s","1.YES","2.NO","YOU CHOICE:"," ");
-               allergies = HandlingException.getInteger(sc);
-
-               if (allergies == 1) {
-                    System.out.print("Show the allergies: ");
-                    sc.nextLine();
-               } else if (allergies == 2) {
-                    System.out.println("The patient has no allergies!!!");
-               } else {
-                    System.out.println("Invalid allergiesChoice");
+               allergies = sc.nextLine();
+               try {
+                    allergiesInt = Integer.parseInt(allergies);
+                    if (allergiesInt == 1) {
+                         System.out.print("Show the allergies: ");
+                         allergyDetails = sc.nextLine();
+                         System.out.println("Allergy details: " + allergyDetails);
+                    } else if (allergiesInt == 2) {
+                         System.out.println("The patient has no allergies!!!");
+                    } else {
+                         System.out.println("Invalid choice, please enter YES or NO.");
+                    }
+               } catch (NumberFormatException e) {
+                    System.out.println("Invalid input, please enter a valid number.");
                }
-          } while ( allergies != 1 && allergies != 2);
-
+          } while ( allergiesInt != 1 && allergiesInt != 2);
           switch (choice) {
                case 1:
-                    patientListOfCARDIOLOGY.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob,
-                                               gender, address, telephone, height, weight, bloodType,
-                                               allergies));
+                    patientListOfCARDIOLOGY.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
+                            height,weight,bloodType,allergyDetails, Specialization.CARDIOLOGY));
                     System.out.println("Add New Patient Successfully to Cardiology.");
                     break;
                case 2:
-                    patientListOfDERMATOLOGY.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob,
-                                                gender, address, telephone, height, weight, bloodType,
-                                                allergies));
+                    patientListOfDERMATOLOGY.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
+                            height,weight,bloodType,allergyDetails, Specialization.DERMATOLOGY));
                     System.out.println("Add New Patient Successfully to Dermatology.");
                     break;
                case 3:
-                    patientListOfENT.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob,
-                                         gender, address, telephone, height, weight, bloodType,
-                                         allergies));
+                    patientListOfENT.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
+                            height,weight,bloodType,allergyDetails, Specialization.ENT));
                     System.out.println("Add New Patient Successfully to Entrepreneur.");
                     break;
                case 4:
-                    patientListOfNEUROLOGY.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob,
-                                               gender, address, telephone, height, weight, bloodType,
-                                               allergies));
+                    patientListOfNEUROLOGY.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
+                            height,weight,bloodType,allergyDetails, Specialization.NEUROLOGY));
                     System.out.println("Add New Patient Successfully to Neurology.");
                     break;
                case 5:
-                    patientListOfGERIATRIC.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob,
-                                               gender, address, telephone, height, weight, bloodType,
-                                               allergies));
+                    patientListOfGERIATRIC.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
+                            height,weight,bloodType,allergyDetails, Specialization.GERIATRIC));
                     System.out.println("Add New Patient Successfully to Geriatric.");
                     break;
           }
      }
-     public void showPatientsList(int choice) {
+     public String showPatientsList(int choice) {
           switch (choice) {
                case 1:
                     if (patientListOfCARDIOLOGY.isEmpty()) {
                          System.out.println("No patients in CARDIOLOGY.");
                     } else {
-                         for (Patient newPatient : patientListOfCARDIOLOGY.values()) {
-                              System.out.println(newPatient.toString());
+                         for (Map.Entry<String , Patient> entry : patientListOfCARDIOLOGY.entrySet()){
+                              System.out.println(entry.getValue());
                          }
                     }
                     break;
@@ -565,8 +567,8 @@ public class Container {
                     if(patientListOfDERMATOLOGY.isEmpty()) {
                          System.out.println("No patients in DERMATOLOGY.");
                     } else{
-                         for (Patient newPatient : patientListOfCARDIOLOGY.values()) {
-                              System.out.println(newPatient.toString());
+                         for (Map.Entry<String , Patient> entry : patientListOfDERMATOLOGY.entrySet()){
+                              System.out.println(entry.getValue());
                          }
                     }
                     break;
@@ -574,8 +576,8 @@ public class Container {
                     if(patientListOfENT.isEmpty()) {
                          System.out.println("No patients in ENT.");
                     } else{
-                         for (Patient newPatient : patientListOfCARDIOLOGY.values()) {
-                              System.out.println(newPatient.toString());
+                         for (Map.Entry<String , Patient> entry : patientListOfENT.entrySet()){
+                              System.out.println(entry.getValue());
                          }
                     }
                     break;
@@ -583,8 +585,8 @@ public class Container {
                     if(patientListOfNEUROLOGY.isEmpty()) {
                          System.out.println("No patients in NEUROLOGY.");
                     } else{
-                         for (Patient newPatient : patientListOfCARDIOLOGY.values()) {
-                              System.out.println(newPatient.toString());
+                         for (Map.Entry<String , Patient> entry : patientListOfNEUROLOGY.entrySet()){
+                              System.out.println(entry.getValue());
                          }
                     }
                     break;
@@ -592,8 +594,8 @@ public class Container {
                     if(patientListOfGERIATRIC.isEmpty()) {
                          System.out.println("No patients in GERIATRIC.");
                     } else{
-                         for (Patient newPatient : patientListOfCARDIOLOGY.values()) {
-                              System.out.println(newPatient.toString());
+                         for (Map.Entry<String , Patient> entry : patientListOfGERIATRIC.entrySet()){
+                              System.out.println(entry.getValue());
                          }
                     }
                     break;
@@ -601,6 +603,7 @@ public class Container {
                     System.out.println("Invalid choice");
                     break;
           }
+         return "";
      }
 
      public String findPatientByIDNumber(String IDNumber, int choice) {
@@ -610,30 +613,40 @@ public class Container {
                     if (patientListOfCARDIOLOGY.containsKey(IDNumber)) {
                          result = patientListOfCARDIOLOGY.get(IDNumber).toString();
                          System.out.println("Patient: "+ result);
+                    }else{
+                         System.out.println("Patient not found in the CARDIOLOGY list.");
                     }
                     break;
                case 2:
                     if (patientListOfDERMATOLOGY.containsKey(IDNumber)) {
                          result = patientListOfDERMATOLOGY.get(IDNumber).toString();
                          System.out.println("Patient: "+ result);
+                    }else{
+                         System.out.println("Patient not found in the Dermatology list.");
                     }
                     break;
                case 3:
                     if (patientListOfENT.containsKey(IDNumber)) {
                          result = patientListOfENT.get(IDNumber).toString();
-                         System.out.println("Patient: "+ result);
+                         System.out.println("Patient: " + result);
+                    }else{
+                         System.out.println("Patient not found in the Entrepreneur list.");
                     }
                     break;
                case 4:
                     if (patientListOfNEUROLOGY.containsKey(IDNumber)) {
                          result = patientListOfNEUROLOGY.get(IDNumber).toString();
                          System.out.println("Patient: "+ result);
+                    }else{
+                         System.out.println("Patient not found in the Neurology list.");
                     }
                     break;
                case 5:
                     if (patientListOfGERIATRIC.containsKey(IDNumber)) {
                          result = patientListOfGERIATRIC.get(IDNumber).toString();
                          System.out.println("Patient: "+ result);
+                    }else{
+                         System.out.println("Patient not found in the Geriatric list.");
                     }
                     break;
                default:
@@ -643,50 +656,73 @@ public class Container {
           return result;
      }
      public void UpdatePatientByID(String IDNumber, int choice) {
+          boolean patientFound = false;
+          String allergyDetails = " ";
           switch (choice){
                case 1:
                     for (Map.Entry<String, Patient> entry : patientListOfCARDIOLOGY.entrySet()) {
                          if (entry.getValue().getIDNumber().equals(IDNumber)){
-                              String allergies = sc.nextLine();
-                              entry.getValue().setAllergies(allergies);
-                              patientListOfGERIATRIC.get(entry.setValue(entry.getValue()));
-
+                              System.out.println("Enter new allergies: ");
+                              allergyDetails = sc.nextLine();
+                              entry.getValue().setAllergyDetails(allergyDetails);
+                              System.out.println("Update Patient Successfully.");
+                              patientFound = true; //danh dau la da tim thay benh nhan qua ID va update thong tin
+                              break;
                          }
                     }
+                    break;
                case 2:
-                    for (Map.Entry<String, Patient> entry : patientListOfDERMATOLOGY.entrySet()){
+                    for (Map.Entry<String, Patient> entry : patientListOfDERMATOLOGY.entrySet()) {
                          if (entry.getValue().getIDNumber().equals(IDNumber)){
-                              String allergies = sc.nextLine();
-                              entry.getValue().setAllergies(allergies);
-                              patientListOfDERMATOLOGY.get(entry.setValue(entry.getValue()));
+                              System.out.println("Enter new allergies: ");
+                              allergyDetails = sc.nextLine();
+                              entry.getValue().setAllergyDetails(allergyDetails);
+                              System.out.println("Update Patient Successfully.");
+                              patientFound = true; //danh dau la da tim thay benh nhan qua ID va update thong tin
+                              break;
                          }
                     }
+                    break;
                case 3:
-                    for (Map.Entry<String, Patient> entry : patientListOfENT.entrySet()){
+                    for (Map.Entry<String, Patient> entry : patientListOfENT.entrySet()) {
                          if (entry.getValue().getIDNumber().equals(IDNumber)){
-                              String allergies = sc.nextLine();
-                              entry.getValue().setAllergies(allergies);
-                              patientListOfENT.get(entry.setValue(entry.getValue()));
+                              System.out.println("Enter new allergies: ");
+                              allergyDetails = sc.nextLine();
+                              entry.getValue().setAllergyDetails(allergyDetails);
+                              System.out.println("Update Patient Successfully.");
+                              patientFound = true; //danh dau la da tim thay benh nhan qua ID va update thong tin
+                              break;
                          }
                     }
+                    break;
                case 4:
-                    for (Map.Entry<String, Patient> entry : patientListOfNEUROLOGY.entrySet()){
+                    for (Map.Entry<String, Patient> entry : patientListOfNEUROLOGY.entrySet()) {
                          if (entry.getValue().getIDNumber().equals(IDNumber)){
-                              String allergies = sc.nextLine();
-                              entry.getValue().setAllergies(allergies);
-                              patientListOfNEUROLOGY.get(entry.setValue(entry.getValue()));
+                              System.out.println("Enter new allergies: ");
+                              allergyDetails = sc.nextLine();
+                              entry.getValue().setAllergyDetails(allergyDetails);
+                              System.out.println("Update Patient Successfully.");
+                              patientFound = true; //danh dau la da tim thay benh nhan qua ID va update thong tin
+                              break;
                          }
                     }
+                    break;
                case 5:
-                    for (Map.Entry<String, Patient> entry : patientListOfGERIATRIC.entrySet()){
+                    for (Map.Entry<String, Patient> entry : patientListOfGERIATRIC.entrySet()) {
                          if (entry.getValue().getIDNumber().equals(IDNumber)){
-                              String allergies = sc.nextLine();
-                              entry.getValue().setAllergies(allergies);
-                              patientListOfGERIATRIC.get(entry.setValue(entry.getValue()));
+                              System.out.println("Enter new allergies: ");
+                              allergyDetails = sc.nextLine();
+                              entry.getValue().setAllergyDetails(allergyDetails);
+                              System.out.println("Update Patient Successfully.");
+                              patientFound = true; //danh dau la da tim thay benh nhan qua ID va update thong tin
+                              break;
                          }
                     }
+                    break;
                default:
-                    System.out.println("Invalid choice. Please choose a valid department.");
+                    if (!patientFound && choice == 1) {
+                         System.out.println("Patient not found.");  // Thông báo nếu không tìm thấy bệnh nhân
+                    }
                     break;
           }
      }
@@ -695,26 +731,35 @@ public class Container {
                case 1:
                     if(patientListOfCARDIOLOGY.containsKey(IDNumber)){
                          patientListOfCARDIOLOGY.remove(IDNumber);
+                         System.out.println("Remove Patient Successfully.");
                     }
                     break;
                case 2:
+
                     if(patientListOfDERMATOLOGY.containsKey(IDNumber)){
                          patientListOfDERMATOLOGY.remove(IDNumber);
+                         System.out.println("Remove Patient Successfully.");
                     }
                     break;
                case 3:
+
                     if(patientListOfENT.containsKey(IDNumber)){
                          patientListOfENT.remove(IDNumber);
+                         System.out.println("Remove Patient Successfully.");
                     }
                     break;
                case 4:
+
                     if(patientListOfNEUROLOGY.containsKey(IDNumber)){
                          patientListOfNEUROLOGY.remove(IDNumber);
+                         System.out.println("Remove Patient Successfully.");
                     }
                     break;
                case 5:
+
                     if(patientListOfGERIATRIC.containsKey(IDNumber)){
                          patientListOfGERIATRIC.remove(IDNumber);
+                         System.out.println("Remove Patient Successfully.");
                     }
                     break;
                default:
@@ -722,11 +767,6 @@ public class Container {
                     break;
           }
      }
-
-
-
-
-
 
 
 }
