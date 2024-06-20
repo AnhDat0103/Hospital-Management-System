@@ -1,5 +1,8 @@
 package validation;
 
+import database.FileIO;
+
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -68,16 +71,19 @@ public class Validate {
     }
 
     // Checking ID for Doctor's IDNumber
-    public static String checkDoctorID (Scanner scanner, int choice) throws ParseException {
+    public static String checkDoctorID (Scanner scanner, int choice) throws ParseException, IOException {
         if (choice == 1) {
             while (true) {
                 System.out.print("Enter ID((CDL/cdl) + XXXX): ");
                 String id = scanner.nextLine();
                 String pattern = "^(?:CDL|cdl)\\d{4}$";
-                if (id.matches(pattern)) {
-                    return id;
-                } else {
+                if (!id.matches(pattern)) {
                     System.out.println("Invalid ID. Please enter a valid ID.");
+                }
+                else if(FileIO.checkIDInFile(id, "doctorsCardiology.txt")) {
+                    System.out.println("ID number is existed. Please enter a new ID.");
+                } else {
+                    return id;
                 }
             }
         } else if (choice == 2) {
