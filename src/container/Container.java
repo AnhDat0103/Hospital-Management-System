@@ -924,7 +924,51 @@ public class Container {
                     break;
           }
      }
-     public void showMedicineOfPatient(){
+
+     public void showMedicineOfPatient(String category, String patientId){
+
+          HashMap<String, Patient> patientList;
+
+          switch (category.toUpperCase()) {
+               case "CARDIOLOGY":
+                    patientList = patientListOfCARDIOLOGY;
+                    break;
+               case "DERMATOLOGY":
+                    patientList = patientListOfDERMATOLOGY;
+                    break;
+               case "ENT":
+                    patientList = patientListOfENT;
+                    break;
+               case "NEUROLOGY":
+                    patientList = patientListOfNEUROLOGY;
+                    break;
+               case "GERIATRIC":
+                    patientList = patientListOfGERIATRIC;
+                    break;
+               default:
+                    System.out.println("Invalid category!");
+                    return;
+          }
+
+
+          Patient patient = patientList.get(patientId);   // find patient trong danh sách
+
+          // Kiểm tra xem bệnh nhân có tồn tại hay không
+          if (patient == null) {
+               System.out.println("Patient not found in " + category);
+               return;
+          }
+
+          // Hiển thị thông tin thuốc của bệnh nhân
+          System.out.println("Medicines for Patient " + patientId + " in " + category + ":");
+          List<Medicine> medicines = patient.getMedicines(); // phương thức getMedicines() trả về danh sách thuốc
+          for (Medicine medicine : medicines) {
+               System.out.println(medicine);
+          }
+
+
+
+
      }
 
 

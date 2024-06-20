@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.util.Scanner;
 
 public class PatientRoleOptions {
-    // implement coding for patient role options.
+
     static Scanner sc = new Scanner(System.in);
     static Container container = new Container();
 
