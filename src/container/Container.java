@@ -835,26 +835,96 @@ public class Container {
                     break;
           }
      }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+     public void addMedicineToPatient(int choice, String numberID){
+          Scanner sc = new Scanner(System.in);
+          switch (choice){
+               case 1:
+                    if (patientListOfCARDIOLOGY.containsKey(numberID)) {
+                         Patient patient = patientListOfCARDIOLOGY.get(numberID);
+                         System.out.print("Enter medicine ID: ");
+                         String medicineID = sc.nextLine();
+                         Medicine medicine = findMedicine(medicineID, choice);
+                         if (medicine != null) {
+                              patient.addMedicine(medicine);
+                              System.out.println("Medicine added successfully.");
+                         } else {
+                              System.out.println("Medicine not found.");
+                         }
+                    } else {
+                         System.out.println("Patient not found.");
+                    }
+                    break;
+               case 2:
+                    if (patientListOfDERMATOLOGY.containsKey(numberID)) {
+                         Patient patient = patientListOfDERMATOLOGY.get(numberID);
+                         System.out.print("Enter medicine ID: ");
+                         String medicineID = sc.nextLine();
+                         Medicine medicine = findMedicine(medicineID, choice);
+                         if (medicine != null) {
+                              patient.addMedicine(medicine);
+                              System.out.println("Medicine added successfully.");
+                         } else {
+                              System.out.println("Medicine not found.");
+                         }
+                    } else {
+                         System.out.println("Patient not found.");
+                    }
+                    break;
+               case 3:
+                    if (patientListOfENT.containsKey(numberID)) {
+                         Patient patient = patientListOfENT.get(numberID);
+                         System.out.print("Enter medicine ID: ");
+                         String medicineID = sc.nextLine();
+                         Medicine medicine = findMedicine(medicineID, choice);
+                         if (medicine != null) {
+                              patient.addMedicine(medicine);
+                              System.out.println("Medicine added successfully.");
+                         } else {
+                              System.out.println("Medicine not found.");
+                         }
+                    } else {
+                         System.out.println("Patient not found.");
+                    }
+                    break;
+               case 4:
+                    if (patientListOfNEUROLOGY.containsKey(numberID)) {
+                         Patient patient = patientListOfNEUROLOGY.get(numberID);
+                         System.out.print("Enter medicine ID: ");
+                         String medicineID = sc.nextLine();
+                         Medicine medicine = findMedicine(medicineID, choice);
+                         if (medicine != null) {
+                              patient.addMedicine(medicine);
+                              System.out.println("Medicine added successfully.");
+                         } else {
+                              System.out.println("Medicine not found.");
+                         }
+                    } else {
+                         System.out.println("Patient not found.");
+                    }
+                    break;
+               case 5:
+                    if (patientListOfGERIATRIC.containsKey(numberID)) {
+                         Patient patient = patientListOfGERIATRIC.get(numberID);
+                         System.out.print("Enter medicine ID: ");
+                         String medicineID = sc.nextLine();
+                         Medicine medicine = findMedicine(medicineID, choice);
+                         if (medicine != null) {
+                              patient.addMedicine(medicine);
+                              System.out.println("Medicine added successfully.");
+                         } else {
+                              System.out.println("Medicine not found.");
+                         }
+                    } else {
+                         System.out.println("Patient not found.");
+                    }
+                    break;
+               default:
+                    System.out.println("Invalid choice. Please choose a valid department.");
+                    break;
+          }
+     }
+     public void showMedicineOfPatient(){
+     }
 
 
 }
