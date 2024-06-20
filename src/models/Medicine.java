@@ -2,15 +2,16 @@ package models;
 
 import models.enums.DosageForm;
 
+import java.util.HashMap;
 import java.util.UUID;
 
-public class Medicine {
+public class Medicine  {
     private String medicineID;
-    private String name;
+    private static String name;
     private DosageForm dosageForm;
     private String strength;
 
-    public Medicine() {
+    public Medicine(HashMap<String, Medicine> medicineListOfCARDIOLOGY) {
         this.medicineID = UUID.randomUUID().toString();
         this.name = "";
         this.strength = "";

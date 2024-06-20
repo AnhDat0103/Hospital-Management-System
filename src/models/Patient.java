@@ -4,30 +4,30 @@ import models.enums.Gender;
 import models.enums.Specialization;
 
 import java.text.ParseException;
-import java.util.HashMap;
+import java.util.List;
 
 public class Patient extends Person {
     private double height;
     private double weight;
     private String bloodType;
-    private String allergies;
+    private boolean allergies;
     private String allergyDetails;
-    private HashMap<String, Medicine> medicines;
+    private List<Medicine> medicines;
     private Specialization specialization;
 
 
-    public Patient() {
-
+    public Patient(){
     }
 
-    public Patient(String idNumber, String firstName, String lastName, String yob, Gender gender, String address, String telephone, double height, double weight, String bloodType, String allergyDetails, Specialization specialization) throws ParseException {
+    public Patient(String idNumber, String firstName, String lastName, String yob, Gender gender, String address, String telephone, double height, double weight, String bloodType,boolean allergies,String allergyDetails, Specialization specialization) throws ParseException {
         super(idNumber, firstName, lastName, yob, gender, address, telephone);
         this.specialization = specialization;
         this.allergyDetails = allergyDetails;
-        this.allergies = allergyDetails;
+        this.allergies = allergies;
         this.height = height;
         this.weight = weight;
         this.bloodType = bloodType;
+
     }
 
     public String getAllergyDetails() {
@@ -38,11 +38,11 @@ public class Patient extends Person {
         this.allergyDetails = allergyDetails;
     }
 
-    public String isAllergies() {
+    public Boolean isAllergies() {
         return allergies;
     }
 
-    public void setAllergies(String allergies) {
+    public void setAllergies(Boolean allergies) {
         this.allergies = allergies;
     }
 
@@ -70,11 +70,11 @@ public class Patient extends Person {
         this.bloodType = bloodType;
     }
 
-    public HashMap<String, Medicine> getMedicine() {
+    public List<Medicine> getMedicines() {
         return medicines;
     }
 
-    public void setMedicine(HashMap<String, Medicine> medicines) {
+    public void setMedicines(List<Medicine> medicines) {
         this.medicines = medicines;
     }
 
@@ -107,7 +107,7 @@ public class Patient extends Person {
 
 
     public void addMedicine(Medicine medicine) {
-        medicines.put(medicine.getMedicineID(), medicine);
+        medicines.add(medicine);
         System.out.println("Medicine " + medicine.getMedicineID() + " has been added");
     }
 }
