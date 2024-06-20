@@ -58,4 +58,8 @@ public class Medicine {
                 "; Dosage Form = " + dosageForm +
                 "; Strength = " + strength;
     }
+
+    public String toFile() {
+        return medicineID + "| " + name + "| " + dosageForm + "| " + strength;
+    }
 }

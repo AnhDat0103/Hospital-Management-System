@@ -7,6 +7,7 @@ import models.Doctor;
 import models.Medicine;
 import validation.Validate;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 
@@ -15,7 +16,7 @@ public class AdminRoleOption {
     static Scanner sc = new Scanner(System.in);
     static Container container = new Container();
 
-    public static void adminRoleOptions(int choice) throws ParseException {
+    public static void adminRoleOptions(int choice) throws ParseException, IOException {
         int choice1;
         do {
             menuDetailsSpecialization();
@@ -63,8 +64,14 @@ public class AdminRoleOption {
                         container.removeDoctor(IDNumberFindToRemove, choice);
                     }
                     break;
-                case 6: break;
-                case 7: break;
+                case 6:
+                    container.showPatientsList(choice);
+                    break;
+                case 7:
+                    System.out.print("Enter ID number you want to find: ");
+                    String IDNumberFindToFind = Validate.checkPatientID(sc, choice);
+                    container.findPatientByIDNumber(IDNumberFindToFind, choice);
+                    break;
                 case 8:
                     container.addNewMedicine(choice);
                     break;

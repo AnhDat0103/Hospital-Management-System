@@ -29,7 +29,7 @@ public class Person {
         this.yob = yob;
         this.age = toAge(yob);
         this.gender = gender;
-        this.address = address;
+        this.address = Validate.formatName(address);
         this.telephoneNumber = telephoneNumber;
     }
 
@@ -38,7 +38,7 @@ public class Person {
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        this.address = Validate.formatName(address);
     }
     public String getTelephoneNumber() {
         return telephoneNumber;
@@ -89,12 +89,12 @@ public class Person {
 
     @Override
     public String toString() {
-        return ", FullName='" + getFullName() +
-                "address='" + address +
-                ", IDNumber='" + IDNumber +
+        return " IDNumber= '" + IDNumber +
+                ", FullName='" + getFullName() +
+                ", gender='" + gender +
                 ", yob='" + yob +
                 ", age=" + age +
-                ", gender='" + gender +
+                ", address='" + address +
                 ", telephoneNumber='" + telephoneNumber;
     }
     //in ra fullname
