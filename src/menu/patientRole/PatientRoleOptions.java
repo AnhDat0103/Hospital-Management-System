@@ -17,7 +17,7 @@ public class PatientRoleOptions {
             choice3 = HandlingException.getInteger(sc);
             switch (choice3){
                 case 1:
-                    System.out.println("ENTER ID Patient want to find: ");
+                    System.out.print("ENTER ID Patient want to find: ");
                     String IDNumber = sc.nextLine();
                     container.findPatientByIDNumber(IDNumber ,choice);
                     break;
@@ -25,7 +25,7 @@ public class PatientRoleOptions {
                     container.showDoctorsList(choice);
                     break;
                 case 3:
-                    System.out.println("ENTER ID Patient want to find: ");
+                    System.out.print("ENTER ID Patient want to find: ");
                     IDNumber = sc.nextLine();
                     container.showMedicineOfPatient();
 

@@ -4,6 +4,7 @@ import container.Container;
 import exception.HandlingException;
 import menu.adminRole.AdminRoleOption;
 import menu.doctorRole.DoctorRoleOptions;
+import menu.patientRole.PatientRoleOptions;
 
 import java.text.ParseException;
 import java.util.Scanner;
@@ -65,7 +66,21 @@ public class MainMenu {
                             System.out.println(e.getMessage());
                         }
                     }
-                case 3: break;
+                case 3:
+                    while (true){
+                        try{
+                            int choice3;
+                            do {
+                                menuTitleForAdministration();
+                                choice3 = HandlingException.getInteger(sc);
+                                if (choice3 == 4) MainMenu.authenticationMenuTitle();
+                            }while (choice3 < 1 || choice3 > 4);
+                            PatientRoleOptions.patientRoleOptions(choice3);
+                            break;
+                        }catch (Exception e){
+                            System.out.println(e.getMessage());
+                        }
+                    }
                 case 4: break;
                 default: System.out.println("Invalid choice");
             }
