@@ -84,24 +84,23 @@ public class Doctor extends Person {
 
     @Override
     public String toString() {
-        return "Doctor{" +
+        return  super.toString() +
                 "clinicHours=" + clinicHours +
                 ", yearsOfExperience=" + yearsOfExperience +
-                ", education='" + education + '\'' +
+                ", education='" + education +
                 ", specialization=" + specialization +
                 ", consultationFee=" + consultationFee +
-                ", patients=" + patients +
-                '}';
+                ", patients=" + patients;
     }
 
     //Ham them benh nhan
-    public void addNewPatient(Patient patient) {
-        if (patient == null || patient.getIDNumber() == null || patient.getIDNumber().isEmpty()) {
-            throw new IllegalArgumentException("Patient or Patient ID cannot be null or empty");
-        }
-        patients.put(patient.getIDNumber(), patient);
-    }
-
+//    public void addNewPatient(Patient patient) {
+//        if (patient == null || patient.getIDNumber() == null || patient.getIDNumber().isEmpty()) {
+//            throw new IllegalArgumentException("Patient or Patient ID cannot be null or empty");
+//        }
+//        patients.put(patient.getIDNumber(), patient);
+//    }
+//
     //Ham tim kiem benh nhan
     public Patient findPatient(String IDNumber) {
         return patients.get(IDNumber);
@@ -133,6 +132,11 @@ public class Doctor extends Person {
         } else {
             throw new IllegalArgumentException("Patient with ID" + IDNumber + " not found.");//xu ly ngoai te neu khong co benh nhan day
         }
+    }
+
+    public String toFile() {
+        return getIDNumber() + "| " + getFullName() + "| " + getGender() + "| " + getYob() + "| " + getAge() + "| " + getAddress() + "| " + getTelephoneNumber() + "| " +
+                clinicHours + "| " + yearsOfExperience + "| " + education + "| " + specialization + "| " + consultationFee;
     }
 }
 
