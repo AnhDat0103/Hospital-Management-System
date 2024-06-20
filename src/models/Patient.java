@@ -7,27 +7,35 @@ import java.text.ParseException;
 import java.util.HashMap;
 
 public class Patient extends Person {
-    private int height;
-    private int weight;
+    private double height;
+    private double weight;
     private String bloodType;
     private String allergies;
+    private String allergyDetails;
     private HashMap<String, Medicine> medicines;
     private Specialization specialization;
 
-    public Patient(String IDNumber, String firstName, String lastName, String yob, Gender gender, String address, String telephone, double height, double weight, String bloodType, int allergiesChoice) {
-        this.medicines = new HashMap<>();
+
+    public Patient() {
+
     }
 
-    public Patient(String IdNumber, String FirstName, String LastName, String yob, Gender gender,
-                   String address, String telephoneNumber, String allergies, int height,
-                   int weight, String bloodType, HashMap<String, Medicine> medicines, Specialization specialization) throws ParseException {
-        super(IdNumber, FirstName, LastName, yob, gender, address, telephoneNumber);
-        this.allergies = allergies;
+    public Patient(String idNumber, String firstName, String lastName, String yob, Gender gender, String address, String telephone, double height, double weight, String bloodType, String allergyDetails, Specialization specialization) throws ParseException {
+        super(idNumber, firstName, lastName, yob, gender, address, telephone);
+        this.specialization = specialization;
+        this.allergyDetails = allergyDetails;
+        this.allergies = allergyDetails;
         this.height = height;
         this.weight = weight;
         this.bloodType = bloodType;
-        this.medicines = new HashMap<>(medicines);
-        this.specialization = specialization;
+    }
+
+    public String getAllergyDetails() {
+        return allergyDetails;
+    }
+
+    public void setAllergyDetails(String allergyDetails) {
+        this.allergyDetails = allergyDetails;
     }
 
     public String isAllergies() {
@@ -82,14 +90,16 @@ public class Patient extends Person {
     public String toString() {
         return "Patient {" +
                 super.toString() +
-                "allergies='" + allergies + '\'' +
+                "allergyDetials='" + allergyDetails + '\'' +
                 ", height=" + height +
                 ", weight=" + weight +
-                ", bloodType='" + bloodType + '\'' +
+                ", bloodType='" + bloodType +
                 ", medicines=" + medicines +
-                ", specialization=" + specialization +
-                '}';
+                ", specialization=" + specialization;
     }
+
+
+
 
     public void addMedicine(Medicine medicine) {
         medicines.put(medicine.getMedicineID(), medicine);

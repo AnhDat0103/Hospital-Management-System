@@ -67,5 +67,125 @@ public class Validate {
         }
     }
 
+    // Checking ID for Doctor's IDNumber
+    public static String checkDoctorID (Scanner scanner, int choice) throws ParseException {
+        if (choice == 1) {
+            while (true) {
+                System.out.print("Enter ID((CDL/cdl) + XXXX): ");
+                String id = scanner.nextLine();
+                String pattern = "^(?:CDL|cdl)\\d{4}$";
+                if (id.matches(pattern)) {
+                    return id;
+                } else {
+                    System.out.println("Invalid ID. Please enter a valid ID.");
+                }
+            }
+        } else if (choice == 2) {
+            while (true) {
+                System.out.print("Enter ID((DML/dml) + XXXX): ");
+                String id = scanner.nextLine();
+                String pattern = "^(?:DML|dml)\\d{4}$";
+                if (id.matches(pattern)) {
+                    return id;
+                } else {
+                    System.out.println("Invalid ID. Please enter a valid ID.");
+                }
+            }
+        } else if (choice == 3) {
+            while (true) {
+                System.out.print("Enter ID((ENT/ent) + XXXX): ");
+                String id = scanner.nextLine();
+                String pattern = "^(?:ENT|ent)\\d{4}$";
+                if (id.matches(pattern)) {
+                    return id;
+                } else {
+                    System.out.println("Invalid ID. Please enter a valid ID.");
+                }
+            }
+        } else if (choice == 4) {
+            while (true) {
+                System.out.print("Enter ID((NRL/nrl) + XXXX): ");
+                String id = scanner.nextLine();
+                String pattern = "^(?:NRL|nrl)\\d{4}$";
+                if (id.matches(pattern)) {
+                    return id;
+                } else {
+                    System.out.println("Invalid ID. Please enter a valid ID.");
+                }
+            }
+        } else if (choice == 5) {
+            while (true) {
+                System.out.print("Enter ID((GIT/git) + XXXX): ");
+                String id = scanner.nextLine();
+                String pattern = "^(?:GIT|git)\\d{4}$";
+                if (id.matches(pattern)) {
+                    return id;
+                } else {
+                    System.out.println("Invalid ID. Please enter a valid ID.");
+                }
+            }
+        }
+        return "";
+    }
 
+    // Checking ID for Patient's IDNumber
+    public static String checkPatientID (Scanner scanner, int choice) throws ParseException {
+        if (choice == 1) {
+            while (true) {
+                System.out.print("Enter ID((PCDL/pcdl) + XXXX): ");
+                String id = scanner.nextLine();
+                String pattern = "^(?:PCDL|pcdl)\\d{4}$";
+                if (id.matches(pattern)) {
+                    return id;
+                } else {
+                    System.out.println("Invalid ID. Please enter a valid ID.");
+                }
+            }
+        } else if (choice == 2) {
+            while (true) {
+                System.out.print("Enter ID((PDML/pdml) + XXXX): ");
+                String id = scanner.nextLine();
+                String pattern = "^(?:PDML|pdml)\\d{4}$";
+                if (id.matches(pattern)) {
+                    return id;
+                } else {
+                    System.out.println("Invalid ID. Please enter a valid ID.");
+                }
+            }
+        } else if (choice == 3) {
+            while (true) {
+                System.out.print("Enter ID((PENT/pent) + XXXX): ");
+                String id = scanner.nextLine();
+                String pattern = "^(?:PENT|pent)\\d{4}$";
+                if (id.matches(pattern)) {
+                    return id;
+                } else {
+                    System.out.println("Invalid ID. Please enter a valid ID.");
+                }
+            }
+        } else if (choice == 4) {
+            while (true) {
+                System.out.print("Enter ID((PNRL/pnrl) + XXXX): ");
+                String id = scanner.nextLine();
+                String pattern = "^(?:pNRL|pnrl)\\d{4}$";
+                if (id.matches(pattern)) {
+                    return id;
+                } else {
+                    System.out.println("Invalid ID. Please enter a valid ID.");
+                }
+            }
+        } else if (choice == 5) {
+            while (true) {
+                System.out.print("Enter ID((PGIT/pgit) + XXXX): ");
+                String id = scanner.nextLine();
+                String pattern = "^(?:PGIT|pgit)\\d{4}$";
+                if (id.matches(pattern)) {
+                    return id;
+                } else {
+                    System.out.println("Invalid ID. Please enter a valid ID.");
+                }
+            }
+        }
+        return "";
+    }
 }

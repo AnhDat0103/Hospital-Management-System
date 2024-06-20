@@ -53,8 +53,7 @@ public class Medicine {
 
     @Override
     public String toString() {
-        return "Medicine: " +
-                "Medicine ID = " + medicineID +
+        return "Medicine ID = " + medicineID +
                 "; Name = " + name +
                 "; Dosage Form = " + dosageForm +
                 "; Strength = " + strength;

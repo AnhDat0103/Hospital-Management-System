@@ -1,11 +1,6 @@
 package exception;
-
-import container.Container;
-import models.Doctor;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class HandlingException {
@@ -34,11 +29,11 @@ public class HandlingException {
 
     // Checking if the entered date is in the correct format dd-MM-yyyy
     public static String getBirthOfDay(Scanner scanner) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        formatter.setLenient(false);
         while (true) {
             try {
-                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-                formatter.setLenient(false);
-                System.out.print("Enter birth date(DD-MM-YYYY): ");
+                System.out.print("Enter birth date(DD/MM/YYYY): ");
                 String date = scanner.nextLine();
                 formatter.parse(date);
                 return date;
@@ -48,18 +43,6 @@ public class HandlingException {
         }
     }
 
-    // Checking ID for Doctor's IDNumber, Patient's IDNumber
-    public static String checkID (Scanner scanner) throws ParseException {
-        while (true) {
-            System.out.print("Enter doctor's ID((CDL/DML/ENT/NRL/GIT) + XXXX): ");
-            String id = scanner.nextLine();
-            String pattern = "^(?:CDL|DML|ENT|NRL|GIT|PCDL|PDML|PENT|PNRL|PGIT)\\d{4}$";
-            if (id.matches(pattern)) {
-                return id;
-            } else {
-                System.out.println("Invalid ID. Please enter a valid ID.");
-            }
-        }
-    }
+
 
 }

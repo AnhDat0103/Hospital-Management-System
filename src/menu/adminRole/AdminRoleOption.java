@@ -2,10 +2,11 @@ package menu.adminRole;
 
 import container.Container;
 import exception.HandlingException;
+import menu.MainMenu;
 import models.Doctor;
 import models.Medicine;
+import validation.Validate;
 
-import java.sql.SQLOutput;
 import java.text.ParseException;
 import java.util.Scanner;
 
@@ -29,7 +30,7 @@ public class AdminRoleOption {
                     break;
                 case 3:
                     System.out.print("Enter ID number you want to find: ");
-                    String IDNumberFind = HandlingException.checkID(sc);
+                    String IDNumberFind = Validate.checkDoctorID(sc, choice);
                     Doctor findDoctorByID = container.findDoctorByID(IDNumberFind, choice);
                     if (findDoctorByID == null) {
                         System.out.println("Doctor not found");
@@ -39,11 +40,11 @@ public class AdminRoleOption {
                     break;
                 case 4: //Update a doctor by IDNumber
                     System.out.print("Enter ID number you want to find: ");
-                    String IDNumberFind2 = HandlingException.checkID(sc);
+                    String IDNumberFind2 = Validate.checkDoctorID(sc, choice);
                     if (container.findDoctorByID(IDNumberFind2, choice) == null) {
                         System.out.println("Doctor not found");
                     } else {
-                        Doctor doctorUpdate = null;
+                        Doctor doctorUpdate;
                         try {
                             doctorUpdate = container.updateDoctor(IDNumberFind2, choice);
                         } catch (Exception e) {
@@ -54,7 +55,7 @@ public class AdminRoleOption {
                     break;
                 case 5:
                     System.out.print("Enter ID number you want to find: ");
-                    String IDNumberFindToRemove = HandlingException.checkID(sc);
+                    String IDNumberFindToRemove = Validate.checkDoctorID(sc, choice);
                     Doctor findDoctorByIDToRemove = container.findDoctorByID(IDNumberFindToRemove, choice);
                     if (findDoctorByIDToRemove == null) {
                         System.out.println("Doctor not found");
@@ -99,24 +100,27 @@ public class AdminRoleOption {
                         container.removeMedicine(medicineID3, choice);
                     }
                     break;
-                case 13: break;
+                case 13:
+                    choice1 = 0;
+                    MainMenu.authenticationMenuTitle();
                 default:
                     System.out.println("Invalid choice");
             }
-        } while (choice1 >= 1 && choice1 <= 12);
+        } while (choice1 >= 1 && choice1 <= 13);
     }
 
     // Detail option for all specialization
     public static void menuDetailsSpecialization() {
-        System.out.println("1. Add the new doctor.");
-        System.out.println("2. Show the list of doctors.");
-        System.out.println("3. Find a doctor by IDNumber.");
-        System.out.println("4. Update a doctor by IDNumber.");
-        System.out.println("5. Delete a doctor by IDNumber.");
-        System.out.println("6. Show the list of Patients.");
-        System.out.println("7. Find a patient by IDNumber");
-        System.out.println("8. Add the new medicine.");
-        System.out.println("9. show list medicines.");
+        System.out.println("1.  Add the new doctor.");
+        System.out.println("2.  Show the list of doctors.");
+        System.out.println("3.  Find a doctor by IDNumber");
+        System.out.println("4.  Update a doctor by IDNumber");
+        System.out.println("5.  Remove doctor by IDNumber");
+        System.out.println("5.  Delete a doctor by IDNumber");
+        System.out.println("6.  Show the list of Patients.");
+        System.out.println("7.  Find a patient by IDNumber");
+        System.out.println("8.  Add the new medicine.");
+        System.out.println("9.  show list medicines.");
         System.out.println("10. Find a medicine by IDNumber.");
         System.out.println("11. Update a medicine by IDNumber.");
         System.out.println("12. Remove a medicine by IDNumber.");
