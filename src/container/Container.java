@@ -837,7 +837,6 @@ public class Container {
      }
      public void addMedicineToPatient(int choice, String numberID){
           Scanner sc = new Scanner(System.in);
-
           switch (choice){
                case 1:
                     if (patientListOfCARDIOLOGY.containsKey(numberID)) {
@@ -926,4 +925,6 @@ public class Container {
      }
      public void showMedicineOfPatient(){
      }
+
+
 }
