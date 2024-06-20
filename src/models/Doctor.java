@@ -5,7 +5,6 @@ import models.enums.Gender;
 import models.enums.Specialization;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -133,6 +132,11 @@ public class Doctor extends Person {
         } else {
             throw new IllegalArgumentException("Patient with ID" + IDNumber + " not found.");//xu ly ngoai te neu khong co benh nhan day
         }
+    }
+
+    public String toFile() {
+        return getIDNumber() + "| " + getFullName() + "| " + getGender() + "| " + getYob() + "| " + getAge() + "| " + getAddress() + "| " + getTelephoneNumber() + "| " +
+                clinicHours + "| " + yearsOfExperience + "| " + education + "| " + specialization + "| " + consultationFee;
     }
 }
 

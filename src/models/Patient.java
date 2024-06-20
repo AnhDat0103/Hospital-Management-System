@@ -90,12 +90,17 @@ public class Patient extends Person {
     public String toString() {
         return "Patient {" +
                 super.toString() +
-                "allergyDetials='" + allergyDetails + '\'' +
+                "allergyDetails='" + allergyDetails + '\'' +
                 ", height=" + height +
                 ", weight=" + weight +
                 ", bloodType='" + bloodType +
                 ", medicines=" + medicines +
                 ", specialization=" + specialization;
+    }
+
+    public String toFile() {
+        return getIDNumber() + "| " + getFullName() + "| " + getGender() + "| " + getYob() + "| " + getAge() + "| " + getAddress() + "| " + getTelephoneNumber() + "| " +
+                allergyDetails + "| " +height + "| " + weight + "| " + bloodType + "| " + specialization;
     }
 
 
