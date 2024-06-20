@@ -24,6 +24,7 @@ public class MainMenu {
             System.out.println("4. Exit");
             System.out.print("Your choice: ");
             choice = HandlingException.getInteger(sc);
+
             switch (choice) {
                 case 1:
                     while (true) {
@@ -33,8 +34,8 @@ public class MainMenu {
                             System.out.print("password: ");
                             String password = sc.nextLine();
                             if (container.checkAdministration(userName,password)) {
-                                int choice2;
-                                do {
+                                int choice2 ;
+                                do{
                                     menuTitleForAdministration();
                                     choice2 = HandlingException.getInteger(sc);
                                     if (choice2 == 6) MainMenu.authenticationMenuTitle();
@@ -50,11 +51,20 @@ public class MainMenu {
                     }
                     break;
                 case 2:
-                    int choice2 = 0;
-                    menuTitleForAdministration();
-                    choice2 = HandlingException.getInteger(sc);
-                    DoctorRoleOptions.doctorRoleOptions(choice2);
-                    break;
+                    while(true){
+                        try{
+                            int choice2;
+                            do{
+                                menuTitleForAdministration();
+                                choice2 = HandlingException.getInteger(sc);
+                                if (choice2 == 6) MainMenu.authenticationMenuTitle();
+                            }while (choice2 < 1 || choice2 > 6);
+                            DoctorRoleOptions.doctorRoleOptions(choice2);
+                            break;
+                        }catch (Exception e){
+                            System.out.println(e.getMessage());
+                        }
+                    }
                 case 3: break;
                 case 4: break;
                 default: System.out.println("Invalid choice");

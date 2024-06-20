@@ -31,11 +31,11 @@ public class Container {
      private final List<Medicine> medicinesOfNEUROLOGY = new ArrayList<>();     // list of NEUROLOGY. The list has information of medicines in NEUROLOGY.
      private final List<Medicine> medicinesOfGERIATRIC = new ArrayList<>();     // list of GERIATRIC. The list has information of medicines in GERIATRIC.
 
-     private final HashMap<String, Patient> patientListOfCARDIOLOGY = new HashMap<>();
-     private final HashMap<String, Patient> patientListOfDERMATOLOGY = new HashMap<>();
-     private final HashMap<String, Patient> patientListOfENT = new HashMap<>();
-     private final HashMap<String, Patient> patientListOfNEUROLOGY = new HashMap<>();
-     private final HashMap<String, Patient> patientListOfGERIATRIC = new HashMap<>();
+     private static final HashMap<String, Patient> patientListOfCARDIOLOGY = new HashMap<>(); //list of CARDIOLOGY. The list has information of patients, medicine of patients in CARDIOLOGY.
+     private static final HashMap<String, Patient> patientListOfDERMATOLOGY = new HashMap<>(); //list of CARDIOLOGY. The list has information of patients, medicine of patients in DERMATOLOGY.
+     private static final HashMap<String, Patient> patientListOfENT = new HashMap<>(); //list of CARDIOLOGY. The list has information of patients, medicine of patients in ENT.
+     private static final HashMap<String, Patient> patientListOfNEUROLOGY = new HashMap<>(); //list of CARDIOLOGY. The list has information of patients, medicine of patients in NEUROLOGY.
+     private static final HashMap<String, Patient> patientListOfGERIATRIC = new HashMap<>(); //list of CARDIOLOGY. The list has information of patients, medicine of patients in GERIATRIC.
 
      private final HashMap<String, Medicine> medicineListOfCARDIOLOGY = new HashMap<>();
      private final HashMap<String, Medicine> medicineListOfDERMATOLOGY = new HashMap<>();
@@ -135,7 +135,7 @@ public class Container {
                                                            consultationFee,patientListOfDERMATOLOGY));
                     FileIO.writeDoctorDataToFile("doctorsDERMATOLOGY.txt", doctorListOfDERMATOLOGY);
                     System.out.println("added new doctor.");
-                    
+
                     break;
                case 3:
                     doctorListOfENT.add(new Doctor(IDNumber, firstName, lastName, yob,
@@ -537,11 +537,10 @@ public class Container {
      }
 
 
-     public void  addNewPatient(int choice) throws ParseException {
-          int choiceGender;
-          String allergies = "";
+     public void addNewPatient(int choice) throws ParseException {
           String allergyDetails = " ";
           int allergiesInt = 0;
+          boolean allergies = false;
 
           Gender gender;
 
@@ -576,51 +575,49 @@ public class Container {
           do{
                System.out.printf("Allergies?: %10s"," ");
                System.out.printf("%10s|%10s|%10s|%10s","1.YES","2.NO","YOU CHOICE:"," ");
-               allergies = sc.nextLine();
-               try {
-                    allergiesInt = Integer.parseInt(allergies);
-                    if (allergiesInt == 1) {
-                         System.out.print("Show the allergies: ");
-                         allergyDetails = sc.nextLine();
-                         System.out.println("Allergy details: " + allergyDetails);
-                    } else if (allergiesInt == 2) {
-                         System.out.println("The patient has no allergies!!!");
-                    } else {
-                         System.out.println("Invalid choice, please enter YES or NO.");
-                    }
-               } catch (NumberFormatException e) {
-                    System.out.println("Invalid input, please enter a valid number.");
+               allergiesInt = HandlingException.getInteger(sc);
+               if (allergiesInt == 1) {
+                    allergies = true;
+                    System.out.print("Show the allergies: ");
+                    allergyDetails = sc.nextLine();
+                    System.out.println("Allergy details: " + allergyDetails);
+               } else if (allergiesInt == 2) {
+                    allergies = false;
+                    allergyDetails = " ";
+                    System.out.println("The patient has no allergies!!!");
+               } else {
+                    System.out.println("Invalid choice, please enter YES or NO.");
                }
           } while ( allergiesInt != 1 && allergiesInt != 2);
           switch (choice) {
                case 1:
                     patientListOfCARDIOLOGY.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
-                            height,weight,bloodType,allergyDetails, Specialization.CARDIOLOGY));
+                                                height, weight, bloodType, allergies, allergyDetails, Specialization.CARDIOLOGY));
                     System.out.println("Add New Patient Successfully to Cardiology.");
                     break;
                case 2:
                     patientListOfDERMATOLOGY.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
-                            height,weight,bloodType,allergyDetails, Specialization.DERMATOLOGY));
+                            height, weight, bloodType, allergies, allergyDetails, Specialization.DERMATOLOGY));
                     System.out.println("Add New Patient Successfully to Dermatology.");
                     break;
                case 3:
                     patientListOfENT.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
-                            height,weight,bloodType,allergyDetails, Specialization.ENT));
+                            height, weight, bloodType, allergies, allergyDetails, Specialization.ENT));
                     System.out.println("Add New Patient Successfully to Entrepreneur.");
                     break;
                case 4:
                     patientListOfNEUROLOGY.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
-                            height,weight,bloodType,allergyDetails, Specialization.NEUROLOGY));
+                            height, weight, bloodType, allergies, allergyDetails, Specialization.NEUROLOGY));
                     System.out.println("Add New Patient Successfully to Neurology.");
                     break;
                case 5:
                     patientListOfGERIATRIC.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
-                            height,weight,bloodType,allergyDetails, Specialization.GERIATRIC));
+                            height, weight, bloodType, allergies, allergyDetails, Specialization.GERIATRIC));
                     System.out.println("Add New Patient Successfully to Geriatric.");
                     break;
           }
      }
-     public String showPatientsList(int choice) {
+     public void showPatientsList(int choice) {
           switch (choice) {
                case 1:
                     if (patientListOfCARDIOLOGY.isEmpty()) {
@@ -671,10 +668,10 @@ public class Container {
                     System.out.println("Invalid choice");
                     break;
           }
-         return "";
+
      }
 
-     public String findPatientByIDNumber(String IDNumber, int choice) {
+     public void findPatientByIDNumber(String IDNumber, int choice) {
           String result = "Patient not found in the selected department.";
           switch (choice) {
                case 1:
@@ -721,7 +718,6 @@ public class Container {
                     result = "Invalid choice. Please choose a valid department.";
                     break;
           }
-          return result;
      }
      public void UpdatePatientByID(String IDNumber, int choice) {
           boolean patientFound = false;
@@ -835,87 +831,92 @@ public class Container {
                     break;
           }
      }
-     public void addMedicineToPatient(int choice, String numberID){
+     public void addMedicineToPatient(int choice, String IDNumber){
           Scanner sc = new Scanner(System.in);
           switch (choice){
                case 1:
-                    if (patientListOfCARDIOLOGY.containsKey(numberID)) {
-                         Patient patient = patientListOfCARDIOLOGY.get(numberID);
-                         System.out.print("Enter medicine ID: ");
+                    if(patientListOfCARDIOLOGY.containsKey(IDNumber)){
+                         Patient patient = patientListOfCARDIOLOGY.get(IDNumber);
+                         System.out.println("Enter new medicine ID: ");
                          String medicineID = sc.nextLine();
                          Medicine medicine = findMedicine(medicineID, choice);
-                         if (medicine != null) {
+                         if(medicine != null){
                               patient.addMedicine(medicine);
-                              System.out.println("Medicine added successfully.");
-                         } else {
+                              System.out.println("Add Medicine Successfully.");
+                         }else{
                               System.out.println("Medicine not found.");
                          }
-                    } else {
-                         System.out.println("Patient not found.");
+
+                    }else{
+                         System.out.println("Medicine not found.");
                     }
                     break;
                case 2:
-                    if (patientListOfDERMATOLOGY.containsKey(numberID)) {
-                         Patient patient = patientListOfDERMATOLOGY.get(numberID);
-                         System.out.print("Enter medicine ID: ");
+                    if(patientListOfDERMATOLOGY.containsKey(IDNumber)){
+                         Patient patient = patientListOfDERMATOLOGY.get(IDNumber);
+                         System.out.println("Enter new medicine ID: ");
                          String medicineID = sc.nextLine();
                          Medicine medicine = findMedicine(medicineID, choice);
-                         if (medicine != null) {
+                         if(medicine != null){
                               patient.addMedicine(medicine);
-                              System.out.println("Medicine added successfully.");
-                         } else {
+                              System.out.println("Add Medicine Successfully.");
+                         }else{
                               System.out.println("Medicine not found.");
                          }
-                    } else {
-                         System.out.println("Patient not found.");
+
+                    }else{
+                         System.out.println("Medicine not found.");
                     }
                     break;
                case 3:
-                    if (patientListOfENT.containsKey(numberID)) {
-                         Patient patient = patientListOfENT.get(numberID);
-                         System.out.print("Enter medicine ID: ");
+                    if(patientListOfENT.containsKey(IDNumber)){
+                         Patient patient = patientListOfENT.get(IDNumber);
+                         System.out.println("Enter new medicine ID: ");
                          String medicineID = sc.nextLine();
                          Medicine medicine = findMedicine(medicineID, choice);
-                         if (medicine != null) {
+                         if(medicine != null){
                               patient.addMedicine(medicine);
-                              System.out.println("Medicine added successfully.");
-                         } else {
+                              System.out.println("Add Medicine Successfully.");
+                         }else{
                               System.out.println("Medicine not found.");
                          }
-                    } else {
-                         System.out.println("Patient not found.");
+
+                    }else{
+                         System.out.println("Medicine not found.");
                     }
                     break;
                case 4:
-                    if (patientListOfNEUROLOGY.containsKey(numberID)) {
-                         Patient patient = patientListOfNEUROLOGY.get(numberID);
-                         System.out.print("Enter medicine ID: ");
+                    if(patientListOfNEUROLOGY.containsKey(IDNumber)){
+                         Patient patient = patientListOfNEUROLOGY.get(IDNumber);
+                         System.out.println("Enter new medicine ID: ");
                          String medicineID = sc.nextLine();
                          Medicine medicine = findMedicine(medicineID, choice);
-                         if (medicine != null) {
+                         if(medicine != null){
                               patient.addMedicine(medicine);
-                              System.out.println("Medicine added successfully.");
-                         } else {
+                              System.out.println("Add Medicine Successfully.");
+                         }else{
                               System.out.println("Medicine not found.");
                          }
-                    } else {
-                         System.out.println("Patient not found.");
+
+                    }else{
+                         System.out.println("Medicine not found.");
                     }
                     break;
                case 5:
-                    if (patientListOfGERIATRIC.containsKey(numberID)) {
-                         Patient patient = patientListOfGERIATRIC.get(numberID);
-                         System.out.print("Enter medicine ID: ");
+                    if(patientListOfGERIATRIC.containsKey(IDNumber)){
+                         Patient patient = patientListOfGERIATRIC.get(IDNumber);
+                         System.out.println("Enter new medicine ID: ");
                          String medicineID = sc.nextLine();
                          Medicine medicine = findMedicine(medicineID, choice);
-                         if (medicine != null) {
+                         if(medicine != null){
                               patient.addMedicine(medicine);
-                              System.out.println("Medicine added successfully.");
-                         } else {
+                              System.out.println("Add Medicine Successfully.");
+                         }else{
                               System.out.println("Medicine not found.");
                          }
-                    } else {
-                         System.out.println("Patient not found.");
+
+                    }else{
+                         System.out.println("Medicine not found.");
                     }
                     break;
                default:
