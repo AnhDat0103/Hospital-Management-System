@@ -1,5 +1,6 @@
 package container;
 
+import database.FileIO;
 import exception.HandlingException;
 import models.Doctor;
 import models.Medicine;
@@ -10,6 +11,7 @@ import models.enums.Gender;
 import models.enums.Specialization;
 import validation.Validate;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
 
@@ -71,7 +73,7 @@ public class Container {
      }
 
      // METHOD OF DOCTOR
-     public void addNewDoctor(int choice) throws ParseException {
+     public void addNewDoctor(int choice) throws ParseException, IOException {
           int choiceDoctorEducation;
           Gender gender;
           Education education = null;
@@ -121,8 +123,9 @@ public class Container {
           switch (choice) {
                case 1:
                     doctorListOfCARDIOLOGY.add(new Doctor(IDNumber, firstName, lastName, yob, gender, address, telephone,
-                                               yearOfExperience, clinicHours, education, Specialization.CARDIOLOGY ,
-                                               consultationFee, patientListOfCARDIOLOGY));
+                            yearOfExperience, clinicHours, education, Specialization.CARDIOLOGY ,
+                            consultationFee, patientListOfCARDIOLOGY));
+                    FileIO.writeDoctorDataToFile("doctorsCardiology.txt", doctorListOfCARDIOLOGY);
                     System.out.println("added new doctor.");
                     break;
                case 2:
@@ -130,13 +133,16 @@ public class Container {
                                                            gender, address, telephone, yearOfExperience,
                                                            clinicHours, education, Specialization.DERMATOLOGY,
                                                            consultationFee,patientListOfDERMATOLOGY));
+                    FileIO.writeDoctorDataToFile("doctorsDERMATOLOGY.txt", doctorListOfDERMATOLOGY);
                     System.out.println("added new doctor.");
+                    
                     break;
                case 3:
                     doctorListOfENT.add(new Doctor(IDNumber, firstName, lastName, yob,
                                                         gender, address, telephone, yearOfExperience,
                                                         clinicHours, education, Specialization.ENT,
                                                         consultationFee,patientListOfENT));
+                    FileIO.writeDoctorDataToFile("doctorsENT.txt", doctorListOfENT);
                     System.out.println("added new doctor.");
                     break;
                case 4:
@@ -144,6 +150,7 @@ public class Container {
                                                         gender, address, telephone, yearOfExperience,
                                                         clinicHours, education, Specialization.NEUROLOGY,
                                                         consultationFee,patientListOfNEUROLOGY));
+                    FileIO.writeDoctorDataToFile("doctorsNEUROLOGY.txt", doctorListOfNEUROLOGY);
                     System.out.println("added new doctor.");
                     break;
                case 5:
@@ -151,6 +158,7 @@ public class Container {
                                                    gender, address, telephone, yearOfExperience,
                                                    clinicHours, education, Specialization.GERIATRIC,
                                                    consultationFee,patientListOfGERIATRIC));
+                    FileIO.writeDoctorDataToFile("doctorsGERIATRIC.txt", doctorListOfGERIATRIC);
                     System.out.println("added new doctor.");
                     break;
           }
@@ -529,7 +537,7 @@ public class Container {
      }
 
 
-     public void addNewPatient(int choice) throws ParseException {
+     public void  addNewPatient(int choice) throws ParseException {
           int choiceGender;
           String allergies = "";
           String allergyDetails = " ";
@@ -826,6 +834,96 @@ public class Container {
                     System.out.println("Invalid choice. Please choose a valid department.");
                     break;
           }
+     }
+     public void addMedicineToPatient(int choice, String numberID){
+          Scanner sc = new Scanner(System.in);
+          switch (choice){
+               case 1:
+                    if (patientListOfCARDIOLOGY.containsKey(numberID)) {
+                         Patient patient = patientListOfCARDIOLOGY.get(numberID);
+                         System.out.print("Enter medicine ID: ");
+                         String medicineID = sc.nextLine();
+                         Medicine medicine = findMedicine(medicineID, choice);
+                         if (medicine != null) {
+                              patient.addMedicine(medicine);
+                              System.out.println("Medicine added successfully.");
+                         } else {
+                              System.out.println("Medicine not found.");
+                         }
+                    } else {
+                         System.out.println("Patient not found.");
+                    }
+                    break;
+               case 2:
+                    if (patientListOfDERMATOLOGY.containsKey(numberID)) {
+                         Patient patient = patientListOfDERMATOLOGY.get(numberID);
+                         System.out.print("Enter medicine ID: ");
+                         String medicineID = sc.nextLine();
+                         Medicine medicine = findMedicine(medicineID, choice);
+                         if (medicine != null) {
+                              patient.addMedicine(medicine);
+                              System.out.println("Medicine added successfully.");
+                         } else {
+                              System.out.println("Medicine not found.");
+                         }
+                    } else {
+                         System.out.println("Patient not found.");
+                    }
+                    break;
+               case 3:
+                    if (patientListOfENT.containsKey(numberID)) {
+                         Patient patient = patientListOfENT.get(numberID);
+                         System.out.print("Enter medicine ID: ");
+                         String medicineID = sc.nextLine();
+                         Medicine medicine = findMedicine(medicineID, choice);
+                         if (medicine != null) {
+                              patient.addMedicine(medicine);
+                              System.out.println("Medicine added successfully.");
+                         } else {
+                              System.out.println("Medicine not found.");
+                         }
+                    } else {
+                         System.out.println("Patient not found.");
+                    }
+                    break;
+               case 4:
+                    if (patientListOfNEUROLOGY.containsKey(numberID)) {
+                         Patient patient = patientListOfNEUROLOGY.get(numberID);
+                         System.out.print("Enter medicine ID: ");
+                         String medicineID = sc.nextLine();
+                         Medicine medicine = findMedicine(medicineID, choice);
+                         if (medicine != null) {
+                              patient.addMedicine(medicine);
+                              System.out.println("Medicine added successfully.");
+                         } else {
+                              System.out.println("Medicine not found.");
+                         }
+                    } else {
+                         System.out.println("Patient not found.");
+                    }
+                    break;
+               case 5:
+                    if (patientListOfGERIATRIC.containsKey(numberID)) {
+                         Patient patient = patientListOfGERIATRIC.get(numberID);
+                         System.out.print("Enter medicine ID: ");
+                         String medicineID = sc.nextLine();
+                         Medicine medicine = findMedicine(medicineID, choice);
+                         if (medicine != null) {
+                              patient.addMedicine(medicine);
+                              System.out.println("Medicine added successfully.");
+                         } else {
+                              System.out.println("Medicine not found.");
+                         }
+                    } else {
+                         System.out.println("Patient not found.");
+                    }
+                    break;
+               default:
+                    System.out.println("Invalid choice. Please choose a valid department.");
+                    break;
+          }
+     }
+     public void showMedicineOfPatient(){
      }
 
 
