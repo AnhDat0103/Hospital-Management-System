@@ -831,6 +831,7 @@ public class Container {
                     break;
           }
      }
+
      public void addMedicineToPatient(int choice, String IDNumber){
           Scanner sc = new Scanner(System.in);
           switch (choice){
@@ -925,51 +926,114 @@ public class Container {
           }
      }
 
-     public void showMedicineOfPatient(String category, String patientId){
+     public void showMedicineOfPatient(int choice, String IdNumber) {
+          Scanner sc = new Scanner(System.in);
 
-          HashMap<String, Patient> patientList;
+          HashMap<String, Patient> patientList = null;
 
-          switch (category.toUpperCase()) {
-               case "CARDIOLOGY":
+          switch (choice) {
+               case 1:
                     patientList = patientListOfCARDIOLOGY;
+                    if (patientList.containsKey(IdNumber)) {
+                         Patient patient = patientList.get(IdNumber);
+                         List<Medicine> medicines = patient.getMedicines();
+                         System.out.println("Medicines for Patient " + IdNumber + " in CARDIOLOGY:");
+                         if (medicines.isEmpty()) {
+                              System.out.println("No medicines prescribed.");
+                         } else {
+                              for (Medicine medicine : medicines) {
+                                   System.out.println(medicine);
+                              }
+                         }
+                    } else {
+                         System.out.println("Patient not found in CARDIOLOGY.");
+                    }
                     break;
-               case "DERMATOLOGY":
+
+               case 2:
                     patientList = patientListOfDERMATOLOGY;
+                    if (patientList.containsKey(IdNumber)) {
+                         Patient patient = patientList.get(IdNumber);
+                         List<Medicine> medicines = patient.getMedicines();
+                         System.out.println("Medicines for Patient " + IdNumber + " in DERMATOLOGY:");
+                         if (medicines.isEmpty()) {
+                              System.out.println("No medicines prescribed.");
+                         } else {
+                              for (Medicine medicine : medicines) {
+                                   System.out.println(medicine);
+                              }
+                         }
+                    } else {
+                         System.out.println("Patient not found in DERMATOLOGY.");
+                    }
                     break;
-               case "ENT":
+
+               case 3:
                     patientList = patientListOfENT;
+                    if (patientList.containsKey(IdNumber)) {
+                         Patient patient = patientList.get(IdNumber);
+                         List<Medicine> medicines = patient.getMedicines();
+                         System.out.println("Medicines for Patient " + IdNumber + " in ENT:");
+                         if (medicines.isEmpty()) {
+                              System.out.println("No medicines prescribed.");
+                         } else {
+                              for (Medicine medicine : medicines) {
+                                   System.out.println(medicine);
+                              }
+                         }
+                    } else {
+                         System.out.println("Patient not found in ENT.");
+                    }
                     break;
-               case "NEUROLOGY":
+
+               case 4:
                     patientList = patientListOfNEUROLOGY;
+                    if (patientList.containsKey(IdNumber)) {
+                         Patient patient = patientList.get(IdNumber);
+                         List<Medicine> medicines = patient.getMedicines();
+                         System.out.println("Medicines for Patient " + IdNumber + " in NEUROLOGY:");
+                         if (medicines.isEmpty()) {
+                              System.out.println("No medicines prescribed.");
+                         } else {
+                              for (Medicine medicine : medicines) {
+                                   System.out.println(medicine);
+                              }
+                         }
+                    } else {
+                         System.out.println("Patient not found in NEUROLOGY.");
+                    }
                     break;
-               case "GERIATRIC":
+
+               case 5:
                     patientList = patientListOfGERIATRIC;
+                    if (patientList.containsKey(IdNumber)) {
+                         Patient patient = patientList.get(IdNumber);
+                         List<Medicine> medicines = patient.getMedicines();
+                         System.out.println("Medicines for Patient " + IdNumber + " in GERIATRIC:");
+                         if (medicines.isEmpty()) {
+                              System.out.println("No medicines prescribed.");
+                         } else {
+                              for (Medicine medicine : medicines) {
+                                   System.out.println(medicine);
+                              }
+                         }
+                    } else {
+                         System.out.println("Patient not found in GERIATRIC.");
+                    }
                     break;
+
                default:
-                    System.out.println("Invalid category!");
-                    return;
+                    System.out.println("Invalid choice!");
+                    break;
           }
-
-
-          Patient patient = patientList.get(patientId);   // find patient trong danh sách
-
-          // Kiểm tra xem bệnh nhân có tồn tại hay không
-          if (patient == null) {
-               System.out.println("Patient not found in " + category);
-               return;
-          }
-
-          // Hiển thị thông tin thuốc của bệnh nhân
-          System.out.println("Medicines for Patient " + patientId + " in " + category + ":");
-          List<Medicine> medicines = patient.getMedicines(); // phương thức getMedicines() trả về danh sách thuốc
-          for (Medicine medicine : medicines) {
-               System.out.println(medicine);
-          }
-
-
-
-
      }
+
+
+
+
+
+
+
 
 
 }
