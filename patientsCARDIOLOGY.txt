@@ -1,0 +1,2 @@
+pcdl1234| Ly Thuong Kiet| MALE| 12-12-2000| 23| Thai Binh| +147-12345678|  | 178.0| 78.0| o| CARDIOLOGY
+pcdl2345| Thanh Nghia| MALE| 03-04-2000| 24| Thanh Hoa| +753-85214796| di ung mat ong| 169.0| 56.0| B| CARDIOLOGY

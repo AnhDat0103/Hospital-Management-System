@@ -1,13 +1,17 @@
-package database;
+package fileIO;
 
 import models.Doctor;
 import models.Medicine;
 import models.Patient;
+import models.enums.Education;
+import models.enums.Gender;
+import models.enums.Specialization;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -30,7 +34,25 @@ public class FileIO {
         try {
             Files.lines(Paths.get(fileName)).forEach(line -> {
                 String[] data = line.split("\\| ");
-                doctors.add(new Doctor());
+                String ID = data[0];
+                String firstName = data[1];
+                String lastName = data[2];
+                Gender gender = Gender.valueOf(data[3]);
+                String dob = data[4];
+                String address = data[6];
+                String telephone = data[7];
+                int clinicTime = Integer.parseInt(data[8]);
+                int yearsOfExperience = Integer.parseInt(data[9]);
+                Education education = Education.valueOf(data[10]);
+                Specialization specialization = Specialization.valueOf(data[11]);
+                double consultationFree = Double.parseDouble(data[12]);
+                try {
+                    doctors.add(new Doctor(ID, firstName, lastName, dob, gender,
+                            address, telephone, yearsOfExperience, clinicTime,
+                            education, specialization, consultationFree));
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
             });
         } catch (IOException e) {
             System.out.println("data is null");
@@ -39,12 +61,12 @@ public class FileIO {
     }
 
     // save patient data  to file text
-    public static void writePatientDataToFile(String file, List<Patient> patients) {
+    public static void writePatientDataToFile(String file, HashMap<String, Patient> patients) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
-            for (Patient patient : patients) {
-                writer.write(patient.toFile());
-                writer.newLine();
-            }
+           for (Patient patient : patients.values()) {
+               writer.write(patient.toFile());
+               writer.newLine();
+           }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -75,7 +97,7 @@ public class FileIO {
         }
     }
 
-    // read doctor data from file text
+    // read medicine data from file text
     public static List<Medicine> getMedicines(String fileName, List<Medicine> medicines) {
         try {
             Files.lines(Paths.get(fileName)).forEach(line -> {

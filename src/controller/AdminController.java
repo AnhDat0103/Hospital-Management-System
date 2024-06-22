@@ -1,22 +1,64 @@
-package menu.adminRole;
+package controller;
 
-import container.Container;
 import exception.HandlingException;
-import menu.MainMenu;
 import models.Doctor;
 import models.Medicine;
+import service.DoctorService;
+import service.MedicineService;
+import service.PatientService;
 import validation.Validate;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 
-public class AdminRoleOption {
+public class AdminController {
 
-    static Scanner sc = new Scanner(System.in);
-    static Container container = new Container();
+    Scanner sc = new Scanner(System.in);
+    private DoctorService doctorService = new DoctorService();
+    private PatientService patientService = new PatientService();
+    private MedicineService medicineService = new MedicineService();
+    private ControllerMain controllerMain;
 
-    public static void adminRoleOptions(int choice) throws ParseException, IOException {
+    public AdminController(ControllerMain controllerMain) {
+        this.controllerMain = controllerMain;
+    }
+
+    public DoctorService getDoctorService() {
+        return doctorService;
+    }
+
+    public void setDoctorService(DoctorService doctorService) {
+        this.doctorService = doctorService;
+    }
+
+    public PatientService getPatientService() {
+        return patientService;
+    }
+
+    public void setPatientService(PatientService patientService) {
+        this.patientService = patientService;
+    }
+
+    public MedicineService getMedicineService() {
+        return medicineService;
+    }
+
+    public void setMedicineService(MedicineService medicineService) {
+        this.medicineService = medicineService;
+    }
+
+    public ControllerMain getControllerMain() {
+        return controllerMain;
+    }
+
+    public void setControllerMain(ControllerMain controllerMain) {
+        this.controllerMain = controllerMain;
+    }
+
+
+
+    public void adminRoleOptions(int choice) throws ParseException, IOException {
         int choice1;
         do {
             menuDetailsSpecialization();
@@ -24,15 +66,14 @@ public class AdminRoleOption {
             choice1 = HandlingException.getInteger(sc);
             switch (choice1) {
                 case 1:
-                    container.addNewDoctor(choice);
+                    doctorService.addNewDoctor(choice);
                     break;
                 case 2:
-                    container.showDoctorsList(choice);
+                    doctorService.showDoctorsList(choice);
                     break;
                 case 3:
-                    System.out.print("Enter ID number you want to find: ");
-                    String IDNumberFind = Validate.checkDoctorID(sc, choice);
-                    Doctor findDoctorByID = container.findDoctorByID(IDNumberFind, choice);
+                    String IDNumber = Validate.checkDoctorID(sc, choice);
+                    Doctor findDoctorByID = doctorService.findDoctorByID(choice, IDNumber);
                     if (findDoctorByID == null) {
                         System.out.println("Doctor not found");
                     } else {
@@ -40,14 +81,13 @@ public class AdminRoleOption {
                     }
                     break;
                 case 4: //Update a doctor by IDNumber
-                    System.out.print("Enter ID number you want to find: ");
                     String IDNumberFind2 = Validate.checkDoctorID(sc, choice);
-                    if (container.findDoctorByID(IDNumberFind2, choice) == null) {
+                    if (doctorService.findDoctorByID(choice, IDNumberFind2) == null) {
                         System.out.println("Doctor not found");
                     } else {
                         Doctor doctorUpdate;
                         try {
-                            doctorUpdate = container.updateDoctor(IDNumberFind2, choice);
+                            doctorUpdate = doctorService.updateDoctor(IDNumberFind2, choice);
                         } catch (Exception e) {
                             throw new RuntimeException(e);
                         }
@@ -55,61 +95,60 @@ public class AdminRoleOption {
                     }
                     break;
                 case 5:
-                    System.out.print("Enter ID number you want to find: ");
                     String IDNumberFindToRemove = Validate.checkDoctorID(sc, choice);
-                    Doctor findDoctorByIDToRemove = container.findDoctorByID(IDNumberFindToRemove, choice);
+                    Doctor findDoctorByIDToRemove = doctorService.findDoctorByID(choice, IDNumberFindToRemove);
                     if (findDoctorByIDToRemove == null) {
                         System.out.println("Doctor not found");
                     } else {
-                        container.removeDoctor(IDNumberFindToRemove, choice);
+                        doctorService.removeDoctor(IDNumberFindToRemove, choice);
                     }
                     break;
                 case 6:
-                    container.showPatientsList(choice);
+                    patientService.showPatientsList(choice);
                     break;
                 case 7:
-                    System.out.print("Enter ID number you want to find: ");
                     String IDNumberFindToFind = Validate.checkPatientID(sc, choice);
-                    container.findPatientByIDNumber(IDNumberFindToFind, choice);
+                    patientService.findPatientByIDNumber(IDNumberFindToFind, choice);
                     break;
                 case 8:
-                    container.addNewMedicine(choice);
+                     medicineService.addNewMedicine(choice);
                     break;
                 case 9:
                     System.out.println("The list medicine: ");
-                    container.showMedicineList(choice);
+                    medicineService.showMedicineList(choice);
                     break;
                 case 10:
                     System.out.println("Enter medicine ID: ");
                     String medicineID = sc.nextLine();
-                    if (container.findMedicine(medicineID, choice) == null) {
+                    if (medicineService.findMedicine(medicineID, choice) == null) {
                         System.out.println("Medicine not found");
                     } else {
-                        System.out.println(container.findMedicine(medicineID, choice).toString());
+                        System.out.println(medicineService.findMedicine(medicineID, choice).toString());
                     }
                     break;
                 case 11:
                     System.out.println("Enter medicine ID: ");
                     String medicineID2 = sc.nextLine();
-                    if (container.findMedicine(medicineID2, choice) == null) {
+                    if (medicineService.findMedicine(medicineID2, choice) == null) {
                         System.out.println("Medicine not found");
                     } else {
-                        Medicine medicineUpdate = container.updateMedicine(medicineID2, choice);
+                        Medicine medicineUpdate = medicineService.updateMedicine(medicineID2, choice);
                         System.out.println("Medicine information after update: " + medicineUpdate.toString());
                     }
                     break;
                 case 12:
                     System.out.println("Enter medicine ID: ");
                     String medicineID3 = sc.nextLine();
-                    if (container.findMedicine(medicineID3, choice) == null) {
+                    if (medicineService.findMedicine(medicineID3, choice) == null) {
                         System.out.println("Medicine not found");
                     } else {
-                        container.removeMedicine(medicineID3, choice);
+                        medicineService.removeMedicine(medicineID3, choice);
                     }
                     break;
                 case 13:
                     choice1 = 0;
-                    MainMenu.authenticationMenuTitle();
+                    controllerMain.authenticationMenuTitle();
+                    break;
                 default:
                     System.out.println("Invalid choice");
             }

@@ -1,53 +1,59 @@
-package menu.doctorRole;
+package controller;
 
-import container.Container;
 import exception.HandlingException;
-import menu.MainMenu;
+import service.DoctorService;
+import service.PatientService;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 
-public class DoctorRoleOptions {
+public class DoctorController {
     // implement coding for doctor role options.
-    static Scanner sc = new Scanner(System.in);
-    static Container container = new Container();
+    Scanner sc = new Scanner(System.in);
+    private ControllerMain controllerMain;
 
-    public static void doctorRoleOptions(int choice) throws ParseException {
+    public DoctorController(ControllerMain controllerMain) {
+        this.controllerMain = controllerMain;
+    }
+
+    public void doctorRoleOptions(int choice) throws ParseException, IOException {
         int choice3;
         do {
+            String IDNumber;
             mainTitle();
             System.out.print("Your choice: ");
             choice3 = HandlingException.getInteger(sc);
             switch (choice3) {
                 case 1:
-                    container.addNewPatient(choice);
+                    controllerMain.getAdminController().getPatientService().addNewPatient(choice);
                     break;
                 case 2:
-                    container.showPatientsList(choice);
+                    controllerMain.getAdminController().getPatientService().showPatientsList(choice);
                     break;
                 case 3:
                     System.out.println("ENTER ID Patient want to find: ");
-                    String IDNumber = sc.nextLine();
-                    container.findPatientByIDNumber(IDNumber, choice);
+                    IDNumber = sc.nextLine();
+                    controllerMain.getAdminController().getPatientService().findPatientByIDNumber(IDNumber, choice);
                     break;
                 case 4:
                     System.out.println("ENTER ID Patient want to update: ");
                     IDNumber = sc.nextLine();
-                    container.UpdatePatientByID(IDNumber, choice);
+                    controllerMain.getAdminController().getPatientService().UpdatePatientByID(IDNumber, choice);
                     break;
                 case 5:
                     System.out.println("ENTER ID Patient want to delete: ");
                     IDNumber = sc.nextLine();
-                    container.RemovePatientByID(IDNumber, choice);
+                    controllerMain.getAdminController().getPatientService().RemovePatientByID(IDNumber, choice);
                     break;
                 case 6:
                     System.out.println("ENTER ID Patient want add Medicine: ");
-                    String numberID = sc.nextLine();
-                    container.addMedicineToPatient(choice, numberID);
+                    IDNumber = sc.nextLine();
+                    controllerMain.getAdminController().getDoctorService().addMedicineToPatient(IDNumber, choice);
                     break;
                 case 7:
                     choice3 = 0;
-                    MainMenu.authenticationMenuTitle();
+                    controllerMain.authenticationMenuTitle();
                     break;
             }
         } while (choice3 >= 1 && choice3 <= 7);
