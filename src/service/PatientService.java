@@ -4,6 +4,7 @@ import exception.HandlingException;
 import fileIO.FileIO;
 import models.Medicine;
 import models.Patient;
+import models.enums.Action;
 import models.enums.Gender;
 import models.enums.Specialization;
 import validation.Validate;
@@ -117,7 +118,7 @@ public class PatientService {
 
         Gender gender;
 
-        String IDNumber = Validate.checkPatientID(sc, choice);
+        String IDNumber = Validate.checkPatientID(sc, choice, Action.CHECK);
 
         System.out.print("Enter Patient's fist name: ");
         String firstName = sc.nextLine();
