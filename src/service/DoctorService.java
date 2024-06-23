@@ -5,6 +5,7 @@ import fileIO.FileIO;
 import models.Doctor;
 import models.Medicine;
 import models.Patient;
+import models.enums.Action;
 import models.enums.Education;
 import models.enums.Gender;
 import models.enums.Specialization;
@@ -77,7 +78,7 @@ public class DoctorService {
         Gender gender;
         Education education = null;
 
-        String IDNumber = Validate.checkDoctorID(sc, choice);
+        String IDNumber = Validate.checkDoctorID(sc, choice, Action.CHECK);
 
         System.out.print("Enter Doctor's fist name: ");
         String firstName = sc.nextLine();
@@ -182,34 +183,29 @@ public class DoctorService {
     public Doctor findDoctorByID(int choice, String IDNumber) throws IOException {
         switch (choice) {
             case 1:
-                if (doctorListOfCARDIOLOGY.isEmpty()) {
-                    return null;
-                } else {
-                    return doctorListOfCARDIOLOGY.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
+                if (FileIO.checkIDInFile(IDNumber, "doctorsCardiology.txt")) {
+                    List<Doctor> doctorList = FileIO.getDoctors("doctorsCardiology.txt", doctorListOfCARDIOLOGY);
+                    return doctorList.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
                 }
             case 2:
-                if (doctorListOfDERMATOLOGY.isEmpty()) {
-                    return null;
-                } else {
-                    return doctorListOfDERMATOLOGY.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
+                if (FileIO.checkIDInFile(IDNumber, "doctorsDERMATOLOGY.txt")) {
+                    List<Doctor> doctorList = FileIO.getDoctors("doctorsDERMATOLOGY", doctorListOfCARDIOLOGY);
+                    return doctorList.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
                 }
             case 3:
-                if (doctorListOfENT.isEmpty()) {
-                    return null;
-                } else {
-                    return doctorListOfENT.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
+                if (FileIO.checkIDInFile(IDNumber, "doctorsENT.txt")) {
+                    List<Doctor> doctorList = FileIO.getDoctors("doctorsENT.txt", doctorListOfCARDIOLOGY);
+                    return doctorList.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
                 }
             case 4:
-                if (doctorListOfNEUROLOGY.isEmpty()) {
-                    return null;
-                } else {
-                    return doctorListOfNEUROLOGY.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
+                if (FileIO.checkIDInFile(IDNumber, "doctorsNEUROLOGY.txt")) {
+                    List<Doctor> doctorList = FileIO.getDoctors("doctorsNEUROLOGY.txt", doctorListOfCARDIOLOGY);
+                    return doctorList.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
                 }
             case 5:
-                if (doctorListOfGERIATRIC.isEmpty()) {
-                    return null;
-                } else {
-                    return doctorListOfGERIATRIC.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
+                if (FileIO.checkIDInFile(IDNumber, "doctorsGERIATRIC.txt")) {
+                    List<Doctor> doctorList = FileIO.getDoctors("doctorsGERIATRIC.txt", doctorListOfCARDIOLOGY);
+                    return doctorList.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
                 }
         }
         return null;

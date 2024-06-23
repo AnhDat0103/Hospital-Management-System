@@ -3,6 +3,7 @@ package controller;
 import exception.HandlingException;
 import models.Doctor;
 import models.Medicine;
+import models.enums.Action;
 import service.DoctorService;
 import service.MedicineService;
 import service.PatientService;
@@ -72,7 +73,7 @@ public class AdminController {
                     doctorService.showDoctorsList(choice);
                     break;
                 case 3:
-                    String IDNumber = Validate.checkDoctorID(sc, choice);
+                    String IDNumber = Validate.checkDoctorID(sc, choice, Action.FIND);
                     Doctor findDoctorByID = doctorService.findDoctorByID(choice, IDNumber);
                     if (findDoctorByID == null) {
                         System.out.println("Doctor not found");
@@ -81,7 +82,7 @@ public class AdminController {
                     }
                     break;
                 case 4: //Update a doctor by IDNumber
-                    String IDNumberFind2 = Validate.checkDoctorID(sc, choice);
+                    String IDNumberFind2 = Validate.checkDoctorID(sc, choice, Action.FIND);
                     if (doctorService.findDoctorByID(choice, IDNumberFind2) == null) {
                         System.out.println("Doctor not found");
                     } else {
@@ -95,7 +96,7 @@ public class AdminController {
                     }
                     break;
                 case 5:
-                    String IDNumberFindToRemove = Validate.checkDoctorID(sc, choice);
+                    String IDNumberFindToRemove = Validate.checkDoctorID(sc, choice, Action.FIND);
                     Doctor findDoctorByIDToRemove = doctorService.findDoctorByID(choice, IDNumberFindToRemove);
                     if (findDoctorByIDToRemove == null) {
                         System.out.println("Doctor not found");
@@ -107,7 +108,7 @@ public class AdminController {
                     patientService.showPatientsList(choice);
                     break;
                 case 7:
-                    String IDNumberFindToFind = Validate.checkPatientID(sc, choice);
+                    String IDNumberFindToFind = Validate.checkPatientID(sc, choice, Action.FIND);
                     patientService.findPatientByIDNumber(IDNumberFindToFind, choice);
                     break;
                 case 8:
