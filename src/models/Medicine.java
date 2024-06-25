@@ -7,11 +7,12 @@ import java.util.UUID;
 
 public class Medicine  {
     private String medicineID;
-    private static String name;
+    private String name;
     private DosageForm dosageForm;
     private String strength;
 
-    public Medicine(HashMap<String, Medicine> medicineListOfCARDIOLOGY) {
+
+    public Medicine() {
         this.medicineID = UUID.randomUUID().toString();
         this.name = "";
         this.strength = "";

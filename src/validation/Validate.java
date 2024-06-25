@@ -1,6 +1,7 @@
 package validation;
 
-import database.FileIO;
+import fileIO.FileIO;
+import models.enums.Action;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -70,20 +71,49 @@ public class Validate {
         }
     }
 
+    // check ID to create new user.
+    public static boolean checkCondition(String id, String pattern, String fileName) throws IOException {
+       if (FileIO.checkIDInFile(id, fileName)) {
+           System.out.println("ID is already in use. Please choose another ID.");
+           return false;
+       } else {
+           if (!id.matches(pattern)) {
+               System.out.println("Invalid ID. Please enter a valid ID.");
+               return false;
+           }
+       }
+       return true;
+    }
+
+    // check ID to find user
+    public static boolean checkIDToFind(String id, String pattern, String fileName) throws IOException {
+        if (id.matches(pattern)) {
+            if (FileIO.checkIDInFile(id, fileName)) {
+                return true;
+            }
+        } else {
+            System.out.println("Id is invalid. Please enter a valid ID.");
+            return false;
+        }
+        return true;
+    }
     // Checking ID for Doctor's IDNumber
-    public static String checkDoctorID (Scanner scanner, int choice) throws ParseException, IOException {
+    public static String checkDoctorID (Scanner scanner, int choice, Action action) throws IOException {
         if (choice == 1) {
             while (true) {
                 System.out.print("Enter ID((CDL/cdl) + XXXX): ");
                 String id = scanner.nextLine();
                 String pattern = "^(?:CDL|cdl)\\d{4}$";
-                if (!id.matches(pattern)) {
-                    System.out.println("Invalid ID. Please enter a valid ID.");
-                }
-                else if(FileIO.checkIDInFile(id, "doctorsCardiology.txt")) {
-                    System.out.println("ID number is existed. Please enter a new ID.");
+                if (action == Action.CHECK) {
+                    if (checkCondition(id, pattern, "doctorsCardiology.txt" )) {
+                        return id;
+                    }
+                } else if (action == Action.FIND) {
+                    if (checkIDToFind(id, pattern, "doctorsCardiology.txt" )) {
+                        return id;
+                    }
                 } else {
-                    return id;
+                    return null;
                 }
             }
         } else if (choice == 2) {
@@ -91,10 +121,16 @@ public class Validate {
                 System.out.print("Enter ID((DML/dml) + XXXX): ");
                 String id = scanner.nextLine();
                 String pattern = "^(?:DML|dml)\\d{4}$";
-                if (id.matches(pattern)) {
-                    return id;
+                if (action == Action.CHECK) {
+                    if (checkCondition(id, pattern, "doctorsDERMATOLOGY.txt" )) {
+                        return id;
+                    }
+                } else if (action == Action.FIND) {
+                    if (checkIDToFind(id, pattern, "doctorsDERMATOLOGY.txt" )) {
+                        return id;
+                    }
                 } else {
-                    System.out.println("Invalid ID. Please enter a valid ID.");
+                    return null;
                 }
             }
         } else if (choice == 3) {
@@ -102,10 +138,16 @@ public class Validate {
                 System.out.print("Enter ID((ENT/ent) + XXXX): ");
                 String id = scanner.nextLine();
                 String pattern = "^(?:ENT|ent)\\d{4}$";
-                if (id.matches(pattern)) {
-                    return id;
+                if (action == Action.CHECK) {
+                    if (checkCondition(id, pattern, "doctorsENT.txt" )) {
+                        return id;
+                    }
+                } else if (action == Action.FIND) {
+                    if (checkIDToFind(id, pattern, "doctorsENT.txt" )) {
+                        return id;
+                    }
                 } else {
-                    System.out.println("Invalid ID. Please enter a valid ID.");
+                    return null;
                 }
             }
         } else if (choice == 4) {
@@ -113,10 +155,16 @@ public class Validate {
                 System.out.print("Enter ID((NRL/nrl) + XXXX): ");
                 String id = scanner.nextLine();
                 String pattern = "^(?:NRL|nrl)\\d{4}$";
-                if (id.matches(pattern)) {
-                    return id;
+                if (action == Action.CHECK) {
+                    if (checkCondition(id, pattern, "doctorsNEUROLOGY.txt" )) {
+                        return id;
+                    }
+                } else if (action == Action.FIND) {
+                    if (checkIDToFind(id, pattern, "doctorsNEUROLOGY.txt" )) {
+                        return id;
+                    }
                 } else {
-                    System.out.println("Invalid ID. Please enter a valid ID.");
+                    return null;
                 }
             }
         } else if (choice == 5) {
@@ -124,10 +172,16 @@ public class Validate {
                 System.out.print("Enter ID((GIT/git) + XXXX): ");
                 String id = scanner.nextLine();
                 String pattern = "^(?:GIT|git)\\d{4}$";
-                if (id.matches(pattern)) {
-                    return id;
+                if (action == Action.CHECK) {
+                    if (checkCondition(id, pattern, "doctorsGERIATRIC.txt" )) {
+                        return id;
+                    }
+                } else if (action == Action.FIND) {
+                    if (checkIDToFind(id, pattern, "doctorsGERIATRIC.txt" )) {
+                        return id;
+                    }
                 } else {
-                    System.out.println("Invalid ID. Please enter a valid ID.");
+                    return null;
                 }
             }
         }
@@ -135,16 +189,22 @@ public class Validate {
     }
 
     // Checking ID for Patient's IDNumber
-    public static String checkPatientID (Scanner scanner, int choice) throws ParseException {
+    public static String checkPatientID (Scanner scanner, int choice, Action action) throws IOException {
         if (choice == 1) {
             while (true) {
                 System.out.print("Enter ID((PCDL/pcdl) + XXXX): ");
                 String id = scanner.nextLine();
                 String pattern = "^(?:PCDL|pcdl)\\d{4}$";
-                if (id.matches(pattern)) {
-                    return id;
+                if (action == Action.CHECK) {
+                    if (checkCondition(id, pattern, "patientsCARDIOLOGY.txt" )) {
+                        return id;
+                    }
+                } else if (action == Action.FIND) {
+                    if (checkIDToFind(id, pattern, "patientsCARDIOLOGY.txt" )) {
+                        return id;
+                    }
                 } else {
-                    System.out.println("Invalid ID. Please enter a valid ID.");
+                    return null;
                 }
             }
         } else if (choice == 2) {
@@ -152,10 +212,16 @@ public class Validate {
                 System.out.print("Enter ID((PDML/pdml) + XXXX): ");
                 String id = scanner.nextLine();
                 String pattern = "^(?:PDML|pdml)\\d{4}$";
-                if (id.matches(pattern)) {
-                    return id;
+                if (action == Action.CHECK) {
+                    if (checkCondition(id, pattern, "patientsDERMATOLOGY.txt" )) {
+                        return id;
+                    }
+                } else if (action == Action.FIND) {
+                    if (checkIDToFind(id, pattern, "patientsDERMATOLOGY.txt" )) {
+                        return id;
+                    }
                 } else {
-                    System.out.println("Invalid ID. Please enter a valid ID.");
+                    return null;
                 }
             }
         } else if (choice == 3) {
@@ -163,10 +229,16 @@ public class Validate {
                 System.out.print("Enter ID((PENT/pent) + XXXX): ");
                 String id = scanner.nextLine();
                 String pattern = "^(?:PENT|pent)\\d{4}$";
-                if (id.matches(pattern)) {
-                    return id;
+                if (action == Action.CHECK) {
+                    if (checkCondition(id, pattern, "patientsENT.txt" )) {
+                        return id;
+                    }
+                } else if (action == Action.FIND) {
+                    if (checkIDToFind(id, pattern, "patientsENT.txt" )) {
+                        return id;
+                    }
                 } else {
-                    System.out.println("Invalid ID. Please enter a valid ID.");
+                    return null;
                 }
             }
         } else if (choice == 4) {
@@ -174,10 +246,16 @@ public class Validate {
                 System.out.print("Enter ID((PNRL/pnrl) + XXXX): ");
                 String id = scanner.nextLine();
                 String pattern = "^(?:pNRL|pnrl)\\d{4}$";
-                if (id.matches(pattern)) {
-                    return id;
+                if (action == Action.CHECK) {
+                    if (checkCondition(id, pattern, "patientsNEUROLOGY.txt" )) {
+                        return id;
+                    }
+                } else if (action == Action.FIND) {
+                    if (checkIDToFind(id, pattern, "patientsNEUROLOGY.txt" )) {
+                        return id;
+                    }
                 } else {
-                    System.out.println("Invalid ID. Please enter a valid ID.");
+                    return null;
                 }
             }
         } else if (choice == 5) {
@@ -185,10 +263,16 @@ public class Validate {
                 System.out.print("Enter ID((PGIT/pgit) + XXXX): ");
                 String id = scanner.nextLine();
                 String pattern = "^(?:PGIT|pgit)\\d{4}$";
-                if (id.matches(pattern)) {
-                    return id;
+                if (action == Action.CHECK) {
+                    if (checkCondition(id, pattern, "patientsGERIATRIC.txt" )) {
+                        return id;
+                    }
+                } else if (action == Action.FIND) {
+                    if (checkIDToFind(id, pattern, "patientsGERIATRIC.txt" )) {
+                        return id;
+                    }
                 } else {
-                    System.out.println("Invalid ID. Please enter a valid ID.");
+                    return null;
                 }
             }
         }

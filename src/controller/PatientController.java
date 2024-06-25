@@ -1,33 +1,41 @@
-package menu.patientRole;
-import container.Container;
+package controller;
 import exception.HandlingException;
+import service.DoctorService;
+import service.MedicineService;
+import service.PatientService;
+
 import java.text.ParseException;
 import java.util.Scanner;
 
-public class PatientRoleOptions {
+public class PatientController {
+    // implement coding for patient role options.
+    Scanner sc = new Scanner(System.in);
+    ControllerMain controllerMain;
 
-    static Scanner sc = new Scanner(System.in);
-    static Container container = new Container();
+    public PatientController(ControllerMain controllerMain) {
+        this.controllerMain = controllerMain;
+    }
 
-    public static void patientRoleOptions(int choice) throws ParseException {
+    public  void patientRoleOptions(int choice) throws ParseException {
         int choice3;
         do{
             menuDetails();
+            String IDNumber;
             System.out.println("Your choice: ");
             choice3 = HandlingException.getInteger(sc);
             switch (choice3){
                 case 1:
                     System.out.println("ENTER ID Patient want to find: ");
-                    String IDNumber = sc.nextLine();
-                    container.findPatientByIDNumber(IDNumber ,choice);
+                    IDNumber = sc.nextLine();
+                    controllerMain.getAdminController().getPatientService().findPatientByIDNumber(IDNumber ,choice);
                     break;
                 case 2:
-                    container.showDoctorsList(choice);
+                    controllerMain.getAdminController().getDoctorService().showDoctorsList(choice);
                     break;
                 case 3:
                     System.out.println("ENTER ID Patient want to find: ");
                     IDNumber = sc.nextLine();
-                    container.showMedicineOfPatient();
+                    controllerMain.getAdminController().getDoctorService().showMedicineOfPatient();
 
             }
         }while (choice3 >= 1 && choice3 <= 4);

@@ -1,19 +1,56 @@
-package menu;
+package controller;
 
-import container.Container;
 import exception.HandlingException;
-import menu.adminRole.AdminRoleOption;
-import menu.doctorRole.DoctorRoleOptions;
 
 import java.text.ParseException;
 import java.util.Scanner;
 
-public class MainMenu {
-    static Scanner sc = new Scanner(System.in);
-    static Container container = new Container();
+public class ControllerMain {
+    private Scanner sc = new Scanner(System.in);
+    private AdminController adminController;
+    private DoctorController doctorController;
+    private PatientController patientController;
+
+    public ControllerMain() {
+        this.adminController = new AdminController(this);
+        this.doctorController = new DoctorController(this);
+        this.patientController = new PatientController(this);
+    }
+
+    public Scanner getSc() {
+        return sc;
+    }
+
+    public void setSc(Scanner sc) {
+        this.sc = sc;
+    }
+
+    public AdminController getAdminController() {
+        return adminController;
+    }
+
+    public void setAdminController(AdminController adminController) {
+        this.adminController = adminController;
+    }
+
+    public DoctorController getDoctorController() {
+        return doctorController;
+    }
+
+    public void setDoctorController(DoctorController doctorController) {
+        this.doctorController = doctorController;
+    }
+
+    public PatientController getPatientController() {
+        return patientController;
+    }
+
+    public void setPatientController(PatientController patientController) {
+        this.patientController = patientController;
+    }
 
     // Main menu
-    public static void authenticationMenuTitle() throws ParseException {
+    public void authenticationMenuTitle() throws ParseException {
         int choice = 0;
         do {
             System.out.println("Welcome to the hospital management system");
@@ -33,14 +70,14 @@ public class MainMenu {
                             String userName = sc.nextLine();
                             System.out.print("password: ");
                             String password = sc.nextLine();
-                            if (container.checkAdministration(userName,password)) {
+                            if (HandlingException.checkAdministration(userName,password)) {
                                 int choice2 ;
                                 do{
                                     menuTitleForAdministration();
                                     choice2 = HandlingException.getInteger(sc);
-                                    if (choice2 == 6) MainMenu.authenticationMenuTitle();
+                                    if (choice2 == 6) authenticationMenuTitle();
                                 } while (choice2 < 1 || choice2 > 6);
-                                AdminRoleOption.adminRoleOptions(choice2);
+                                adminController.adminRoleOptions(choice2);
                                break;
                             } else {
                                 System.out.println("Invalid username or password");
@@ -57,9 +94,9 @@ public class MainMenu {
                             do{
                                 menuTitleForAdministration();
                                 choice2 = HandlingException.getInteger(sc);
-                                if (choice2 == 6) MainMenu.authenticationMenuTitle();
+                                if (choice2 == 6) authenticationMenuTitle();
                             }while (choice2 < 1 || choice2 > 6);
-                            DoctorRoleOptions.doctorRoleOptions(choice2);
+                            doctorController.doctorRoleOptions(choice2);
                             break;
                         }catch (Exception e){
                             System.out.println(e.getMessage());
