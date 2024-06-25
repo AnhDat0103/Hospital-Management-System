@@ -92,7 +92,7 @@ public class Doctor extends Person {
     }
 
     public String toFile() {
-        return getIDNumber() + "| " + getFirstName() + "| "+ getLastName() + "| " + "| " + getGender() + "| " + getYob() + "| " + getAge() + "| " + getAddress() + "| " + getTelephoneNumber() + "| " +
+        return getIDNumber() + "| " + getFirstName() + "| "+ getLastName() + "| " + getGender() + "| " + getYob() + "| " + getAge() + "| " + getAddress() + "| " + getTelephoneNumber() + "| " +
                 clinicHours + "| " + yearsOfExperience + "| " + education + "| " + specialization + "| " + consultationFee;
     }
 }

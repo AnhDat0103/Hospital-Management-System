@@ -11,6 +11,7 @@ import validation.Validate;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.List;
 import java.util.Scanner;
 
 public class AdminController {
@@ -70,7 +71,7 @@ public class AdminController {
                     doctorService.addNewDoctor(choice);
                     break;
                 case 2:
-                    doctorService.showDoctorsList(choice);
+                    doctorService.showDoctorsList(choice).forEach(s -> System.out.println(s.toString()));
                     break;
                 case 3:
                     String IDNumber = Validate.checkDoctorID(sc, choice, Action.FIND);
@@ -83,16 +84,10 @@ public class AdminController {
                     break;
                 case 4: //Update a doctor by IDNumber
                     String IDNumberFind2 = Validate.checkDoctorID(sc, choice, Action.FIND);
-                    if (doctorService.findDoctorByID(choice, IDNumberFind2) == null) {
-                        System.out.println("Doctor not found");
-                    } else {
-                        Doctor doctorUpdate;
-                        try {
-                            doctorUpdate = doctorService.updateDoctor(IDNumberFind2, choice);
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                        System.out.println("Doctor's information after update: " + doctorUpdate.toString());
+                    try {
+                        doctorService.updateDoctor(IDNumberFind2, choice);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
                     }
                     break;
                 case 5:
