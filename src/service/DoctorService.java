@@ -160,72 +160,65 @@ public class DoctorService {
 
     }
 
-    public void showDoctorsList(int choice) {
+    public List<Doctor> showDoctorsList(int choice) {
         switch (choice) {
             case 1:
-                FileIO.getDoctors("doctorsCardiology.txt", doctorListOfCARDIOLOGY).forEach(Doctor -> System.out.println(Doctor.toString()));
-                break;
+                return FileIO.getDoctors("doctorsCardiology.txt", doctorListOfCARDIOLOGY);
             case 2:
-                FileIO.getDoctors("doctorsDERMATOLOGY.txt", doctorListOfCARDIOLOGY).forEach(Doctor -> System.out.println(Doctor.toString()));
-                break;
+                return FileIO.getDoctors("doctorsDERMATOLOGY.txt", doctorListOfCARDIOLOGY);
             case 3:
-                FileIO.getDoctors("doctorsENT.txt", doctorListOfCARDIOLOGY).forEach(Doctor -> System.out.println(Doctor.toString()));
-                break;
+                return FileIO.getDoctors("doctorsENT.txt", doctorListOfCARDIOLOGY);
             case 4:
-                FileIO.getDoctors("doctorsNEUROLOGY.txt", doctorListOfCARDIOLOGY).forEach(Doctor -> System.out.println(Doctor.toString()));
-                break;
+                return FileIO.getDoctors("doctorsNEUROLOGY.txt", doctorListOfCARDIOLOGY);
             case 5:
-                FileIO.getDoctors("doctorsGERIATRIC.txt", doctorListOfCARDIOLOGY).forEach(Doctor -> System.out.println(Doctor.toString()));
-                break;
+                return FileIO.getDoctors("doctorsGERIATRIC.txt", doctorListOfCARDIOLOGY);
         }
+        return null;
     }
 
     public Doctor findDoctorByID(int choice, String IDNumber) throws IOException {
         switch (choice) {
             case 1:
                 if (FileIO.checkIDInFile(IDNumber, "doctorsCardiology.txt")) {
-                    List<Doctor> doctorList = FileIO.getDoctors("doctorsCardiology.txt", doctorListOfCARDIOLOGY);
-                    return doctorList.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
+                    return doctorListOfCARDIOLOGY.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
+
                 }
             case 2:
                 if (FileIO.checkIDInFile(IDNumber, "doctorsDERMATOLOGY.txt")) {
-                    List<Doctor> doctorList = FileIO.getDoctors("doctorsDERMATOLOGY", doctorListOfCARDIOLOGY);
-                    return doctorList.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
+                    return doctorListOfDERMATOLOGY.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
                 }
             case 3:
                 if (FileIO.checkIDInFile(IDNumber, "doctorsENT.txt")) {
-                    List<Doctor> doctorList = FileIO.getDoctors("doctorsENT.txt", doctorListOfCARDIOLOGY);
-                    return doctorList.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
+                    return doctorListOfENT.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
                 }
             case 4:
                 if (FileIO.checkIDInFile(IDNumber, "doctorsNEUROLOGY.txt")) {
-                    List<Doctor> doctorList = FileIO.getDoctors("doctorsNEUROLOGY.txt", doctorListOfCARDIOLOGY);
-                    return doctorList.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
+                    return doctorListOfNEUROLOGY.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
                 }
             case 5:
                 if (FileIO.checkIDInFile(IDNumber, "doctorsGERIATRIC.txt")) {
-                    List<Doctor> doctorList = FileIO.getDoctors("doctorsGERIATRIC.txt", doctorListOfCARDIOLOGY);
-                    return doctorList.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
+                    return doctorListOfGERIATRIC.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
                 }
         }
         return null;
     }
 
-    public Doctor updateDoctor(String IDNumber, int choice) throws Exception {
+    public void updateDoctor(String IDNumber, int choice) throws Exception {
         int choiceGender, choiceDoctorEducation;
-        if (findDoctorByID(choice, IDNumber) == null) {
+        Doctor doctor = findDoctorByID(choice, IDNumber);
+        if (doctor == null) {
             System.out.println("Not found!!!");
         } else {
             System.out.print("Enter Doctor's fist name: ");
-            findDoctorByID(choice, IDNumber).setFirstName(sc.nextLine());
+            doctor.setFirstName(sc.nextLine());
 
             System.out.print("Enter Doctor's last name: ");
-            findDoctorByID(choice, IDNumber).setLastName(sc.nextLine());
+            doctor.setLastName(sc.nextLine());
 
-            findDoctorByID(choice, IDNumber).setFullName();
+            doctor.setFullName();
 
 
-            findDoctorByID(choice, IDNumber).setYob(HandlingException.getBirthOfDay(sc));
+            doctor.setYob(HandlingException.getBirthOfDay(sc));
 
 
             do {
@@ -233,9 +226,9 @@ public class DoctorService {
                 System.out.printf("%10s|%10s|%10s|%10s", "1.MALE", "2.FEMALE", "Your choice:", " ");
                 choiceGender = HandlingException.getInteger(sc);
                 if (choiceGender == 1) {
-                    findDoctorByID(choice, IDNumber).setGender(Gender.MALE);
+                    doctor.setGender(Gender.MALE);
                 } else if (choiceGender == 2) {
-                    findDoctorByID(choice, IDNumber).setGender(Gender.FEMALE);
+                    doctor.setGender(Gender.FEMALE);
                 }
                 else {
                     System.out.println("Invalid Gender");
@@ -243,35 +236,56 @@ public class DoctorService {
             } while ( choiceGender != 1 && choiceGender != 2);
 
             System.out.print("Enter doctor's address: ");
-            findDoctorByID(choice, IDNumber).setAddress(sc.nextLine());
+            doctor.setAddress(sc.nextLine());
 
-            findDoctorByID(choice, IDNumber).setTelephoneNumber(Validate.getTelephoneNumber(sc));
+            doctor.setTelephoneNumber(Validate.getTelephoneNumber(sc));
 
             System.out.print("Enter doctor's years of experience: ");
-            findDoctorByID(choice, IDNumber).setYearsOfExperience(HandlingException.getInteger(sc));
+            doctor.setYearsOfExperience(HandlingException.getInteger(sc));
 
-            findDoctorByID(choice, IDNumber).setClinicHours(Validate.getClinicHours(sc));
+            doctor.setClinicHours(Validate.getClinicHours(sc));
 
             do {
                 System.out.printf("Choose doctor's education:%10s", " ");
                 System.out.printf("%10s|%10s|%10s|%10s", "1. DOCTOR", "2. PROFESSOR", "3. ASSOCIATE_PROFESSOR", " ");
                 choiceDoctorEducation = HandlingException.getInteger(sc);
                 if (choiceDoctorEducation == 1) {
-                    findDoctorByID( choice, IDNumber).setEducation(Education.DOCTOR);
+                    doctor.setEducation(Education.DOCTOR);
                 } else if (choiceDoctorEducation == 2) {
-                    findDoctorByID(choice, IDNumber).setEducation(Education.PROFESSOR);
+                    doctor.setEducation(Education.PROFESSOR);
                 } else if (choiceDoctorEducation == 3) {
-                    findDoctorByID(choice, IDNumber).setEducation(Education.ASSOCIATE_PROFESSOR);
+                    doctor.setEducation(Education.ASSOCIATE_PROFESSOR);
                 } else {
                     System.out.println("Invalid Education");
                 }
             } while ( choiceDoctorEducation < 1 || choiceDoctorEducation > 3);
 
             System.out.print("Enter doctor's consultationFee: ");
-            findDoctorByID(choice, IDNumber).setConsultationFee(HandlingException.getDouble(sc));
-            return findDoctorByID(choice, IDNumber);
+            doctor.setConsultationFee(HandlingException.getDouble(sc));
+
+            switch (choice) {
+                case 1:
+                    FileIO.updateDoctorDataToFile("doctorsCardiology.txt", doctorListOfCARDIOLOGY);
+                    System.out.println("Updated Doctors cardiology data");
+                    break;
+                case 2:
+                    FileIO.updateDoctorDataToFile("doctorsDERMATOLOGY.txt", doctorListOfDERMATOLOGY);
+                    System.out.println("Updated Doctors DERMATOLOGY data");
+                    break;
+                case 3:
+                    FileIO.updateDoctorDataToFile("doctorsENT.txt", doctorListOfENT);
+                    System.out.println("Updated Doctors ENT data");
+                    break;
+                case 4:
+                    FileIO.updateDoctorDataToFile("doctorsNEUROLOGY.txt", doctorListOfNEUROLOGY);
+                    System.out.println("Updated Doctors NEUROLOGY data");
+                    break;
+                case 5:
+                    FileIO.updateDoctorDataToFile("doctorsGERIATRIC.txt", doctorListOfGERIATRIC);
+                    System.out.println("Updated Doctors GERIATRIC data");
+                    break;
+            }
         }
-        return null;
     }
 
     public void removeDoctor(String IDNumber, int choice) throws IOException {
@@ -281,22 +295,27 @@ public class DoctorService {
             switch (choice) {
                 case 1:
                     doctorListOfCARDIOLOGY.remove(findDoctorByID(choice, IDNumber));
+                    FileIO.updateDoctorDataToFile("doctorsCardiology.txt", doctorListOfCARDIOLOGY);
                     System.out.println("Remove is successful");
                     break;
                 case 2:
                     doctorListOfDERMATOLOGY.remove(findDoctorByID(choice, IDNumber));
+                    FileIO.updateDoctorDataToFile("doctorsDERMATOLOGY.txt", doctorListOfDERMATOLOGY);
                     System.out.println("Remove is successful");
                     break;
                 case 3:
                     doctorListOfENT.remove(findDoctorByID(choice, IDNumber));
+                    FileIO.updateDoctorDataToFile("doctorsENT.txt", doctorListOfENT);
                     System.out.println("Remove is successful");
                     break;
                 case 4:
                     doctorListOfNEUROLOGY.remove(findDoctorByID(choice, IDNumber));
+                    FileIO.updateDoctorDataToFile("doctorsNEUROLOGY.txt", doctorListOfNEUROLOGY);
                     System.out.println("Remove is successful");
                     break;
                 case 5:
                     doctorListOfGERIATRIC.remove(findDoctorByID(choice, IDNumber));
+                    FileIO.updateDoctorDataToFile("doctorsGERIATRIC.txt", doctorListOfGERIATRIC);
                     System.out.println("Remove is successful");
                     break;
             }
