@@ -1,9 +1,11 @@
 package service;
 
 import exception.HandlingException;
+import fileIO.FileIO;
 import models.Medicine;
 import models.enums.DosageForm;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -93,98 +95,79 @@ public class MedicineService {
 
         switch (choice) {
             case 1:
+                FileIO.getMedicines("medicinesOfCARDIOLOGY.txt", medicinesOfCARDIOLOGY);
                 medicinesOfCARDIOLOGY.add( new Medicine(medicineName, dosageForm, strength ));
+                FileIO.writeMedicineDataToFile("medicinesOfCARDIOLOGY.txt", medicinesOfCARDIOLOGY);
                 System.out.println("added new medicine.");
                 break;
             case 2:
+                FileIO.getMedicines("medicinesOfDERMATOLOGY.txt", medicinesOfDERMATOLOGY);
                 medicinesOfDERMATOLOGY.add( new Medicine(medicineName, dosageForm, strength ));
+                FileIO.writeMedicineDataToFile("medicinesOfDERMATOLOGY.txt", medicinesOfDERMATOLOGY);
                 System.out.println("added new medicine.");
                 break;
             case 3:
+                FileIO.getMedicines("medicinesOfENT.txt", medicinesOfENT);
                 medicinesOfENT.add( new Medicine(medicineName, dosageForm, strength ));
+                FileIO.writeMedicineDataToFile("medicinesOfENT.txt", medicinesOfENT);
                 System.out.println("added new medicine.");
                 break;
             case 4:
+                FileIO.getMedicines("medicinesOfNEUROLOGY.txt", medicinesOfNEUROLOGY);
                 medicinesOfNEUROLOGY.add( new Medicine(medicineName, dosageForm, strength ));
+                FileIO.writeMedicineDataToFile("medicinesOfNEUROLOGY.txt", medicinesOfNEUROLOGY);
                 System.out.println("added new medicine.");
                 break;
             case 5:
+                FileIO.getMedicines("medicinesOfGERIATRIC.txt", medicinesOfGERIATRIC);
                 medicinesOfGERIATRIC.add( new Medicine(medicineName, dosageForm, strength ));
+                FileIO.writeMedicineDataToFile("medicinesOfGERIATRIC.txt", medicinesOfGERIATRIC);
                 System.out.println("added new medicine.");
                 break;
         }
     }
 
-    public void showMedicineList(int choice) {
+    public List<Medicine> showMedicineList(int choice) {
         switch (choice) {
             case 1:
-                if (medicinesOfCARDIOLOGY.isEmpty()) {
-                    System.out.println("no one medicine in here");
-                }
-                medicinesOfCARDIOLOGY.forEach(Medicine ->System.out.println(Medicine.toString()));
-                break;
+                return FileIO.getMedicines("medicinesOfCARDIOLOGY.txt", medicinesOfCARDIOLOGY);
             case 2:
-                if (medicinesOfDERMATOLOGY.isEmpty()) {
-                    System.out.println("no one medicine in here");
-                }
-                medicinesOfDERMATOLOGY.forEach(Medicine ->System.out.println(Medicine.toString()));
-                break;
+                return FileIO.getMedicines("medicinesOfDERMATOLOGY.txt", medicinesOfDERMATOLOGY);
             case 3:
-                if (medicinesOfENT.isEmpty()) {
-                    System.out.println("no one medicine in here");
-                }
-                medicinesOfENT.forEach(Medicine ->System.out.println(Medicine.toString()));
-                break;
+                return FileIO.getMedicines("medicinesOfENT.txt", medicinesOfENT);
             case 4:
-                if (medicinesOfNEUROLOGY.isEmpty()) {
-                    System.out.println("no one medicine in here");
-                }
-                medicinesOfNEUROLOGY.forEach(Medicine ->System.out.println(Medicine.toString()));
-                break;
+                return FileIO.getMedicines("medicinesOfNEUROLOGY.txt", medicinesOfNEUROLOGY);
             case 5:
-                if (medicinesOfGERIATRIC.isEmpty()) {
-                    System.out.println("no one medicine in here");
-                }
-                medicinesOfGERIATRIC.forEach(Medicine ->System.out.println(Medicine.toString()));
-                break;
-        }
-    }
-
-    public Medicine findMedicine(String IDNumber, int choice) {
-        switch (choice) {
-            case 1:
-                if (medicinesOfCARDIOLOGY.isEmpty()) {
-                    return null;
-                }
-                return medicinesOfCARDIOLOGY.stream().filter(medicine ->  medicine.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
-            case 2:
-                if (medicinesOfDERMATOLOGY.isEmpty()) {
-                    return null;
-                }
-                return medicinesOfDERMATOLOGY.stream().filter(medicine ->  medicine.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
-            case 3:
-                if (medicinesOfENT.isEmpty()) {
-                    return null;
-                }
-                return medicinesOfENT.stream().filter(medicine ->  medicine.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
-            case 4:
-                if (medicinesOfNEUROLOGY.isEmpty()) {
-                    return null;
-                }
-                return medicinesOfNEUROLOGY.stream().filter(medicine ->  medicine.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
-            case 5:
-                if (medicinesOfGERIATRIC.isEmpty()) {
-                    return null;
-                }
-                return medicinesOfGERIATRIC.stream().filter(medicine ->  medicine.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
+                return FileIO.getMedicines("medicinesOfGERIATRIC.txt", medicinesOfGERIATRIC);
         }
         return null;
     }
 
-    public Medicine updateMedicine(String IDNumber, int choice) {
+    public Medicine findMedicine(String IDNumber, int choice) throws IOException {
+        switch (choice) {
+            case 1:
+                if(FileIO.checkIDInFile(IDNumber, "medicinesOfCARDIOLOGY.txt"))
+                    return medicinesOfCARDIOLOGY.stream().filter(m -> m.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
+            case 2:
+                if(FileIO.checkIDInFile(IDNumber, "medicinesOfDERMATOLOGY.txt"))
+                    return medicinesOfDERMATOLOGY.stream().filter(m -> m.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
+            case 3:
+                if(FileIO.checkIDInFile(IDNumber, "medicinesOfENT.txt"))
+                    return medicinesOfENT.stream().filter(m -> m.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
+            case 4:
+                if(FileIO.checkIDInFile(IDNumber, "medicinesOfNEUROLOGY.txt"))
+                    return medicinesOfNEUROLOGY.stream().filter(m -> m.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
+            case 5:
+                if(FileIO.checkIDInFile(IDNumber, "medicinesOfGERIATRIC.txt"))
+                    return medicinesOfGERIATRIC.stream().filter(m -> m.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
+        }
+        return null;
+    }
 
-        if (findMedicine(IDNumber, choice) == null) {
-            return null;
+    public void updateMedicine(String IDNumber, int choice) throws IOException {
+        Medicine medicine = findMedicine(IDNumber, choice);
+        if (medicine == null) {
+            System.out.println("Medicine not found");
         } else {
             System.out.print("Medicine's name: ");
             findMedicine(IDNumber, choice).setName(sc.nextLine());
@@ -218,53 +201,58 @@ public class MedicineService {
 
             switch (choice) {
                 case 1:
-                    medicinesOfCARDIOLOGY.set(medicinesOfCARDIOLOGY.indexOf(findMedicine(IDNumber, choice)), findMedicine(IDNumber, choice));
+                    FileIO.writeMedicineDataToFile("medicinesOfCARDIOLOGY.txt", medicinesOfCARDIOLOGY);
                     System.out.println("updated information of medicine.");
                     break;
                 case 2:
-                    medicinesOfDERMATOLOGY.set(medicinesOfDERMATOLOGY.indexOf(findMedicine(IDNumber, choice)), findMedicine(IDNumber, choice));
+                    FileIO.writeMedicineDataToFile("medicinesOfDERMATOLOGY.txt", medicinesOfDERMATOLOGY);
                     System.out.println("updated information of medicine.");
                     break;
                 case 3:
-                    medicinesOfENT.set(medicinesOfENT.indexOf(findMedicine(IDNumber, choice)), findMedicine(IDNumber, choice));
+                    FileIO.writeMedicineDataToFile("medicinesOfENT.txt", medicinesOfENT);
                     System.out.println("updated information of medicine.");
                     break;
                 case 4:
-                    medicinesOfNEUROLOGY.set(medicinesOfNEUROLOGY.indexOf(findMedicine(IDNumber, choice)), findMedicine(IDNumber, choice));
+                    FileIO.writeMedicineDataToFile("medicinesOfNEUROLOGY.txt", medicinesOfNEUROLOGY);
                     System.out.println("updated information of medicine.");
                     break;
                 case 5:
-                    medicinesOfGERIATRIC.set(medicinesOfGERIATRIC.indexOf(findMedicine(IDNumber, choice)), findMedicine(IDNumber, choice));
+                    FileIO.writeMedicineDataToFile("medicinesOfGERIATRIC.txt", medicinesOfGERIATRIC);
                     System.out.println("updated information of medicine.");
                     break;
             }
-            return findMedicine(IDNumber, choice);
         }
     }
 
-    public void removeMedicine(String IDNumber, int choice) {
-        if (findMedicine(IDNumber, choice) == null) {
+    public void removeMedicine(String IDNumber, int choice) throws IOException {
+        Medicine medicine = findMedicine(IDNumber, choice);
+        if (medicine == null) {
             System.out.println("The medicine does not exist.");
         } else {
             switch (choice) {
                 case 1:
-                    medicinesOfCARDIOLOGY.remove(findMedicine(IDNumber, choice));
+                    medicinesOfCARDIOLOGY.remove(medicine);
+                    FileIO.writeMedicineDataToFile("medicinesOfCARDIOLOGY.txt", medicinesOfCARDIOLOGY);
                     System.out.println("The medicine has been removed.");
                     break;
                 case 2:
-                    medicinesOfDERMATOLOGY.remove(findMedicine(IDNumber, choice));
+                    medicinesOfDERMATOLOGY.remove(medicine);
+                    FileIO.writeMedicineDataToFile("medicinesOfDERMATOLOGY.txt", medicinesOfDERMATOLOGY);
                     System.out.println("The medicine has been removed.");
                     break;
                 case 3:
-                    medicinesOfENT.remove(findMedicine(IDNumber, choice));
+                    medicinesOfENT.remove(medicine);
+                    FileIO.writeMedicineDataToFile("medicinesOfENT.txt", medicinesOfENT);
                     System.out.println("The medicine has been removed.");
                     break;
                 case 4:
-                    medicinesOfNEUROLOGY.remove(findMedicine(IDNumber, choice));
+                    medicinesOfNEUROLOGY.remove(medicine);
+                    FileIO.writeMedicineDataToFile("medicinesOfNEUROLOGY.txt", medicinesOfNEUROLOGY);
                     System.out.println("The medicine has been removed.");
                     break;
                 case 5:
-                    medicinesOfGERIATRIC.remove(findMedicine(IDNumber, choice));
+                    medicinesOfGERIATRIC.remove(medicine);
+                    FileIO.writeMedicineDataToFile("medicinesOfGERIATRIC.txt", medicinesOfGERIATRIC);
                     System.out.println("The medicine has been removed.");
                     break;
             }

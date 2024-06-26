@@ -3,6 +3,7 @@ package fileIO;
 import models.Doctor;
 import models.Medicine;
 import models.Patient;
+import models.enums.DosageForm;
 import models.enums.Education;
 import models.enums.Gender;
 import models.enums.Specialization;
@@ -21,18 +22,6 @@ public class FileIO {
 
     // save doctor data  to file text
     public static void writeDoctorDataToFile(String file, List<Doctor> doctors) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
-            for (Doctor doctor : doctors) {
-                writer.write(doctor.toFile());
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // update doctor data  to file text
-    public static void updateDoctorDataToFile(String file, List<Doctor> doctors) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             for (Doctor doctor : doctors) {
                 writer.write(doctor.toFile());
@@ -42,8 +31,6 @@ public class FileIO {
             e.printStackTrace();
         }
     }
-
-
 
     // read doctor data from file text
     public static List<Doctor> getDoctors(String fileName, List<Doctor> doctors) {
@@ -87,7 +74,7 @@ public class FileIO {
 
     // save patient data  to file text
     public static void writePatientDataToFile(String file, HashMap<String, Patient> patients) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
            for (Patient patient : patients.values()) {
                writer.write(patient.toFile());
                writer.newLine();
@@ -99,10 +86,34 @@ public class FileIO {
 
     // read patient data from file text
     public static List<Patient> getPatients(String fileName, List<Patient> patients) {
+        Map<String, Patient> patientMap = new HashMap<>();
+        for (Patient patient : patients) {
+            patientMap.put(patient.getIDNumber(), patient);
+        }
         try {
             Files.lines(Paths.get(fileName)).forEach(line -> {
                 String[] data = line.split("\\| ");
-                patients.add(new Patient());
+                String ID = data[0];
+                if (!patientMap.containsKey(ID)) {
+                    String firstName = data[1];
+                    String lastName = data[2];
+                    Gender gender = Gender.valueOf(data[3]);
+                    String dob = data[4];
+                    String address = data[6];
+                    String telephone = data[7];
+                    boolean allergies = data[8].equals("true");
+                    String allergyDetails = data[9];
+                    double height = Double.parseDouble(data[10]);
+                    double weight = Double.parseDouble(data[11]);
+                    String bloodType = data[12];
+                    Specialization specialization = Specialization.valueOf(data[13]);
+                    try {
+                        patients.add(new Patient(ID, firstName, lastName, dob, gender
+                                , address, telephone, height, weight, bloodType, allergies, allergyDetails, specialization));
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             });
         } catch (IOException e) {
             System.out.println("data is null");
@@ -112,7 +123,7 @@ public class FileIO {
 
     // save medicine data  to file text
     public static void writeMedicineDataToFile(String file, List<Medicine> medicines) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             for (Medicine medicine : medicines) {
                 writer.write(medicine.toFile());
                 writer.newLine();
@@ -124,10 +135,20 @@ public class FileIO {
 
     // read medicine data from file text
     public static List<Medicine> getMedicines(String fileName, List<Medicine> medicines) {
+        Map<String, Medicine> medicineMap = new HashMap<>();
+        for (Medicine m : medicines) {
+            medicineMap.put(m.getMedicineID(), m);
+        }
         try {
             Files.lines(Paths.get(fileName)).forEach(line -> {
                 String[] data = line.split("\\| ");
-                medicines.add(new Medicine());
+                String ID = data[0];
+                if (!medicineMap.containsKey(ID)) {
+                    String name = data[1];
+                    DosageForm dosageForm = DosageForm.valueOf(data[2]);
+                    String strength = data[3];
+                    medicines.add(new Medicine(name, dosageForm, strength));
+                }
             });
         } catch (IOException e) {
             System.out.println("data is null");

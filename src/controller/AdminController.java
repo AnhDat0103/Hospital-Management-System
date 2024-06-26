@@ -100,55 +100,41 @@ public class AdminController {
                     }
                     break;
                 case 6:
-                    patientService.showPatientsList(choice);
-                    break;
-                case 7:
                     String IDNumberFindToFind = Validate.checkPatientID(sc, choice, Action.FIND);
                     patientService.findPatientByIDNumber(IDNumberFindToFind, choice);
                     break;
-                case 8:
+                case 7:
                      medicineService.addNewMedicine(choice);
                     break;
-                case 9:
+                case 8:
                     System.out.println("The list medicine: ");
-                    medicineService.showMedicineList(choice);
+                    medicineService.showMedicineList(choice).forEach(m -> System.out.println(m.toString()));
                     break;
-                case 10:
+                case 9:
                     System.out.println("Enter medicine ID: ");
                     String medicineID = sc.nextLine();
                     if (medicineService.findMedicine(medicineID, choice) == null) {
                         System.out.println("Medicine not found");
-                    } else {
-                        System.out.println(medicineService.findMedicine(medicineID, choice).toString());
-                    }
+                    } else System.out.println(medicineService.findMedicine(medicineID, choice).toString());
+                    break;
+                case 10:
+                    System.out.println("Enter medicine ID: ");
+                    String medicineID2 = sc.nextLine();
+                    medicineService.updateMedicine(medicineID2, choice);
                     break;
                 case 11:
                     System.out.println("Enter medicine ID: ");
-                    String medicineID2 = sc.nextLine();
-                    if (medicineService.findMedicine(medicineID2, choice) == null) {
-                        System.out.println("Medicine not found");
-                    } else {
-                        Medicine medicineUpdate = medicineService.updateMedicine(medicineID2, choice);
-                        System.out.println("Medicine information after update: " + medicineUpdate.toString());
-                    }
+                    String medicineID3 = sc.nextLine();
+                    medicineService.removeMedicine(medicineID3, choice);
                     break;
                 case 12:
-                    System.out.println("Enter medicine ID: ");
-                    String medicineID3 = sc.nextLine();
-                    if (medicineService.findMedicine(medicineID3, choice) == null) {
-                        System.out.println("Medicine not found");
-                    } else {
-                        medicineService.removeMedicine(medicineID3, choice);
-                    }
-                    break;
-                case 13:
                     choice1 = 0;
                     controllerMain.authenticationMenuTitle();
                     break;
                 default:
                     System.out.println("Invalid choice");
             }
-        } while (choice1 >= 1 && choice1 <= 13);
+        } while (choice1 >= 1 && choice1 <= 12);
     }
 
     // Detail option for all specialization
@@ -158,13 +144,12 @@ public class AdminController {
         System.out.println("3.  Find a doctor by IDNumber");
         System.out.println("4.  Update a doctor by IDNumber");
         System.out.println("5.  Remove doctor by IDNumber");
-        System.out.println("6.  Show the list of Patients.");
-        System.out.println("7.  Find a patient by IDNumber");
-        System.out.println("8.  Add the new medicine.");
-        System.out.println("9.  show list medicines.");
-        System.out.println("10. Find a medicine by IDNumber.");
-        System.out.println("11. Update a medicine by IDNumber.");
-        System.out.println("12. Remove a medicine by IDNumber.");
-        System.out.println("13. Exit");
+        System.out.println("6.  Find a patient by IDNumber");
+        System.out.println("7.  Add the new medicine.");
+        System.out.println("8.  show list medicines.");
+        System.out.println("9.  Find a medicine by IDNumber.");
+        System.out.println("10. Update a medicine by IDNumber.");
+        System.out.println("11. Remove a medicine by IDNumber.");
+        System.out.println("12. Exit");
     }
 }
