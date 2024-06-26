@@ -71,14 +71,14 @@ public class ControllerMain {
                             System.out.print("password: ");
                             String password = sc.nextLine();
                             if (HandlingException.checkAdministration(userName,password)) {
-                                int choice2 ;
-                                do{
+                                int choice2;
+                                do {
                                     menuTitleForAdministration();
                                     choice2 = HandlingException.getInteger(sc);
                                     if (choice2 == 6) authenticationMenuTitle();
                                 } while (choice2 < 1 || choice2 > 6);
                                 adminController.adminRoleOptions(choice2);
-                               break;
+                                break;
                             } else {
                                 System.out.println("Invalid username or password");
                             }
@@ -110,7 +110,7 @@ public class ControllerMain {
     }
 
     // Menu for choice the specialization
-    public static void menuTitleForAdministration() {
+    public void menuTitleForAdministration() {
         System.out.println("Choose the specialization: ");
         System.out.println("1. CARDIOLOGY ");
         System.out.println("2. DERMATOLOGY ");

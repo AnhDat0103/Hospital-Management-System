@@ -2,24 +2,26 @@ package models;
 
 import models.enums.DosageForm;
 
-import java.util.HashMap;
-import java.util.UUID;
-
 public class Medicine  {
-    private String medicineID;
+    private static int idCounter = 0;
+    private String medicineID ;
     private String name;
     private DosageForm dosageForm;
     private String strength;
 
 
     public Medicine() {
-        this.medicineID = UUID.randomUUID().toString();
+        this.medicineID = generateID();
         this.name = "";
         this.strength = "";
     }
 
-    public Medicine( String name, DosageForm dosageForm, String strength) {
-        this.medicineID = UUID.randomUUID().toString();
+    private String generateID() {
+        return String.valueOf(++idCounter);
+    }
+
+    public Medicine(String name, DosageForm dosageForm, String strength) {
+        this.medicineID = generateID();
         this.name = name;
         this.dosageForm = dosageForm;
         this.strength = strength;
@@ -52,6 +54,8 @@ public class Medicine  {
     public void setDosageForm(DosageForm dosageForm) {
         this.dosageForm = dosageForm;
     }
+
+
 
     @Override
     public String toString() {

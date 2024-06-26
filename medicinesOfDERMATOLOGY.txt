@@ -1,0 +1,3 @@
+2| Paracetamol | LIQUIDS| 500 mg, 650 mg
+3| Albuterol (Salbutamol) Inhaler| TABLETS| 90 mcg per puff
+4| Omeprazole| LIQUIDS| 40 mg

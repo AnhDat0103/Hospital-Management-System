@@ -121,6 +121,7 @@ public class DoctorService {
 
         switch (choice) {
             case 1:
+                FileIO.getDoctors("doctorsCardiology.txt", doctorListOfCARDIOLOGY);
                 doctorListOfCARDIOLOGY.add(new Doctor(IDNumber, firstName, lastName, yob, gender,
                                             address, telephone, yearOfExperience, clinicHours, education,
                                             Specialization.CARDIOLOGY, consultationFee));
@@ -128,6 +129,7 @@ public class DoctorService {
                 System.out.println("added new doctor.");
                 break;
             case 2:
+                FileIO.getDoctors("doctorsDERMATOLOGY.txt", doctorListOfDERMATOLOGY);
                 doctorListOfDERMATOLOGY.add(new Doctor(IDNumber, firstName, lastName, yob, gender,
                         address, telephone, yearOfExperience, clinicHours, education,
                         Specialization.DERMATOLOGY, consultationFee));
@@ -136,6 +138,7 @@ public class DoctorService {
 
                 break;
             case 3:
+                FileIO.getDoctors("doctorsENT.txt", doctorListOfENT);
                 doctorListOfENT.add(new Doctor(IDNumber, firstName, lastName, yob, gender,
                         address, telephone, yearOfExperience, clinicHours, education,
                         Specialization.ENT, consultationFee));
@@ -143,6 +146,7 @@ public class DoctorService {
                 System.out.println("added new doctor.");
                 break;
             case 4:
+                FileIO.getDoctors("doctorsNEUROLOGY.txt", doctorListOfNEUROLOGY);
                 doctorListOfNEUROLOGY.add(new Doctor(IDNumber, firstName, lastName, yob, gender,
                         address, telephone, yearOfExperience, clinicHours, education,
                         Specialization.NEUROLOGY, consultationFee));
@@ -150,6 +154,7 @@ public class DoctorService {
                 System.out.println("added new doctor.");
                 break;
             case 5:
+                FileIO.getDoctors("doctorsGERIATRIC.txt", doctorListOfGERIATRIC);
                 doctorListOfGERIATRIC.add(new Doctor(IDNumber, firstName, lastName, yob, gender,
                         address, telephone, yearOfExperience, clinicHours, education,
                         Specialization.GERIATRIC, consultationFee));
@@ -165,13 +170,13 @@ public class DoctorService {
             case 1:
                 return FileIO.getDoctors("doctorsCardiology.txt", doctorListOfCARDIOLOGY);
             case 2:
-                return FileIO.getDoctors("doctorsDERMATOLOGY.txt", doctorListOfCARDIOLOGY);
+                return FileIO.getDoctors("doctorsDERMATOLOGY.txt", doctorListOfDERMATOLOGY);
             case 3:
-                return FileIO.getDoctors("doctorsENT.txt", doctorListOfCARDIOLOGY);
+                return FileIO.getDoctors("doctorsENT.txt", doctorListOfENT);
             case 4:
-                return FileIO.getDoctors("doctorsNEUROLOGY.txt", doctorListOfCARDIOLOGY);
+                return FileIO.getDoctors("doctorsNEUROLOGY.txt", doctorListOfNEUROLOGY);
             case 5:
-                return FileIO.getDoctors("doctorsGERIATRIC.txt", doctorListOfCARDIOLOGY);
+                return FileIO.getDoctors("doctorsGERIATRIC.txt", doctorListOfGERIATRIC);
         }
         return null;
     }
@@ -181,7 +186,6 @@ public class DoctorService {
             case 1:
                 if (FileIO.checkIDInFile(IDNumber, "doctorsCardiology.txt")) {
                     return doctorListOfCARDIOLOGY.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
-
                 }
             case 2:
                 if (FileIO.checkIDInFile(IDNumber, "doctorsDERMATOLOGY.txt")) {
@@ -265,23 +269,23 @@ public class DoctorService {
 
             switch (choice) {
                 case 1:
-                    FileIO.updateDoctorDataToFile("doctorsCardiology.txt", doctorListOfCARDIOLOGY);
+                    FileIO.writeDoctorDataToFile("doctorsCardiology.txt", doctorListOfCARDIOLOGY);
                     System.out.println("Updated Doctors cardiology data");
                     break;
                 case 2:
-                    FileIO.updateDoctorDataToFile("doctorsDERMATOLOGY.txt", doctorListOfDERMATOLOGY);
+                    FileIO.writeDoctorDataToFile("doctorsDERMATOLOGY.txt", doctorListOfDERMATOLOGY);
                     System.out.println("Updated Doctors DERMATOLOGY data");
                     break;
                 case 3:
-                    FileIO.updateDoctorDataToFile("doctorsENT.txt", doctorListOfENT);
+                    FileIO.writeDoctorDataToFile("doctorsENT.txt", doctorListOfENT);
                     System.out.println("Updated Doctors ENT data");
                     break;
                 case 4:
-                    FileIO.updateDoctorDataToFile("doctorsNEUROLOGY.txt", doctorListOfNEUROLOGY);
+                    FileIO.writeDoctorDataToFile("doctorsNEUROLOGY.txt", doctorListOfNEUROLOGY);
                     System.out.println("Updated Doctors NEUROLOGY data");
                     break;
                 case 5:
-                    FileIO.updateDoctorDataToFile("doctorsGERIATRIC.txt", doctorListOfGERIATRIC);
+                    FileIO.writeDoctorDataToFile("doctorsGERIATRIC.txt", doctorListOfGERIATRIC);
                     System.out.println("Updated Doctors GERIATRIC data");
                     break;
             }
@@ -295,27 +299,27 @@ public class DoctorService {
             switch (choice) {
                 case 1:
                     doctorListOfCARDIOLOGY.remove(findDoctorByID(choice, IDNumber));
-                    FileIO.updateDoctorDataToFile("doctorsCardiology.txt", doctorListOfCARDIOLOGY);
+                    FileIO.writeDoctorDataToFile("doctorsCardiology.txt", doctorListOfCARDIOLOGY);
                     System.out.println("Remove is successful");
                     break;
                 case 2:
                     doctorListOfDERMATOLOGY.remove(findDoctorByID(choice, IDNumber));
-                    FileIO.updateDoctorDataToFile("doctorsDERMATOLOGY.txt", doctorListOfDERMATOLOGY);
+                    FileIO.writeDoctorDataToFile("doctorsDERMATOLOGY.txt", doctorListOfDERMATOLOGY);
                     System.out.println("Remove is successful");
                     break;
                 case 3:
                     doctorListOfENT.remove(findDoctorByID(choice, IDNumber));
-                    FileIO.updateDoctorDataToFile("doctorsENT.txt", doctorListOfENT);
+                    FileIO.writeDoctorDataToFile("doctorsENT.txt", doctorListOfENT);
                     System.out.println("Remove is successful");
                     break;
                 case 4:
                     doctorListOfNEUROLOGY.remove(findDoctorByID(choice, IDNumber));
-                    FileIO.updateDoctorDataToFile("doctorsNEUROLOGY.txt", doctorListOfNEUROLOGY);
+                    FileIO.writeDoctorDataToFile("doctorsNEUROLOGY.txt", doctorListOfNEUROLOGY);
                     System.out.println("Remove is successful");
                     break;
                 case 5:
                     doctorListOfGERIATRIC.remove(findDoctorByID(choice, IDNumber));
-                    FileIO.updateDoctorDataToFile("doctorsGERIATRIC.txt", doctorListOfGERIATRIC);
+                    FileIO.writeDoctorDataToFile("doctorsGERIATRIC.txt", doctorListOfGERIATRIC);
                     System.out.println("Remove is successful");
                     break;
             }
@@ -323,7 +327,7 @@ public class DoctorService {
     }
 
 
-    public void addMedicineToPatient(String IDNumber, int choice){
+    public void addMedicineToPatient(String IDNumber, int choice) throws IOException {
         Scanner sc = new Scanner(System.in);
         switch (choice){
             case 1:
@@ -417,7 +421,6 @@ public class DoctorService {
         }
     }
 
-    public void showMedicineOfPatient(){
+    public void showMedicineOfPatient() {
     }
-
 }

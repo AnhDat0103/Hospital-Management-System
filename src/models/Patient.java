@@ -19,7 +19,9 @@ public class Patient extends Person {
     public Patient(){
     }
 
-    public Patient(String idNumber, String firstName, String lastName, String yob, Gender gender, String address, String telephone, double height, double weight, String bloodType,boolean allergies,String allergyDetails, Specialization specialization) throws ParseException {
+    public Patient(String idNumber, String firstName, String lastName, String yob, Gender gender, String address, String telephone,
+                   double height, double weight, String bloodType,
+                   boolean allergies,String allergyDetails, Specialization specialization) throws ParseException {
         super(idNumber, firstName, lastName, yob, gender, address, telephone);
         this.specialization = specialization;
         this.allergyDetails = allergyDetails;
@@ -86,6 +88,18 @@ public class Patient extends Person {
         this.specialization = specialization;
     }
 
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public void setAllergies(boolean allergies) {
+        this.allergies = allergies;
+    }
+
     @Override
     public String toString() {
         return "Patient {" +
@@ -99,8 +113,8 @@ public class Patient extends Person {
     }
 
     public String toFile() {
-        return getIDNumber() + "| " + getFullName() + "| " + getGender() + "| " + getYob() + "| " + getAge() + "| " + getAddress() + "| " + getTelephoneNumber() + "| " +
-                allergyDetails + "| " +height + "| " + weight + "| " + bloodType + "| " + specialization;
+        return getIDNumber() + "| " + getFirstName() + "| "+ getLastName() + "| " + getGender() + "| " + getYob() + "| " + getAge() + "| " + getAddress() + "| " + getTelephoneNumber() + "| " + allergies + "| " +
+                allergyDetails + "| " + height + "| " + weight + "| " + bloodType + "| " + specialization;
     }
 
 
