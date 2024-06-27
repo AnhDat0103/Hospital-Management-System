@@ -7,9 +7,9 @@ public class Main {
         try {
             ControllerMain controller = new ControllerMain();
             controller.authenticationMenuTitle();
+            System.out.println("checking comment");
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
     }
-
 }
