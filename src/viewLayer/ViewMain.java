@@ -1,20 +1,44 @@
-package controller;
+package viewLayer;
 
 import exception.HandlingException;
 
 import java.text.ParseException;
 import java.util.Scanner;
 
-public class ControllerMain {
+public class ViewMain {
     private Scanner sc = new Scanner(System.in);
-    private AdminController adminController;
-    private DoctorController doctorController;
-    private PatientController patientController;
+    private AdminView adminView;
+    private DoctorView doctorView;
+    private PatientView patientView;
 
-    public ControllerMain() {
-        this.adminController = new AdminController(this);
-        this.doctorController = new DoctorController(this);
-        this.patientController = new PatientController(this);
+    public ViewMain() {
+        this.adminView = new AdminView(this);
+        this.doctorView = new DoctorView(this);
+        this.patientView = new PatientView(this);
+    }
+
+    public PatientView getPatientView() {
+        return patientView;
+    }
+
+    public void setPatientView(PatientView patientView) {
+        this.patientView = patientView;
+    }
+
+    public DoctorView getDoctorView() {
+        return doctorView;
+    }
+
+    public void setDoctorView(DoctorView doctorView) {
+        this.doctorView = doctorView;
+    }
+
+    public AdminView getAdminView() {
+        return adminView;
+    }
+
+    public void setAdminView(AdminView adminView) {
+        this.adminView = adminView;
     }
 
     public Scanner getSc() {
@@ -23,30 +47,6 @@ public class ControllerMain {
 
     public void setSc(Scanner sc) {
         this.sc = sc;
-    }
-
-    public AdminController getAdminController() {
-        return adminController;
-    }
-
-    public void setAdminController(AdminController adminController) {
-        this.adminController = adminController;
-    }
-
-    public DoctorController getDoctorController() {
-        return doctorController;
-    }
-
-    public void setDoctorController(DoctorController doctorController) {
-        this.doctorController = doctorController;
-    }
-
-    public PatientController getPatientController() {
-        return patientController;
-    }
-
-    public void setPatientController(PatientController patientController) {
-        this.patientController = patientController;
     }
 
     // Main menu
@@ -77,7 +77,7 @@ public class ControllerMain {
                                     choice2 = HandlingException.getInteger(sc);
                                     if (choice2 == 6) authenticationMenuTitle();
                                 } while (choice2 < 1 || choice2 > 6);
-                                adminController.adminRoleOptions(choice2);
+                                adminView.adminRoleOptions(choice2);
                                 break;
                             } else {
                                 System.out.println("Invalid username or password");
@@ -96,7 +96,7 @@ public class ControllerMain {
                                 choice2 = HandlingException.getInteger(sc);
                                 if (choice2 == 6) authenticationMenuTitle();
                             }while (choice2 < 1 || choice2 > 6);
-                            doctorController.doctorRoleOptions(choice2);
+                            doctorView.doctorRoleOptions(choice2);
                             break;
                         }catch (Exception e){
                             System.out.println(e.getMessage());
@@ -111,7 +111,7 @@ public class ControllerMain {
                                 choice3 = HandlingException.getInteger(sc);
                                 if (choice3 == 6) authenticationMenuTitle();
                             }while (choice3 < 1 || choice3 > 6);
-                            patientController.patientRoleOptions(choice3);
+                            patientView.patientRoleOptions(choice3);
                             break;
                         }catch (Exception e){
                             System.out.println(e.getMessage());

@@ -1,4 +1,4 @@
-package service;
+package controller;
 
 import exception.HandlingException;
 import fileIO.FileIO;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class MedicineService {
+public class MedicineController {
 
     Scanner sc = new Scanner(System.in);
     private  List<Medicine> medicinesOfCARDIOLOGY = new ArrayList<>();    // list of CARDIOLOGY. The list has information of medicines in CARDIOLOGY.
