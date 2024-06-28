@@ -11,9 +11,7 @@ import validation.Validate;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class PatientService {
 
@@ -255,6 +253,7 @@ public class PatientService {
 
     public void findPatientByIDNumber(String IDNumber, int choice) {
         String result = "Patient not found in the selected department.";
+        loadPatientsFromFiles();
         switch (choice) {
             case 1:
                 if (patientListOfCARDIOLOGY.containsKey(IDNumber)) {
@@ -412,5 +411,23 @@ public class PatientService {
                 System.out.println("Invalid choice. Please choose a valid department.");
                 break;
         }
+    }
+    public void loadPatientsFromFiles() {                    //tải dữ liệu từ tệp
+        patientListOfCARDIOLOGY = loadPatientsForSpecialization("patientsCARDIOLOGY.txt", Specialization.CARDIOLOGY);
+        patientListOfDERMATOLOGY = loadPatientsForSpecialization("patientsDERMATOLOGY.txt", Specialization.DERMATOLOGY);
+        patientListOfENT = loadPatientsForSpecialization("patientsENT.txt", Specialization.ENT);
+        patientListOfNEUROLOGY = loadPatientsForSpecialization("patientsNEUROLOGY.txt", Specialization.NEUROLOGY);
+        patientListOfGERIATRIC = loadPatientsForSpecialization("patientsGERIATRIC.txt", Specialization.GERIATRIC);
+    }
+
+    private HashMap<String, Patient> loadPatientsForSpecialization(String fileName, Specialization specialization) {
+        List<Patient> patients = FileIO.getPatients(fileName, new ArrayList<>());
+        HashMap<String, Patient> patientMap = new HashMap<>();
+        for (Patient patient : patients) {
+            if (patient.getSpecialization() == specialization) {
+                patientMap.put(patient.getIDNumber(), patient);
+            }
+        }
+        return patientMap;
     }
 }

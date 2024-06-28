@@ -13,9 +13,11 @@ public class PatientController {
     ControllerMain controllerMain;
 
     private DoctorService doctorService = new DoctorService();
+    private PatientService patientService;
 
     public PatientController(ControllerMain controllerMain) {
         this.controllerMain = controllerMain;
+        this.patientService = new PatientService();
     }
 
     public DoctorService getDoctorService() {
@@ -36,7 +38,7 @@ public class PatientController {
                 case 1:
                     System.out.println("ENTER ID Patient want to find: ");
                     IDNumber = sc.nextLine();
-                    controllerMain.getAdminController().getPatientService().findPatientByIDNumber(IDNumber ,choice);
+                    patientService.findPatientByIDNumber(IDNumber, choice);
                     break;
                 case 2:
                     doctorService.showDoctorsList(choice).forEach(s -> System.out.println(s.toString()));
