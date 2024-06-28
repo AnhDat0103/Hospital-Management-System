@@ -36,7 +36,10 @@ public class PatientController {
                     System.out.println("ENTER ID Patient want to find: ");
                     IDNumber = sc.nextLine();
                     controllerMain.getAdminController().getDoctorService().showMedicineOfPatient();
-
+                case 4:
+                    choice3 = 0;
+                    controllerMain.authenticationMenuTitle();
+                    break;
             }
         }while (choice3 >= 1 && choice3 <= 4);
     }
