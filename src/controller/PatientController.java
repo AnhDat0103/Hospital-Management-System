@@ -12,8 +12,17 @@ public class PatientController {
     Scanner sc = new Scanner(System.in);
     ControllerMain controllerMain;
 
+    private DoctorService doctorService = new DoctorService();
+
     public PatientController(ControllerMain controllerMain) {
         this.controllerMain = controllerMain;
+    }
+
+    public DoctorService getDoctorService() {
+        return doctorService;
+    }
+    public void setDoctorService(DoctorService doctorService) {
+        this.doctorService = doctorService;
     }
 
     public  void patientRoleOptions(int choice) throws ParseException {
@@ -30,13 +39,16 @@ public class PatientController {
                     controllerMain.getAdminController().getPatientService().findPatientByIDNumber(IDNumber ,choice);
                     break;
                 case 2:
-                    controllerMain.getAdminController().getDoctorService().showDoctorsList(choice);
+                    doctorService.showDoctorsList(choice).forEach(s -> System.out.println(s.toString()));
                     break;
                 case 3:
                     System.out.println("ENTER ID Patient want to find: ");
                     IDNumber = sc.nextLine();
                     controllerMain.getAdminController().getDoctorService().showMedicineOfPatient();
-
+                case 4:
+                    choice3 = 0;
+                    controllerMain.authenticationMenuTitle();
+                    break;
             }
         }while (choice3 >= 1 && choice3 <= 4);
     }

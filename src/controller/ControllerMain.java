@@ -102,7 +102,21 @@ public class ControllerMain {
                             System.out.println(e.getMessage());
                         }
                     }
-                case 3: break;
+                case 3:
+                    while(true){
+                        try{
+                            int choice3;
+                            do{
+                                menuTitleForAdministration();
+                                choice3 = HandlingException.getInteger(sc);
+                                if (choice3 == 6) authenticationMenuTitle();
+                            }while (choice3 < 1 || choice3 > 6);
+                            patientController.patientRoleOptions(choice3);
+                            break;
+                        }catch (Exception e){
+                            System.out.println(e.getMessage());
+                        }
+                    }
                 case 4: break;
                 default: System.out.println("Invalid choice");
             }
