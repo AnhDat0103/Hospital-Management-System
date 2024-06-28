@@ -1,64 +1,68 @@
-package controller;
+package viewLayer;
 
 import exception.HandlingException;
 import models.Doctor;
-import models.Medicine;
 import models.enums.Action;
-import service.DoctorService;
-import service.MedicineService;
-import service.PatientService;
+import controller.DoctorController;
+import controller.MedicineController;
+import controller.PatientController;
 import validation.Validate;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.List;
 import java.util.Scanner;
 
-public class AdminController {
+public class AdminView {
 
     Scanner sc = new Scanner(System.in);
-    private DoctorService doctorService = new DoctorService();
-    private PatientService patientService = new PatientService();
-    private MedicineService medicineService = new MedicineService();
-    private ControllerMain controllerMain;
+    private DoctorController doctorController = new DoctorController();
+    private PatientController patientController = new PatientController();
+    private MedicineController medicineController = new MedicineController();
+    private ViewMain controllerMain;
 
-    public AdminController(ControllerMain controllerMain) {
+    public AdminView(ViewMain controllerMain) {
         this.controllerMain = controllerMain;
     }
 
-    public DoctorService getDoctorService() {
-        return doctorService;
+    public Scanner getSc() {
+        return sc;
     }
 
-    public void setDoctorService(DoctorService doctorService) {
-        this.doctorService = doctorService;
+    public void setSc(Scanner sc) {
+        this.sc = sc;
     }
 
-    public PatientService getPatientService() {
-        return patientService;
+    public DoctorController getDoctorController() {
+        return doctorController;
     }
 
-    public void setPatientService(PatientService patientService) {
-        this.patientService = patientService;
+    public void setDoctorController(DoctorController doctorController) {
+        this.doctorController = doctorController;
     }
 
-    public MedicineService getMedicineService() {
-        return medicineService;
+    public PatientController getPatientController() {
+        return patientController;
     }
 
-    public void setMedicineService(MedicineService medicineService) {
-        this.medicineService = medicineService;
+    public void setPatientController(PatientController patientController) {
+        this.patientController = patientController;
     }
 
-    public ControllerMain getControllerMain() {
+    public MedicineController getMedicineController() {
+        return medicineController;
+    }
+
+    public void setMedicineController(MedicineController medicineController) {
+        this.medicineController = medicineController;
+    }
+
+    public ViewMain getControllerMain() {
         return controllerMain;
     }
 
-    public void setControllerMain(ControllerMain controllerMain) {
+    public void setControllerMain(ViewMain controllerMain) {
         this.controllerMain = controllerMain;
     }
-
-
 
     public void adminRoleOptions(int choice) throws ParseException, IOException {
         int choice1;
@@ -68,14 +72,14 @@ public class AdminController {
             choice1 = HandlingException.getInteger(sc);
             switch (choice1) {
                 case 1:
-                    doctorService.addNewDoctor(choice);
+                    doctorController.addNewDoctor(choice);
                     break;
                 case 2:
-                    doctorService.showDoctorsList(choice).forEach(s -> System.out.println(s.toString()));
+                    doctorController.showDoctorsList(choice).forEach(s -> System.out.println(s.toString()));
                     break;
                 case 3:
                     String IDNumber = Validate.checkDoctorID(sc, choice, Action.FIND);
-                    Doctor findDoctorByID = doctorService.findDoctorByID(choice, IDNumber);
+                    Doctor findDoctorByID = doctorController.findDoctorByID(choice, IDNumber);
                     if (findDoctorByID == null) {
                         System.out.println("Doctor not found");
                     } else {
@@ -85,47 +89,47 @@ public class AdminController {
                 case 4: //Update a doctor by IDNumber
                     String IDNumberFind2 = Validate.checkDoctorID(sc, choice, Action.FIND);
                     try {
-                        doctorService.updateDoctor(IDNumberFind2, choice);
+                        doctorController.updateDoctor(IDNumberFind2, choice);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
                     break;
                 case 5:
                     String IDNumberFindToRemove = Validate.checkDoctorID(sc, choice, Action.FIND);
-                    Doctor findDoctorByIDToRemove = doctorService.findDoctorByID(choice, IDNumberFindToRemove);
+                    Doctor findDoctorByIDToRemove = doctorController.findDoctorByID(choice, IDNumberFindToRemove);
                     if (findDoctorByIDToRemove == null) {
                         System.out.println("Doctor not found");
                     } else {
-                        doctorService.removeDoctor(IDNumberFindToRemove, choice);
+                        doctorController.removeDoctor(IDNumberFindToRemove, choice);
                     }
                     break;
                 case 6:
                     String IDNumberFindToFind = Validate.checkPatientID(sc, choice, Action.FIND);
-                    patientService.findPatientByIDNumber(IDNumberFindToFind, choice);
+                    patientController.findPatientByIDNumber(IDNumberFindToFind, choice);
                     break;
                 case 7:
-                     medicineService.addNewMedicine(choice);
+                     medicineController.addNewMedicine(choice);
                     break;
                 case 8:
                     System.out.println("The list medicine: ");
-                    medicineService.showMedicineList(choice).forEach(m -> System.out.println(m.toString()));
+                    medicineController.showMedicineList(choice).forEach(m -> System.out.println(m.toString()));
                     break;
                 case 9:
                     System.out.println("Enter medicine ID: ");
                     String medicineID = sc.nextLine();
-                    if (medicineService.findMedicine(medicineID, choice) == null) {
+                    if (medicineController.findMedicine(medicineID, choice) == null) {
                         System.out.println("Medicine not found");
-                    } else System.out.println(medicineService.findMedicine(medicineID, choice).toString());
+                    } else System.out.println(medicineController.findMedicine(medicineID, choice).toString());
                     break;
                 case 10:
                     System.out.println("Enter medicine ID: ");
                     String medicineID2 = sc.nextLine();
-                    medicineService.updateMedicine(medicineID2, choice);
+                    medicineController.updateMedicine(medicineID2, choice);
                     break;
                 case 11:
                     System.out.println("Enter medicine ID: ");
                     String medicineID3 = sc.nextLine();
-                    medicineService.removeMedicine(medicineID3, choice);
+                    medicineController.removeMedicine(medicineID3, choice);
                     break;
                 case 12:
                     choice1 = 0;
