@@ -109,8 +109,8 @@ public class ControllerMain {
                             do{
                                 menuTitleForAdministration();
                                 choice3 = HandlingException.getInteger(sc);
-                                if (choice3 == 4) authenticationMenuTitle();
-                            }while (choice3 < 1 || choice3 > 4);
+                                if (choice3 == 6) authenticationMenuTitle();
+                            }while (choice3 < 1 || choice3 > 6);
                             patientController.patientRoleOptions(choice3);
                             break;
                         }catch (Exception e){
