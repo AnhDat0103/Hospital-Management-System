@@ -44,7 +44,7 @@ public class PatientView {
         int choice3;
         do{
             menuDetails();
-            String IDNumber;
+            String IDNumber = "";
             System.out.println("Your choice: ");
             choice3 = HandlingException.getInteger(sc);
             switch (choice3){
@@ -57,7 +57,7 @@ public class PatientView {
                     controllerMain.getAdminView().getDoctorController().showDoctorsList(choice).forEach(s -> System.out.println(s.toString()));
                     break;
                 case 3:
-                    controllerMain.getAdminView().getDoctorController().showMedicineOfPatient();
+                    controllerMain.getAdminView().getDoctorController().showMedicineOfPatient(IDNumber , choice);
                 case 4:
                     choice3 = 0;
                     controllerMain.authenticationMenuTitle();

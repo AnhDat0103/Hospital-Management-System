@@ -421,7 +421,7 @@ public class DoctorController {
         }
     }
 
-    public void showMedicineOfPatient(String IDNumber , int choice) throws IOException {
+    public void showMedicineOfPatient(String IDNumber , int choice) {
 
         switch (choice) {
             case 1:
