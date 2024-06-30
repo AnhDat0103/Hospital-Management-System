@@ -57,7 +57,10 @@ public class PatientView {
                     controllerMain.getAdminView().getDoctorController().showDoctorsList(choice).forEach(s -> System.out.println(s.toString()));
                     break;
                 case 3:
+                    System.out.println("ENTER ID Patient want to find: ");
+                    IDNumber = sc.nextLine();
                     controllerMain.getAdminView().getDoctorController().showMedicineOfPatient(IDNumber , choice);
+                    break;
                 case 4:
                     choice3 = 0;
                     controllerMain.authenticationMenuTitle();
