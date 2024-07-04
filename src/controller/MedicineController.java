@@ -20,43 +20,24 @@ public class MedicineController {
     private  List<Medicine> medicinesOfGERIATRIC = new ArrayList<>();     // list of GERIATRIC. The list has information of medicines in GERIATRIC.
 
     public List<Medicine> getMedicinesOfCARDIOLOGY() {
-        return medicinesOfCARDIOLOGY;
-    }
-
-    public void setMedicinesOfCARDIOLOGY(List<Medicine> medicinesOfCARDIOLOGY) {
-        this.medicinesOfCARDIOLOGY = medicinesOfCARDIOLOGY;
+        return FileIO.getMedicines("medicinesOfCARDIOLOGY.txt", medicinesOfCARDIOLOGY);
     }
 
     public List<Medicine> getMedicinesOfDERMATOLOGY() {
-        return medicinesOfDERMATOLOGY;
-    }
-
-    public void setMedicinesOfDERMATOLOGY(List<Medicine> medicinesOfDERMATOLOGY) {
-        this.medicinesOfDERMATOLOGY = medicinesOfDERMATOLOGY;
+        return FileIO.getMedicines("medicinesOfDERMATOLOGY.txt", medicinesOfDERMATOLOGY);
     }
 
     public List<Medicine> getMedicinesOfENT() {
-        return medicinesOfENT;
-    }
-
-    public void setMedicinesOfENT(List<Medicine> medicinesOfENT) {
-        this.medicinesOfENT = medicinesOfENT;
+        return FileIO.getMedicines("medicinesOfENT.txt", medicinesOfENT);
     }
 
     public List<Medicine> getMedicinesOfNEUROLOGY() {
-        return medicinesOfNEUROLOGY;
-    }
+        return FileIO.getMedicines("medicinesOfNEUROLOGY.txt", medicinesOfNEUROLOGY);
 
-    public void setMedicinesOfNEUROLOGY(List<Medicine> medicinesOfNEUROLOGY) {
-        this.medicinesOfNEUROLOGY = medicinesOfNEUROLOGY;
     }
 
     public List<Medicine> getMedicinesOfGERIATRIC() {
-        return medicinesOfGERIATRIC;
-    }
-
-    public void setMedicinesOfGERIATRIC(List<Medicine> medicinesOfGERIATRIC) {
-        this.medicinesOfGERIATRIC = medicinesOfGERIATRIC;
+        return FileIO.getMedicines("medicinesOfGERIATRIC.txt", medicinesOfGERIATRIC);
     }
 
     // METHOD OF MEDICINE
@@ -95,71 +76,70 @@ public class MedicineController {
 
         switch (choice) {
             case 1:
-                FileIO.getMedicines("medicinesOfCARDIOLOGY.txt", medicinesOfCARDIOLOGY);
-                medicinesOfCARDIOLOGY.add( new Medicine(medicineName, dosageForm, strength ));
+                getMedicinesOfCARDIOLOGY().add( new Medicine(medicineName, dosageForm, strength ));
                 FileIO.writeMedicineDataToFile("medicinesOfCARDIOLOGY.txt", medicinesOfCARDIOLOGY);
                 System.out.println("added new medicine.");
                 break;
             case 2:
-                FileIO.getMedicines("medicinesOfDERMATOLOGY.txt", medicinesOfDERMATOLOGY);
-                medicinesOfDERMATOLOGY.add( new Medicine(medicineName, dosageForm, strength ));
+                getMedicinesOfDERMATOLOGY().add( new Medicine(medicineName, dosageForm, strength ));
                 FileIO.writeMedicineDataToFile("medicinesOfDERMATOLOGY.txt", medicinesOfDERMATOLOGY);
                 System.out.println("added new medicine.");
                 break;
             case 3:
-                FileIO.getMedicines("medicinesOfENT.txt", medicinesOfENT);
-                medicinesOfENT.add( new Medicine(medicineName, dosageForm, strength ));
+                getMedicinesOfENT().add( new Medicine(medicineName, dosageForm, strength ));
                 FileIO.writeMedicineDataToFile("medicinesOfENT.txt", medicinesOfENT);
                 System.out.println("added new medicine.");
                 break;
             case 4:
-                FileIO.getMedicines("medicinesOfNEUROLOGY.txt", medicinesOfNEUROLOGY);
-                medicinesOfNEUROLOGY.add( new Medicine(medicineName, dosageForm, strength ));
+                getMedicinesOfNEUROLOGY().add( new Medicine(medicineName, dosageForm, strength ));
                 FileIO.writeMedicineDataToFile("medicinesOfNEUROLOGY.txt", medicinesOfNEUROLOGY);
                 System.out.println("added new medicine.");
                 break;
             case 5:
-                FileIO.getMedicines("medicinesOfGERIATRIC.txt", medicinesOfGERIATRIC);
-                medicinesOfGERIATRIC.add( new Medicine(medicineName, dosageForm, strength ));
+                getMedicinesOfGERIATRIC().add( new Medicine(medicineName, dosageForm, strength ));
                 FileIO.writeMedicineDataToFile("medicinesOfGERIATRIC.txt", medicinesOfGERIATRIC);
                 System.out.println("added new medicine.");
                 break;
         }
     }
 
-    public List<Medicine> showMedicineList(int choice) {
+    public void showMedicineList(int choice) {
         switch (choice) {
             case 1:
-                return FileIO.getMedicines("medicinesOfCARDIOLOGY.txt", medicinesOfCARDIOLOGY);
+                getMedicinesOfCARDIOLOGY().forEach(System.out::println);
+                break;
             case 2:
-                return FileIO.getMedicines("medicinesOfDERMATOLOGY.txt", medicinesOfDERMATOLOGY);
+                getMedicinesOfDERMATOLOGY().forEach(System.out::println);
+                break;
             case 3:
-                return FileIO.getMedicines("medicinesOfENT.txt", medicinesOfENT);
+                getMedicinesOfENT().forEach(System.out::println);
+                break;
             case 4:
-                return FileIO.getMedicines("medicinesOfNEUROLOGY.txt", medicinesOfNEUROLOGY);
+                getMedicinesOfNEUROLOGY().forEach(System.out::println);
+                break;
             case 5:
-                return FileIO.getMedicines("medicinesOfGERIATRIC.txt", medicinesOfGERIATRIC);
+                getMedicinesOfGERIATRIC().forEach(System.out::println);
+                break;
         }
-        return null;
     }
 
     public Medicine findMedicine(String IDNumber, int choice) throws IOException {
         switch (choice) {
             case 1:
                 if(FileIO.checkIDInFile(IDNumber, "medicinesOfCARDIOLOGY.txt"))
-                    return medicinesOfCARDIOLOGY.stream().filter(m -> m.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
+                    return getMedicinesOfCARDIOLOGY().stream().filter(m -> m.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
             case 2:
                 if(FileIO.checkIDInFile(IDNumber, "medicinesOfDERMATOLOGY.txt"))
-                    return medicinesOfDERMATOLOGY.stream().filter(m -> m.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
+                    return getMedicinesOfDERMATOLOGY().stream().filter(m -> m.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
             case 3:
                 if(FileIO.checkIDInFile(IDNumber, "medicinesOfENT.txt"))
-                    return medicinesOfENT.stream().filter(m -> m.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
+                    return getMedicinesOfENT().stream().filter(m -> m.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
             case 4:
                 if(FileIO.checkIDInFile(IDNumber, "medicinesOfNEUROLOGY.txt"))
-                    return medicinesOfNEUROLOGY.stream().filter(m -> m.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
+                    return getMedicinesOfNEUROLOGY().stream().filter(m -> m.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
             case 5:
                 if(FileIO.checkIDInFile(IDNumber, "medicinesOfGERIATRIC.txt"))
-                    return medicinesOfGERIATRIC.stream().filter(m -> m.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
+                    return getMedicinesOfGERIATRIC().stream().filter(m -> m.getMedicineID().equals(IDNumber)).findFirst().orElse(null);
         }
         return null;
     }

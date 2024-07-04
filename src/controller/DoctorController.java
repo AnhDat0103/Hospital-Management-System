@@ -30,47 +30,27 @@ public class DoctorController {
     PatientController patientController = new PatientController();
     MedicineController medicineController  = new MedicineController();
 
-    public List<Doctor> getDoctorListOfCARDIOLOGY() {
-        return doctorListOfCARDIOLOGY;
+    public DoctorController() {
     }
 
-    public void setDoctorListOfCARDIOLOGY(List<Doctor> doctorListOfCARDIOLOGY) {
-        this.doctorListOfCARDIOLOGY = doctorListOfCARDIOLOGY;
+    public List<Doctor> getDoctorListOfCARDIOLOGY() {
+        return FileIO.getDoctors("doctorsCardiology.txt", doctorListOfCARDIOLOGY);
     }
 
     public List<Doctor> getDoctorListOfDERMATOLOGY() {
-        return doctorListOfDERMATOLOGY;
-    }
-
-    public void setDoctorListOfDERMATOLOGY(List<Doctor> doctorListOfDERMATOLOGY) {
-        this.doctorListOfDERMATOLOGY = doctorListOfDERMATOLOGY;
+        return FileIO.getDoctors("doctorsDERMATOLOGY.txt", doctorListOfDERMATOLOGY);
     }
 
     public List<Doctor> getDoctorListOfENT() {
-        return doctorListOfENT;
-    }
-
-    public void setDoctorListOfENT(List<Doctor> doctorListOfENT) {
-        this.doctorListOfENT = doctorListOfENT;
+        return FileIO.getDoctors("doctorsENT.txt", doctorListOfENT);
     }
 
     public List<Doctor> getDoctorListOfNEUROLOGY() {
-        return doctorListOfNEUROLOGY;
-    }
-
-    public void setDoctorListOfNEUROLOGY(List<Doctor> doctorListOfNEUROLOGY) {
-        this.doctorListOfNEUROLOGY = doctorListOfNEUROLOGY;
+        return FileIO.getDoctors("doctorsNEUROLOGY.txt", doctorListOfNEUROLOGY);
     }
 
     public List<Doctor> getDoctorListOfGERIATRIC() {
-        return doctorListOfGERIATRIC;
-    }
-
-    public void setDoctorListOfGERIATRIC(List<Doctor> doctorListOfGERIATRIC) {
-        this.doctorListOfGERIATRIC = doctorListOfGERIATRIC;
-    }
-
-    public DoctorController() {
+        return FileIO.getDoctors("doctorsGERIATRIC.txt", doctorListOfGERIATRIC);
     }
 
     public void addNewDoctor(int choice) throws ParseException, IOException {
@@ -121,16 +101,15 @@ public class DoctorController {
 
         switch (choice) {
             case 1:
-                FileIO.getDoctors("doctorsCardiology.txt", doctorListOfCARDIOLOGY);
-                doctorListOfCARDIOLOGY.add(new Doctor(IDNumber, firstName, lastName, yob, gender,
+                getDoctorListOfCARDIOLOGY().add(new Doctor(IDNumber, firstName, lastName, yob, gender,
                                             address, telephone, yearOfExperience, clinicHours, education,
                                             Specialization.CARDIOLOGY, consultationFee));
                 FileIO.writeDoctorDataToFile("doctorsCardiology.txt", doctorListOfCARDIOLOGY);
                 System.out.println("added new doctor.");
                 break;
             case 2:
-                FileIO.getDoctors("doctorsDERMATOLOGY.txt", doctorListOfDERMATOLOGY);
-                doctorListOfDERMATOLOGY.add(new Doctor(IDNumber, firstName, lastName, yob, gender,
+
+                getDoctorListOfDERMATOLOGY().add(new Doctor(IDNumber, firstName, lastName, yob, gender,
                         address, telephone, yearOfExperience, clinicHours, education,
                         Specialization.DERMATOLOGY, consultationFee));
                 FileIO.writeDoctorDataToFile("doctorsDERMATOLOGY.txt", doctorListOfDERMATOLOGY);
@@ -138,24 +117,24 @@ public class DoctorController {
 
                 break;
             case 3:
-                FileIO.getDoctors("doctorsENT.txt", doctorListOfENT);
-                doctorListOfENT.add(new Doctor(IDNumber, firstName, lastName, yob, gender,
+
+                getDoctorListOfENT().add(new Doctor(IDNumber, firstName, lastName, yob, gender,
                         address, telephone, yearOfExperience, clinicHours, education,
                         Specialization.ENT, consultationFee));
                 FileIO.writeDoctorDataToFile("doctorsENT.txt", doctorListOfENT);
                 System.out.println("added new doctor.");
                 break;
             case 4:
-                FileIO.getDoctors("doctorsNEUROLOGY.txt", doctorListOfNEUROLOGY);
-                doctorListOfNEUROLOGY.add(new Doctor(IDNumber, firstName, lastName, yob, gender,
+
+                getDoctorListOfNEUROLOGY().add(new Doctor(IDNumber, firstName, lastName, yob, gender,
                         address, telephone, yearOfExperience, clinicHours, education,
                         Specialization.NEUROLOGY, consultationFee));
                 FileIO.writeDoctorDataToFile("doctorsNEUROLOGY.txt", doctorListOfNEUROLOGY);
                 System.out.println("added new doctor.");
                 break;
             case 5:
-                FileIO.getDoctors("doctorsGERIATRIC.txt", doctorListOfGERIATRIC);
-                doctorListOfGERIATRIC.add(new Doctor(IDNumber, firstName, lastName, yob, gender,
+
+                getDoctorListOfGERIATRIC().add(new Doctor(IDNumber, firstName, lastName, yob, gender,
                         address, telephone, yearOfExperience, clinicHours, education,
                         Specialization.GERIATRIC, consultationFee));
                 FileIO.writeDoctorDataToFile("doctorsGERIATRIC.txt", doctorListOfGERIATRIC);
@@ -165,43 +144,47 @@ public class DoctorController {
 
     }
 
-    public List<Doctor> showDoctorsList(int choice) {
+    public void showDoctorsList(int choice) {
         switch (choice) {
             case 1:
-                return FileIO.getDoctors("doctorsCardiology.txt", doctorListOfCARDIOLOGY);
+                getDoctorListOfCARDIOLOGY().forEach(s -> System.out.println(s.toString()));
+                break;
             case 2:
-                return FileIO.getDoctors("doctorsDERMATOLOGY.txt", doctorListOfDERMATOLOGY);
+                getDoctorListOfDERMATOLOGY().forEach(s -> System.out.println(s.toString()));
+                break;
             case 3:
-                return FileIO.getDoctors("doctorsENT.txt", doctorListOfENT);
+                getDoctorListOfENT().forEach(s -> System.out.println(s.toString()));
+                break;
             case 4:
-                return FileIO.getDoctors("doctorsNEUROLOGY.txt", doctorListOfNEUROLOGY);
+                getDoctorListOfNEUROLOGY().forEach(s -> System.out.println(s.toString()));
+                break;
             case 5:
-                return FileIO.getDoctors("doctorsGERIATRIC.txt", doctorListOfGERIATRIC);
+                getDoctorListOfGERIATRIC().forEach(s -> System.out.println(s.toString()));
+                break;
         }
-        return null;
     }
 
     public Doctor findDoctorByID(int choice, String IDNumber) throws IOException {
         switch (choice) {
             case 1:
                 if (FileIO.checkIDInFile(IDNumber, "doctorsCardiology.txt")) {
-                    return doctorListOfCARDIOLOGY.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
+                    return getDoctorListOfCARDIOLOGY().stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
                 }
             case 2:
                 if (FileIO.checkIDInFile(IDNumber, "doctorsDERMATOLOGY.txt")) {
-                    return doctorListOfDERMATOLOGY.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
+                    return getDoctorListOfDERMATOLOGY().stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
                 }
             case 3:
                 if (FileIO.checkIDInFile(IDNumber, "doctorsENT.txt")) {
-                    return doctorListOfENT.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
+                    return getDoctorListOfENT().stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
                 }
             case 4:
                 if (FileIO.checkIDInFile(IDNumber, "doctorsNEUROLOGY.txt")) {
-                    return doctorListOfNEUROLOGY.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
+                    return getDoctorListOfNEUROLOGY().stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
                 }
             case 5:
                 if (FileIO.checkIDInFile(IDNumber, "doctorsGERIATRIC.txt")) {
-                    return doctorListOfGERIATRIC.stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
+                    return getDoctorListOfGERIATRIC().stream().filter(Doctor -> Doctor.getIDNumber().equals(IDNumber)).findFirst().orElse(null);
                 }
         }
         return null;

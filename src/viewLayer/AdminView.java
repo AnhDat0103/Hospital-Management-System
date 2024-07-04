@@ -3,9 +3,6 @@ package viewLayer;
 import exception.HandlingException;
 import models.Doctor;
 import models.enums.Action;
-import controller.DoctorController;
-import controller.MedicineController;
-import controller.PatientController;
 import validation.Validate;
 
 import java.io.IOException;
@@ -13,57 +10,15 @@ import java.text.ParseException;
 import java.util.Scanner;
 
 public class AdminView {
-
     Scanner sc = new Scanner(System.in);
-    private DoctorController doctorController = new DoctorController();
-    private PatientController patientController = new PatientController();
-    private MedicineController medicineController = new MedicineController();
-    private ViewMain controllerMain;
+    
+    private ViewMain viewMain;
 
-    public AdminView(ViewMain controllerMain) {
-        this.controllerMain = controllerMain;
+    public AdminView(ViewMain viewMain) {
+        this.viewMain = viewMain;
     }
-
-    public Scanner getSc() {
-        return sc;
-    }
-
-    public void setSc(Scanner sc) {
-        this.sc = sc;
-    }
-
-    public DoctorController getDoctorController() {
-        return doctorController;
-    }
-
-    public void setDoctorController(DoctorController doctorController) {
-        this.doctorController = doctorController;
-    }
-
-    public PatientController getPatientController() {
-        return patientController;
-    }
-
-    public void setPatientController(PatientController patientController) {
-        this.patientController = patientController;
-    }
-
-    public MedicineController getMedicineController() {
-        return medicineController;
-    }
-
-    public void setMedicineController(MedicineController medicineController) {
-        this.medicineController = medicineController;
-    }
-
-    public ViewMain getControllerMain() {
-        return controllerMain;
-    }
-
-    public void setControllerMain(ViewMain controllerMain) {
-        this.controllerMain = controllerMain;
-    }
-
+    
+    
     public void adminRoleOptions(int choice) throws ParseException, IOException {
         int choice1;
         do {
@@ -72,14 +27,14 @@ public class AdminView {
             choice1 = HandlingException.getInteger(sc);
             switch (choice1) {
                 case 1:
-                    doctorController.addNewDoctor(choice);
+                    viewMain.getDoctorController().addNewDoctor(choice);
                     break;
                 case 2:
-                    doctorController.showDoctorsList(choice).forEach(s -> System.out.println(s.toString()));
+                    viewMain.getDoctorController().showDoctorsList(choice);
                     break;
                 case 3:
                     String IDNumber = Validate.checkDoctorID(sc, choice, Action.FIND);
-                    Doctor findDoctorByID = doctorController.findDoctorByID(choice, IDNumber);
+                    Doctor findDoctorByID = viewMain.getDoctorController().findDoctorByID(choice, IDNumber);
                     if (findDoctorByID == null) {
                         System.out.println("Doctor not found");
                     } else {
@@ -89,51 +44,51 @@ public class AdminView {
                 case 4: //Update a doctor by IDNumber
                     String IDNumberFind2 = Validate.checkDoctorID(sc, choice, Action.FIND);
                     try {
-                        doctorController.updateDoctor(IDNumberFind2, choice);
+                        viewMain.getDoctorController().updateDoctor(IDNumberFind2, choice);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
                     break;
                 case 5:
                     String IDNumberFindToRemove = Validate.checkDoctorID(sc, choice, Action.FIND);
-                    Doctor findDoctorByIDToRemove = doctorController.findDoctorByID(choice, IDNumberFindToRemove);
+                    Doctor findDoctorByIDToRemove = viewMain.getDoctorController().findDoctorByID(choice, IDNumberFindToRemove);
                     if (findDoctorByIDToRemove == null) {
                         System.out.println("Doctor not found");
                     } else {
-                        doctorController.removeDoctor(IDNumberFindToRemove, choice);
+                        viewMain.getDoctorController().removeDoctor(IDNumberFindToRemove, choice);
                     }
                     break;
                 case 6:
                     String IDNumberFindToFind = Validate.checkPatientID(sc, choice, Action.FIND);
-                    patientController.findPatientByIDNumber(IDNumberFindToFind, choice);
+                    viewMain.getPatientController().findPatientByIDNumber(IDNumberFindToFind, choice);
                     break;
                 case 7:
-                     medicineController.addNewMedicine(choice);
+                     viewMain.getMedicineController().addNewMedicine(choice);
                     break;
                 case 8:
                     System.out.println("The list medicine: ");
-                    medicineController.showMedicineList(choice).forEach(m -> System.out.println(m.toString()));
+                    viewMain.getMedicineController().showMedicineList(choice);
                     break;
                 case 9:
                     System.out.println("Enter medicine ID: ");
                     String medicineID = sc.nextLine();
-                    if (medicineController.findMedicine(medicineID, choice) == null) {
+                    if (viewMain.getMedicineController().findMedicine(medicineID, choice) == null) {
                         System.out.println("Medicine not found");
-                    } else System.out.println(medicineController.findMedicine(medicineID, choice).toString());
+                    } else System.out.println(viewMain.getMedicineController().findMedicine(medicineID, choice).toString());
                     break;
                 case 10:
                     System.out.println("Enter medicine ID: ");
                     String medicineID2 = sc.nextLine();
-                    medicineController.updateMedicine(medicineID2, choice);
+                    viewMain.getMedicineController().updateMedicine(medicineID2, choice);
                     break;
                 case 11:
                     System.out.println("Enter medicine ID: ");
                     String medicineID3 = sc.nextLine();
-                    medicineController.removeMedicine(medicineID3, choice);
+                    viewMain.getMedicineController().removeMedicine(medicineID3, choice);
                     break;
                 case 12:
                     choice1 = 0;
-                    controllerMain.authenticationMenuTitle();
+                    viewMain.authenticationMenuTitle();
                     break;
                 default:
                     System.out.println("Invalid choice");

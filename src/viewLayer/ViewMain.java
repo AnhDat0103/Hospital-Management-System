@@ -1,5 +1,8 @@
 package viewLayer;
 
+import controller.DoctorController;
+import controller.MedicineController;
+import controller.PatientController;
 import exception.HandlingException;
 
 import java.text.ParseException;
@@ -10,6 +13,9 @@ public class ViewMain {
     private AdminView adminView;
     private DoctorView doctorView;
     private PatientView patientView;
+    private DoctorController doctorController = new DoctorController();
+    private PatientController patientController = new PatientController();
+    private MedicineController medicineController = new MedicineController();
 
     public ViewMain() {
         this.adminView = new AdminView(this);
@@ -17,36 +23,16 @@ public class ViewMain {
         this.patientView = new PatientView(this);
     }
 
-    public PatientView getPatientView() {
-        return patientView;
+    public DoctorController getDoctorController() {
+        return doctorController;
     }
 
-    public void setPatientView(PatientView patientView) {
-        this.patientView = patientView;
+    public PatientController getPatientController() {
+        return patientController;
     }
 
-    public DoctorView getDoctorView() {
-        return doctorView;
-    }
-
-    public void setDoctorView(DoctorView doctorView) {
-        this.doctorView = doctorView;
-    }
-
-    public AdminView getAdminView() {
-        return adminView;
-    }
-
-    public void setAdminView(AdminView adminView) {
-        this.adminView = adminView;
-    }
-
-    public Scanner getSc() {
-        return sc;
-    }
-
-    public void setSc(Scanner sc) {
-        this.sc = sc;
+    public MedicineController getMedicineController() {
+        return medicineController;
     }
 
     // Main menu

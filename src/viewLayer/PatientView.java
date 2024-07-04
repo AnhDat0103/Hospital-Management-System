@@ -10,34 +10,8 @@ public class PatientView {
     Scanner sc = new Scanner(System.in);
     ViewMain controllerMain;
 
-    private DoctorController doctorController = new DoctorController();
-
     public PatientView(ViewMain controllerMain) {
         this.controllerMain = controllerMain;
-    }
-
-    public Scanner getSc() {
-        return sc;
-    }
-
-    public void setSc(Scanner sc) {
-        this.sc = sc;
-    }
-
-    public ViewMain getControllerMain() {
-        return controllerMain;
-    }
-
-    public void setControllerMain(ViewMain controllerMain) {
-        this.controllerMain = controllerMain;
-    }
-
-    public DoctorController getDoctorController() {
-        return doctorController;
-    }
-
-    public void setDoctorController(DoctorController doctorController) {
-        this.doctorController = doctorController;
     }
 
     public  void patientRoleOptions(int choice) throws ParseException {
@@ -51,13 +25,13 @@ public class PatientView {
                 case 1:
                     System.out.println("ENTER ID Patient want to find: ");
                     IDNumber = sc.nextLine();
-                    controllerMain.getAdminView().getPatientController().findPatientByIDNumber(IDNumber ,choice);
+                    controllerMain.getPatientController().findPatientByIDNumber(IDNumber ,choice);
                     break;
                 case 2:
-                    controllerMain.getAdminView().getDoctorController().showDoctorsList(choice).forEach(s -> System.out.println(s.toString()));
+                    controllerMain.getDoctorController().showDoctorsList(choice);
                     break;
                 case 3:
-                    controllerMain.getAdminView().getDoctorController().showMedicineOfPatient();
+                    controllerMain.getDoctorController().showMedicineOfPatient();
                 case 4:
                     choice3 = 0;
                     controllerMain.authenticationMenuTitle();
