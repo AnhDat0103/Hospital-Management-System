@@ -28,21 +28,17 @@ public class PatientView {
                     viewMain.getPatientController().findPatientByIDNumber(IDNumber ,choice);
                     break;
                 case 2:
-                    viewMain.getDoctorController().showDoctorsList(choice);
-                    break;
-                case 3:
                     viewMain.getDoctorController().showMedicineOfPatient();
-                case 4:
+                case 3:
                     choice3 = 0;
                     viewMain.authenticationMenuTitle();
                     break;
             }
-        }while (choice3 >= 1 && choice3 <= 4);
+        }while (choice3 >= 1 && choice3 <= 3);
     }
     public static void menuDetails(){
         System.out.println("1. Find a patient by IDNumber.");
-        System.out.println("2. Show the list of doctors.");
         System.out.println("3. Show the patient's prescription.");
-        System.out.println("4. Exit.");
+        System.out.println("3. Exit.");
     }
 }
