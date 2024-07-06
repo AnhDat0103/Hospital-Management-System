@@ -118,8 +118,6 @@ public class Patient extends Person {
     }
 
 
-
-
     public void addMedicine(Medicine medicine) {
         medicines.add(medicine);
         System.out.println("Medicine " + medicine.getMedicineID() + " has been added");
