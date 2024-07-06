@@ -30,7 +30,7 @@ public class PatientView {
                 case 2:
                     System.out.println("ENTER ID Patient want to find: ");
                     IDNumber = sc.nextLine();
-                    controllerMain.getAdminView().getDoctorController().showMedicineOfPatient(IDNumber , choice);
+                    viewMain.getDoctorController().showMedicineOfPatient(IDNumber , choice);
                     break;
                 case 3:
                     choice3 = 0;
