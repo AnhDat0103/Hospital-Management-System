@@ -62,8 +62,9 @@ public class ViewMain {
                                     menuTitleForAdministration();
                                     choice2 = HandlingException.getInteger(sc);
                                     if (choice2 == 6) authenticationMenuTitle();
+                                    if (choice2 == 1 || choice2 == 2 || choice2 == 3 || choice2 == 4 || choice2 == 5)
+                                        adminView.adminRoleOptions(choice2);
                                 } while (choice2 < 1 || choice2 > 6);
-                                adminView.adminRoleOptions(choice2);
                                 break;
                             } else {
                                 System.out.println("Invalid username or password");
@@ -96,13 +97,14 @@ public class ViewMain {
                                 menuTitleForAdministration();
                                 choice3 = HandlingException.getInteger(sc);
                                 if (choice3 == 6) authenticationMenuTitle();
+                                if (choice3 == 1 || choice3 == 2 || choice3 == 3 || choice3 == 4 || choice3 == 5) patientView.patientRoleOptions(choice3);
                             }while (choice3 < 1 || choice3 > 6);
-                            patientView.patientRoleOptions(choice3);
                             break;
                         }catch (Exception e){
                             System.out.println(e.getMessage());
                         }
                     }
+                    break;
                 case 4: break;
                 default: System.out.println("Invalid choice");
             }

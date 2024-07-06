@@ -36,6 +36,8 @@ public class PatientView {
                     choice3 = 0;
                     viewMain.authenticationMenuTitle();
                     break;
+                default:
+                    System.out.println("Invalid choice");
             }
         }while (choice3 >= 1 && choice3 <= 3);
     }
