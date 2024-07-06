@@ -18,18 +18,18 @@ public class PatientView {
         int choice3;
         do{
             menuDetails();
-            String IDNumber = "";
+            String IDNumber = ""; // cap nhat id vua lay tu file txt
             System.out.println("Your choice: ");
             choice3 = HandlingException.getInteger(sc);
             switch (choice3){
                 case 1:
-                    System.out.println("ENTER ID Patient want to find: ");
-                    IDNumber = sc.nextLine();
+                    System.out.println("ENTER ID Patient want to find: "); // xoa bo
+                    IDNumber = sc.nextLine(); //  // xoa bo
                     viewMain.getPatientController().findPatientByIDNumber(IDNumber ,choice);
                     break;
                 case 2:
-                    System.out.println("ENTER ID Patient want to find: ");
-                    IDNumber = sc.nextLine();
+                    System.out.println("ENTER ID Patient want to find: "); // xoa bo
+                    IDNumber = sc.nextLine(); // xoa bo
                     viewMain.getDoctorController().showMedicineOfPatient(IDNumber , choice);
                     break;
                 case 3:
