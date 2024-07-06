@@ -8,36 +8,10 @@ import java.util.Scanner;
 public class PatientView {
     // implement coding for patient role options.
     Scanner sc = new Scanner(System.in);
-    ViewMain controllerMain;
+    ViewMain viewMain;
 
-    private DoctorController doctorController = new DoctorController();
-
-    public PatientView(ViewMain controllerMain) {
-        this.controllerMain = controllerMain;
-    }
-
-    public Scanner getSc() {
-        return sc;
-    }
-
-    public void setSc(Scanner sc) {
-        this.sc = sc;
-    }
-
-    public ViewMain getControllerMain() {
-        return controllerMain;
-    }
-
-    public void setControllerMain(ViewMain controllerMain) {
-        this.controllerMain = controllerMain;
-    }
-
-    public DoctorController getDoctorController() {
-        return doctorController;
-    }
-
-    public void setDoctorController(DoctorController doctorController) {
-        this.doctorController = doctorController;
+    public PatientView(ViewMain viewMain) {
+        this.viewMain = viewMain;
     }
 
     public  void patientRoleOptions(int choice) throws ParseException {
@@ -51,27 +25,23 @@ public class PatientView {
                 case 1:
                     System.out.println("ENTER ID Patient want to find: ");
                     IDNumber = sc.nextLine();
-                    controllerMain.getAdminView().getPatientController().findPatientByIDNumber(IDNumber ,choice);
+                    viewMain.getPatientController().findPatientByIDNumber(IDNumber ,choice);
                     break;
                 case 2:
-                    controllerMain.getAdminView().getDoctorController().showDoctorsList(choice).forEach(s -> System.out.println(s.toString()));
-                    break;
-                case 3:
                     System.out.println("ENTER ID Patient want to find: ");
                     IDNumber = sc.nextLine();
                     controllerMain.getAdminView().getDoctorController().showMedicineOfPatient(IDNumber , choice);
                     break;
-                case 4:
+                case 3:
                     choice3 = 0;
-                    controllerMain.authenticationMenuTitle();
+                    viewMain.authenticationMenuTitle();
                     break;
             }
-        }while (choice3 >= 1 && choice3 <= 4);
+        }while (choice3 >= 1 && choice3 <= 3);
     }
     public static void menuDetails(){
         System.out.println("1. Find a patient by IDNumber.");
-        System.out.println("2. Show the list of doctors.");
-        System.out.println("3. Show the patient's prescription.");
-        System.out.println("4. Exit.");
+        System.out.println("2. Show the patient's prescription.");
+        System.out.println("3. Exit.");
     }
 }

@@ -101,7 +101,7 @@ public class Validate {
     public static String checkDoctorID (Scanner scanner, int choice, Action action) throws IOException {
         if (choice == 1) {
             while (true) {
-                System.out.print("Enter ID((CDL/cdl) + XXXX): ");
+                System.out.print("Enter ID(CDL/cdl) + XXXX): ");
                 String id = scanner.nextLine();
                 String pattern = "^(?:CDL|cdl)\\d{4}$";
                 if (action == Action.CHECK) {
@@ -118,7 +118,7 @@ public class Validate {
             }
         } else if (choice == 2) {
             while (true) {
-                System.out.print("Enter ID((DML/dml) + XXXX): ");
+                System.out.print("Enter ID(DML/dml) + XXXX): ");
                 String id = scanner.nextLine();
                 String pattern = "^(?:DML|dml)\\d{4}$";
                 if (action == Action.CHECK) {
@@ -135,7 +135,7 @@ public class Validate {
             }
         } else if (choice == 3) {
             while (true) {
-                System.out.print("Enter ID((ENT/ent) + XXXX): ");
+                System.out.print("Enter ID(ENT/ent) + XXXX): ");
                 String id = scanner.nextLine();
                 String pattern = "^(?:ENT|ent)\\d{4}$";
                 if (action == Action.CHECK) {
@@ -152,7 +152,7 @@ public class Validate {
             }
         } else if (choice == 4) {
             while (true) {
-                System.out.print("Enter ID((NRL/nrl) + XXXX): ");
+                System.out.print("Enter ID(NRL/nrl) + XXXX): ");
                 String id = scanner.nextLine();
                 String pattern = "^(?:NRL|nrl)\\d{4}$";
                 if (action == Action.CHECK) {
@@ -169,7 +169,7 @@ public class Validate {
             }
         } else if (choice == 5) {
             while (true) {
-                System.out.print("Enter ID((GIT/git) + XXXX): ");
+                System.out.print("Enter ID(GIT/git) + XXXX): ");
                 String id = scanner.nextLine();
                 String pattern = "^(?:GIT|git)\\d{4}$";
                 if (action == Action.CHECK) {
@@ -192,7 +192,7 @@ public class Validate {
     public static String checkPatientID (Scanner scanner, int choice, Action action) throws IOException {
         if (choice == 1) {
             while (true) {
-                System.out.print("Enter ID((PCDL/pcdl) + XXXX): ");
+                System.out.print("Enter ID(PCDL/pcdl) + XXXX): ");
                 String id = scanner.nextLine();
                 String pattern = "^(?:PCDL|pcdl)\\d{4}$";
                 if (action == Action.CHECK) {

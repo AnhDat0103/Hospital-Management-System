@@ -24,30 +24,30 @@ public class DoctorView {
             choice3 = HandlingException.getInteger(sc);
             switch (choice3) {
                 case 1:
-                    ViewMain.getAdminView().getPatientController().addNewPatient(choice);
+                    ViewMain.getPatientController().addNewPatient(choice);
                     break;
                 case 2:
-                    ViewMain.getAdminView().getPatientController().showPatientsList(choice);
+                    ViewMain.getPatientController().showPatientsList(choice);
                     break;
                 case 3:
                     System.out.println("ENTER ID Patient want to find: ");
                     IDNumber = sc.nextLine();
-                    ViewMain.getAdminView().getPatientController().findPatientByIDNumber(IDNumber, choice);
+                    ViewMain.getPatientController().findPatientByIDNumber(IDNumber, choice);
                     break;
                 case 4:
                     System.out.println("ENTER ID Patient want to update: ");
                     IDNumber = sc.nextLine();
-                    ViewMain.getAdminView().getPatientController().UpdatePatientByID(IDNumber, choice);
+                    ViewMain.getPatientController().UpdatePatientByID(IDNumber, choice);
                     break;
                 case 5:
                     System.out.println("ENTER ID Patient want to delete: ");
                     IDNumber = sc.nextLine();
-                    ViewMain.getAdminView().getPatientController().RemovePatientByID(IDNumber, choice);
+                    ViewMain.getPatientController().RemovePatientByID(IDNumber, choice);
                     break;
                 case 6:
                     System.out.println("ENTER ID Patient want add Medicine: ");
                     IDNumber = sc.nextLine();
-                    ViewMain.getAdminView().getDoctorController().addMedicineToPatient(IDNumber, choice);
+                    ViewMain.getDoctorController().addMedicineToPatient(IDNumber, choice);
                     break;
                 case 7:
                     choice3 = 0;
