@@ -18,7 +18,7 @@ public class PatientView {
         int choice3;
         do{
             menuDetails();
-            String IDNumber;
+            String IDNumber = "";
             System.out.println("Your choice: ");
             choice3 = HandlingException.getInteger(sc);
             switch (choice3){
@@ -28,7 +28,10 @@ public class PatientView {
                     viewMain.getPatientController().findPatientByIDNumber(IDNumber ,choice);
                     break;
                 case 2:
-                    viewMain.getDoctorController().showMedicineOfPatient();
+                    System.out.println("ENTER ID Patient want to find: ");
+                    IDNumber = sc.nextLine();
+                    controllerMain.getAdminView().getDoctorController().showMedicineOfPatient(IDNumber , choice);
+                    break;
                 case 3:
                     choice3 = 0;
                     viewMain.authenticationMenuTitle();
@@ -38,7 +41,7 @@ public class PatientView {
     }
     public static void menuDetails(){
         System.out.println("1. Find a patient by IDNumber.");
-        System.out.println("3. Show the patient's prescription.");
+        System.out.println("2. Show the patient's prescription.");
         System.out.println("3. Exit.");
     }
 }
