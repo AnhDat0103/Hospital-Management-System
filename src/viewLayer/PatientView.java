@@ -8,10 +8,10 @@ import java.util.Scanner;
 public class PatientView {
     // implement coding for patient role options.
     Scanner sc = new Scanner(System.in);
-    ViewMain controllerMain;
+    ViewMain viewMain;
 
-    public PatientView(ViewMain controllerMain) {
-        this.controllerMain = controllerMain;
+    public PatientView(ViewMain viewMain) {
+        this.viewMain = viewMain;
     }
 
     public  void patientRoleOptions(int choice) throws ParseException {
@@ -25,16 +25,16 @@ public class PatientView {
                 case 1:
                     System.out.println("ENTER ID Patient want to find: ");
                     IDNumber = sc.nextLine();
-                    controllerMain.getPatientController().findPatientByIDNumber(IDNumber ,choice);
+                    viewMain.getPatientController().findPatientByIDNumber(IDNumber ,choice);
                     break;
                 case 2:
-                    controllerMain.getDoctorController().showDoctorsList(choice);
+                    viewMain.getDoctorController().showDoctorsList(choice);
                     break;
                 case 3:
-                    controllerMain.getDoctorController().showMedicineOfPatient();
+                    viewMain.getDoctorController().showMedicineOfPatient();
                 case 4:
                     choice3 = 0;
-                    controllerMain.authenticationMenuTitle();
+                    viewMain.authenticationMenuTitle();
                     break;
             }
         }while (choice3 >= 1 && choice3 <= 4);
