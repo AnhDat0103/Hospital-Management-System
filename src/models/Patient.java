@@ -29,7 +29,6 @@ public class Patient extends Person {
         this.height = height;
         this.weight = weight;
         this.bloodType = bloodType;
-
     }
 
     public String getAllergyDetails() {

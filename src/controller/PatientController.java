@@ -165,6 +165,8 @@ public class PatientController {
         } while ( allergiesInt != 1 && allergiesInt != 2);
         switch (choice) {
             case 1:
+                // ngoài add vào khoa cần add vào list của bác sĩ riêng là sublist của khoa.
+                // list này chỉ cần lưu id của bệnh nhân tương tự với each case
                 patientListOfCARDIOLOGY.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
                         height, weight, bloodType, allergies, allergyDetails, Specialization.CARDIOLOGY));
                 FileIO.writePatientDataToFile("patientsCARDIOLOGY.txt", patientListOfCARDIOLOGY);
@@ -200,6 +202,7 @@ public class PatientController {
     }
 
     public void showPatientsList(int choice) {
+        // show sublist bệnh nhân
         switch (choice) {
             case 1:
                 if (patientListOfCARDIOLOGY.isEmpty()) {

@@ -321,6 +321,7 @@ public class DoctorController {
                     Medicine medicine = medicineController.findMedicine(medicineID, choice);
                     if(medicine != null){
                         patient.addMedicine(medicine);
+                        System.out.println(patient.getMedicines());
                         System.out.println("Add Medicine Successfully.");
                     }else{
                         System.out.println("Medicine not found.");
