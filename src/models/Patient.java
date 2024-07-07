@@ -113,9 +113,8 @@ public class Patient extends Person {
 
     public String toFile() {
         return getIDNumber() + "| " + getFirstName() + "| "+ getLastName() + "| " + getGender() + "| " + getYob() + "| " + getAge() + "| " + getAddress() + "| " + getTelephoneNumber() + "| " + allergies + "| " +
-                allergyDetails + "| " + height + "| " + weight + "| " + bloodType + "| " + specialization;
+                allergyDetails + "| " + height + "| " + weight + "| " + bloodType + "| " + specialization + "| " + getMedicines();
     }
-
 
     public void addMedicine(Medicine medicine) {
         medicines.add(medicine);

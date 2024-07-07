@@ -85,9 +85,9 @@ public class FileIO {
     }
 
     // read patient data from file text
-    public static List<Patient> getPatients(String fileName, List<Patient> patients) {
+    public static HashMap<String, Patient> getPatients(String fileName, HashMap<String ,Patient> patients) {
         Map<String, Patient> patientMap = new HashMap<>();
-        for (Patient patient : patients) {
+        for (Patient patient : patients.values()) {
             patientMap.put(patient.getIDNumber(), patient);
         }
         try {
@@ -107,8 +107,9 @@ public class FileIO {
                     double weight = Double.parseDouble(data[11]);
                     String bloodType = data[12];
                     Specialization specialization = Specialization.valueOf(data[13]);
+
                     try {
-                        patients.add(new Patient(ID, firstName, lastName, dob, gender
+                        patients.put(ID, new Patient(ID, firstName, lastName, dob, gender
                                 , address, telephone, height, weight, bloodType, allergies, allergyDetails, specialization));
                     } catch (ParseException e) {
                         throw new RuntimeException(e);

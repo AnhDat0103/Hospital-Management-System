@@ -4,6 +4,9 @@ import controller.DoctorController;
 import controller.MedicineController;
 import controller.PatientController;
 import exception.HandlingException;
+import fileIO.FileIO;
+import models.enums.Action;
+import validation.Validate;
 
 import java.text.ParseException;
 import java.util.Scanner;
@@ -82,8 +85,11 @@ public class ViewMain {
                                 menuTitleForAdministration();
                                 choice2 = HandlingException.getInteger(sc);
                                 if (choice2 == 6) authenticationMenuTitle();
-                                if (choice2 == 1 || choice2 == 2 || choice2 == 3 || choice2 == 4 || choice2 == 5)
-                                    doctorView.doctorRoleOptions(choice2);
+                                if (choice2 == 1 || choice2 == 2 || choice2 == 3 || choice2 == 4 || choice2 == 5) {
+                                    System.out.print("Enter Doctor ID: ");
+                                    String doctorID = Validate.checkDoctorID(sc, choice2,Action.FIND);
+                                    doctorView.doctorRoleOptions(choice2, doctorID);
+                                }
                             }while (choice2 < 1 || choice2 > 6);
                             break;
                         }catch (Exception e){

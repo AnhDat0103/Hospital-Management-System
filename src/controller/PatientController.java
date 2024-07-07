@@ -2,6 +2,7 @@ package controller;
 
 import exception.HandlingException;
 import fileIO.FileIO;
+import models.Doctor;
 import models.Medicine;
 import models.Patient;
 import models.enums.Action;
@@ -31,87 +32,53 @@ public class PatientController {
     private  HashMap<String, Patient> patientListOfNEUROLOGY = new HashMap<>(); //list of CARDIOLOGY. The list has information of patients, medicine of patients in NEUROLOGY.
     private  HashMap<String, Patient> patientListOfGERIATRIC = new HashMap<>(); //list of CARDIOLOGY. The list has information of patients, medicine of patients in GERIATRIC.
 
+    HashMap<String, Patient> subHashMap = new HashMap<>(); // list patient for each doctor
+
     public HashMap<String, Medicine> getMedicineListOfCARDIOLOGY() {
         return medicineListOfCARDIOLOGY;
-    }
-
-    public void setMedicineListOfCARDIOLOGY(HashMap<String, Medicine> medicineListOfCARDIOLOGY) {
-        this.medicineListOfCARDIOLOGY = medicineListOfCARDIOLOGY;
     }
 
     public HashMap<String, Medicine> getMedicineListOfDERMATOLOGY() {
         return medicineListOfDERMATOLOGY;
     }
 
-    public void setMedicineListOfDERMATOLOGY(HashMap<String, Medicine> medicineListOfDERMATOLOGY) {
-        this.medicineListOfDERMATOLOGY = medicineListOfDERMATOLOGY;
-    }
-
     public HashMap<String, Medicine> getMedicineListOfENT() {
         return medicineListOfENT;
-    }
-
-    public void setMedicineListOfENT(HashMap<String, Medicine> medicineListOfENT) {
-        this.medicineListOfENT = medicineListOfENT;
     }
 
     public HashMap<String, Medicine> getMedicineListOfNEUROLOGY() {
         return medicineListOfNEUROLOGY;
     }
 
-    public void setMedicineListOfNEUROLOGY(HashMap<String, Medicine> medicineListOfNEUROLOGY) {
-        this.medicineListOfNEUROLOGY = medicineListOfNEUROLOGY;
-    }
-
     public HashMap<String, Medicine> getMedicineListOfGERIATRIC() {
         return medicineListOfGERIATRIC;
     }
 
-    public void setMedicineListOfGERIATRIC(HashMap<String, Medicine> medicineListOfGERIATRIC) {
-        this.medicineListOfGERIATRIC = medicineListOfGERIATRIC;
-    }
-
     public HashMap<String, Patient> getPatientListOfCARDIOLOGY() {
-        return patientListOfCARDIOLOGY;
-    }
-
-    public void setPatientListOfCARDIOLOGY(HashMap<String, Patient> patientListOfCARDIOLOGY) {
-        this.patientListOfCARDIOLOGY = patientListOfCARDIOLOGY;
+        return FileIO.getPatients("patientsCARDIOLOGY.txt", patientListOfCARDIOLOGY);
     }
 
     public HashMap<String, Patient> getPatientListOfDERMATOLOGY() {
-        return patientListOfDERMATOLOGY;
-    }
-
-    public void setPatientListOfDERMATOLOGY(HashMap<String, Patient> patientListOfDERMATOLOGY) {
-        this.patientListOfDERMATOLOGY = patientListOfDERMATOLOGY;
+        return FileIO.getPatients("patientsDERMATOLOGY.txt", patientListOfDERMATOLOGY);
     }
 
     public HashMap<String, Patient> getPatientListOfENT() {
-        return patientListOfENT;
-    }
-
-    public void setPatientListOfENT(HashMap<String, Patient> patientListOfENT) {
-        this.patientListOfENT = patientListOfENT;
+        return FileIO.getPatients("patientsENT.txt", patientListOfENT);
     }
 
     public HashMap<String, Patient> getPatientListOfNEUROLOGY() {
-        return patientListOfNEUROLOGY;
-    }
-
-    public void setPatientListOfNEUROLOGY(HashMap<String, Patient> patientListOfNEUROLOGY) {
-        this.patientListOfNEUROLOGY = patientListOfNEUROLOGY;
+        return FileIO.getPatients("patientsNEUROLOGY.txt", patientListOfNEUROLOGY);
     }
 
     public HashMap<String, Patient> getPatientListOfGERIATRIC() {
-        return patientListOfGERIATRIC;
+        return FileIO.getPatients("patientsGERIATRIC.txt", patientListOfGERIATRIC);
     }
 
-    public void setPatientListOfGERIATRIC(HashMap<String, Patient> patientListOfGERIATRIC) {
-        this.patientListOfGERIATRIC = patientListOfGERIATRIC;
+    public HashMap<String, Patient> getSubHashMap(String fileName) {
+        return null;
     }
 
-    public void addNewPatient(int choice) throws ParseException, IOException {
+    public void addNewPatient(int choice, Doctor doctor) throws ParseException, IOException {
         String allergyDetails = " ";
         int allergiesInt = 0;
         boolean allergies = false;
@@ -156,7 +123,6 @@ public class PatientController {
                 allergyDetails = sc.nextLine();
                 System.out.println("Allergy details: " + allergyDetails);
             } else if (allergiesInt == 2) {
-                allergies = false;
                 allergyDetails = " ";
                 System.out.println("The patient has no allergies!!!");
             } else {
@@ -167,32 +133,36 @@ public class PatientController {
             case 1:
                 // ngoài add vào khoa cần add vào list của bác sĩ riêng là sublist của khoa.
                 // list này chỉ cần lưu id của bệnh nhân tương tự với each case
-                patientListOfCARDIOLOGY.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
-                        height, weight, bloodType, allergies, allergyDetails, Specialization.CARDIOLOGY));
+                Patient patient = new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
+                        height, weight, bloodType, allergies, allergyDetails, Specialization.CARDIOLOGY);
+                getPatientListOfCARDIOLOGY().put(IDNumber, patient);
                 FileIO.writePatientDataToFile("patientsCARDIOLOGY.txt", patientListOfCARDIOLOGY);
+                subHashMap.put(IDNumber,patientListOfCARDIOLOGY.get(IDNumber));
+                String doctorNameFile = doctor.getLastName() + ".txt"; // tạo tên file riêng cho từng doctor
+                FileIO.writePatientDataToFile(doctorNameFile, subHashMap);
                 System.out.println("Add New Patient Successfully to Cardiology.");
                 break;
             case 2:
-                patientListOfDERMATOLOGY.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
+                getPatientListOfDERMATOLOGY().put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
                         height, weight, bloodType, allergies, allergyDetails, Specialization.DERMATOLOGY));
                 FileIO.writePatientDataToFile("patientsDERMATOLOGY.txt", patientListOfDERMATOLOGY);
                 System.out.println("Add New Patient Successfully to Dermatology.");
                 break;
             case 3:
-                patientListOfENT.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
+                getPatientListOfENT().put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
                         height, weight, bloodType, allergies, allergyDetails, Specialization.ENT));
                 FileIO.writePatientDataToFile("patientsENT.txt", patientListOfENT);
                 System.out.println("Add New Patient Successfully to Entrepreneur.");
                 break;
             case 4:
-                patientListOfNEUROLOGY.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
+                getPatientListOfNEUROLOGY().put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
                         height, weight, bloodType, allergies, allergyDetails, Specialization.NEUROLOGY));
                 FileIO.writePatientDataToFile("patientsNEUROLOGY.txt", patientListOfNEUROLOGY);
 
                 System.out.println("Add New Patient Successfully to Neurology.");
                 break;
             case 5:
-                patientListOfGERIATRIC.put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
+                getPatientListOfGERIATRIC().put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
                         height, weight, bloodType, allergies, allergyDetails, Specialization.GERIATRIC));
                 FileIO.writePatientDataToFile("patientsGERIATRIC.txt", patientListOfGERIATRIC);
 
