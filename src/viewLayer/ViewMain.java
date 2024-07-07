@@ -82,8 +82,9 @@ public class ViewMain {
                                 menuTitleForAdministration();
                                 choice2 = HandlingException.getInteger(sc);
                                 if (choice2 == 6) authenticationMenuTitle();
+                                if (choice2 == 1 || choice2 == 2 || choice2 == 3 || choice2 == 4 || choice2 == 5)
+                                    doctorView.doctorRoleOptions(choice2);
                             }while (choice2 < 1 || choice2 > 6);
-                            doctorView.doctorRoleOptions(choice2);
                             break;
                         }catch (Exception e){
                             System.out.println(e.getMessage());
