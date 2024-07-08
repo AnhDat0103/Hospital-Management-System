@@ -4,6 +4,7 @@ import models.enums.Gender;
 import models.enums.Specialization;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Patient extends Person {
@@ -113,11 +114,24 @@ public class Patient extends Person {
 
     public String toFile() {
         return getIDNumber() + "| " + getFirstName() + "| "+ getLastName() + "| " + getGender() + "| " + getYob() + "| " + getAge() + "| " + getAddress() + "| " + getTelephoneNumber() + "| " + allergies + "| " +
-                allergyDetails + "| " + height + "| " + weight + "| " + bloodType + "| " + specialization + "| " + getMedicines();
+                allergyDetails + "| " + height + "| " + weight + "| " + bloodType + "| " + specialization;
     }
 
     public void addMedicine(Medicine medicine) {
         medicines.add(medicine);
         System.out.println("Medicine " + medicine.getMedicineID() + " has been added");
+    }
+
+    public static void getHead() {
+        String format = "| %-10s | %-20s | %-6s | %-10s | %-3s | %-25s | %-15s | %-6s | %-6s | %-9s | %-8s | %-30s | %-15s | %-15s |%n";
+        System.out.println("+------------+----------------------+--------+------------+-----+---------------------------+-----------------+--------+--------+-----------+----------+--------------------------------+-----------------+------------------+");
+        System.out.printf(format, "ID", "Full Name", "Gender", "Birth Day", "Age", "Address", "Telephone", "Height", "Weight", "Blood Type", "Allergies", "Allergy Details", "Specialization", "Medicines");
+        System.out.println("+------------+----------------------+--------+------------+-----+---------------------------+-----------------+--------+--------+-----------+----------+--------------------------------+-----------------+------------------+");
+    }
+
+    public void generateTable() {
+        String format = "| %-10s | %-20s | %-6s | %-10s | %-3s | %-25s | %-15s | %-6.2f | %-6.2f | %-9s | %-8s | %-30s | %-15s | %-15s |%n";
+        System.out.printf(format, getIDNumber(), getFullName(), getGender(), getYob(), getAge(), getAddress(), getTelephoneNumber(), getHeight(), getWeight(), getBloodType(), isAllergies(), getAllergyDetails(), getSpecialization(), getMedicines());
+        System.out.println("+------------+----------------------+--------+------------+-----+---------------------------+-----------------+--------+--------+-----------+----------+--------------------------------+-----------------+------------------+");
     }
 }

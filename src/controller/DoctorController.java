@@ -147,19 +147,26 @@ public class DoctorController {
     public void showDoctorsList(int choice) {
         switch (choice) {
             case 1:
-                getDoctorListOfCARDIOLOGY().forEach(s -> System.out.println(s.toString()));
+                Doctor.getHead();
+                getDoctorListOfCARDIOLOGY().forEach(Doctor::generateTable);
                 break;
             case 2:
-                getDoctorListOfDERMATOLOGY().forEach(s -> System.out.println(s.toString()));
+                Doctor.getHead();
+                getDoctorListOfDERMATOLOGY().forEach(Doctor::generateTable);
                 break;
             case 3:
-                getDoctorListOfENT().forEach(s -> System.out.println(s.toString()));
+                Doctor.getHead();
+
+                getDoctorListOfENT().forEach(Doctor::generateTable);
                 break;
             case 4:
-                getDoctorListOfNEUROLOGY().forEach(s -> System.out.println(s.toString()));
+                Doctor.getHead();
+
+                getDoctorListOfNEUROLOGY().forEach(Doctor::generateTable);
                 break;
             case 5:
-                getDoctorListOfGERIATRIC().forEach(s -> System.out.println(s.toString()));
+                Doctor.getHead();
+                getDoctorListOfGERIATRIC().forEach(Doctor::generateTable);
                 break;
         }
     }
@@ -281,27 +288,27 @@ public class DoctorController {
         } else {
             switch (choice) {
                 case 1:
-                    doctorListOfCARDIOLOGY.remove(findDoctorByID(choice, IDNumber));
+                    getDoctorListOfCARDIOLOGY().remove(findDoctorByID(choice, IDNumber));
                     FileIO.writeDoctorDataToFile("doctorsCardiology.txt", doctorListOfCARDIOLOGY);
                     System.out.println("Remove is successful");
                     break;
                 case 2:
-                    doctorListOfDERMATOLOGY.remove(findDoctorByID(choice, IDNumber));
+                    getDoctorListOfDERMATOLOGY().remove(findDoctorByID(choice, IDNumber));
                     FileIO.writeDoctorDataToFile("doctorsDERMATOLOGY.txt", doctorListOfDERMATOLOGY);
                     System.out.println("Remove is successful");
                     break;
                 case 3:
-                    doctorListOfENT.remove(findDoctorByID(choice, IDNumber));
+                    getDoctorListOfENT().remove(findDoctorByID(choice, IDNumber));
                     FileIO.writeDoctorDataToFile("doctorsENT.txt", doctorListOfENT);
                     System.out.println("Remove is successful");
                     break;
                 case 4:
-                    doctorListOfNEUROLOGY.remove(findDoctorByID(choice, IDNumber));
+                    getDoctorListOfNEUROLOGY().remove(findDoctorByID(choice, IDNumber));
                     FileIO.writeDoctorDataToFile("doctorsNEUROLOGY.txt", doctorListOfNEUROLOGY);
                     System.out.println("Remove is successful");
                     break;
                 case 5:
-                    doctorListOfGERIATRIC.remove(findDoctorByID(choice, IDNumber));
+                    getDoctorListOfGERIATRIC().remove(findDoctorByID(choice, IDNumber));
                     FileIO.writeDoctorDataToFile("doctorsGERIATRIC.txt", doctorListOfGERIATRIC);
                     System.out.println("Remove is successful");
                     break;

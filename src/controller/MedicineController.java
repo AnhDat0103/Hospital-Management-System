@@ -106,19 +106,24 @@ public class MedicineController {
     public void showMedicineList(int choice) {
         switch (choice) {
             case 1:
-                getMedicinesOfCARDIOLOGY().forEach(System.out::println);
+                Medicine.getHead();
+                getMedicinesOfCARDIOLOGY().forEach(Medicine::generateTable);
                 break;
             case 2:
-                getMedicinesOfDERMATOLOGY().forEach(System.out::println);
+                Medicine.getHead();
+                getMedicinesOfDERMATOLOGY().forEach(Medicine::generateTable);
                 break;
             case 3:
-                getMedicinesOfENT().forEach(System.out::println);
+                Medicine.getHead();
+                getMedicinesOfENT().forEach(Medicine::generateTable);
                 break;
             case 4:
-                getMedicinesOfNEUROLOGY().forEach(System.out::println);
+                Medicine.getHead();
+                getMedicinesOfNEUROLOGY().forEach(Medicine::generateTable);
                 break;
             case 5:
-                getMedicinesOfGERIATRIC().forEach(System.out::println);
+                Medicine.getHead();
+                getMedicinesOfGERIATRIC().forEach(Medicine::generateTable);
                 break;
         }
     }

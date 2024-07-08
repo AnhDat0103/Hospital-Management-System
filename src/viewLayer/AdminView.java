@@ -2,6 +2,7 @@ package viewLayer;
 
 import exception.HandlingException;
 import models.Doctor;
+import models.Medicine;
 import models.enums.Action;
 import validation.Validate;
 
@@ -38,7 +39,8 @@ public class AdminView {
                     if (findDoctorByID == null) {
                         System.out.println("Doctor not found");
                     } else {
-                        System.out.println(findDoctorByID);
+                        Doctor.getHead();
+                        findDoctorByID.generateTable();
                     }
                     break;
                 case 4: //Update a doctor by IDNumber
@@ -74,7 +76,10 @@ public class AdminView {
                     String medicineID = sc.nextLine();
                     if (viewMain.getMedicineController().findMedicine(medicineID, choice) == null) {
                         System.out.println("Medicine not found");
-                    } else System.out.println(viewMain.getMedicineController().findMedicine(medicineID, choice).toString());
+                    } else {
+                        Medicine.getHead();
+                        viewMain.getMedicineController().findMedicine(medicineID, choice).generateTable();
+                    }
                     break;
                 case 10:
                     System.out.println("Enter medicine ID: ");

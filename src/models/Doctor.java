@@ -6,7 +6,7 @@ import models.enums.Specialization;
 
 import java.text.ParseException;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class Doctor extends Person {
     private int yearsOfExperience; //nam kinh nghiem
@@ -82,18 +82,32 @@ public class Doctor extends Person {
 
     @Override
     public String toString() {
-        return  super.toString() +
-                "clinicHours=" + clinicHours +
-                ", yearsOfExperience=" + yearsOfExperience +
-                ", education='" + education +
+        return "Doctor{" +
+                "yearsOfExperience=" + yearsOfExperience +
+                ", clinicHours=" + clinicHours +
+                ", education=" + education +
                 ", specialization=" + specialization +
-                ", consultationFee=" + consultationFee;
-
+                ", consultationFee=" + consultationFee +
+                ", patients=" + patients +
+                '}';
     }
 
     public String toFile() {
         return getIDNumber() + "| " + getFirstName() + "| "+ getLastName() + "| " + getGender() + "| " + getYob() + "| " + getAge() + "| " + getAddress() + "| " + getTelephoneNumber() + "| " +
                 clinicHours + "| " + yearsOfExperience + "| " + education + "| " + specialization + "| " + consultationFee;
+    }
+
+    public static void getHead() {
+        String format = "| %-10s | %-20s | %-6s | %-10s | %-3s | %-25s | %-15s | %-12s | %-18s | %-20s | %-15s | %-15s |%n";
+        System.out.println("+------------+----------------------+--------+------------+-----+---------------------------+-----------------+--------------+--------------------+----------------------+-----------------+------------------+");
+        System.out.printf(format, "ID", "Full Name", "Gender", "Birth Day", "Age", "Address", "Telephone", "Clinic Hours", "Experience (Years)", "Education", "Specialization", "Consultation Fee");
+        System.out.println("+------------+----------------------+--------+------------+-----+---------------------------+-----------------+--------------+--------------------+----------------------+-----------------+------------------+");
+    }
+
+    public void generateTable() {
+        String format = "| %-10s | %-20s | %-6s | %-10s | %-3s | %-25s | %-15s | %-12s | %-18s | %-20s | %-15s | %-15s  |%n";
+        System.out.printf(format, getIDNumber(), getFullName(), getGender(), getYob(), getAge(), getAddress(), getTelephoneNumber(), getClinicHours(), getYearsOfExperience(), getEducation(), getSpecialization(), getConsultationFee() );
+        System.out.println("+------------+----------------------+--------+------------+-----+---------------------------+-----------------+--------------+--------------------+----------------------+-----------------+------------------+");
     }
 }
 

@@ -107,7 +107,6 @@ public class FileIO {
                     double weight = Double.parseDouble(data[11]);
                     String bloodType = data[12];
                     Specialization specialization = Specialization.valueOf(data[13]);
-
                     try {
                         patients.put(ID, new Patient(ID, firstName, lastName, dob, gender
                                 , address, telephone, height, weight, bloodType, allergies, allergyDetails, specialization));

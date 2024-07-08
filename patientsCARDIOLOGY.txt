@@ -1,4 +1,5 @@
-pcdl0001| manh| quan| MALE| 09-09-2009| 14| Hai Duong| +123-12345678| false|  | 140.0| 34.0| a| CARDIOLOGYnull
-pcdl9999| abc| xyz| MALE| 12-12-2000| 23| Hai Duong| +123-45678912| false|  | 180.0| 70.0| a| CARDIOLOGYnull
-pcdl1234| Ly Thuong| Kiet| MALE| 12-12-2000| 23| Thai Binh| +147-12345678| false|  | 178.0| 78.0| o| CARDIOLOGYnull
-pcdl2345| Thanh| Nghia| MALE| 03-04-2000| 24| Thanh Hoa| +753-85214796| true| di ung mat ong| 169.0| 56.0| B| CARDIOLOGYnull
+pcdl0001| manh| quan| MALE| 09-09-2009| 14| Hai Duong| +123-12345678| false|  | 140.0| 34.0| a| CARDIOLOGY
+pcdl9999| abc| xyz| MALE| 12-12-2000| 23| Hai Duong| +123-45678912| false|  | 180.0| 70.0| a| CARDIOLOGY
+pcdl1234| Ly Thuong| Kiet| MALE| 12-12-2000| 23| Thai Binh| +147-12345678| false|  | 178.0| 78.0| o| CARDIOLOGY
+pcdl2345| Thanh| Nghia| MALE| 03-04-2000| 24| Thanh Hoa| +753-85214796| true| di ung mat ong| 169.0| 56.0| B| CARDIOLOGY
+pcdl9998| abcd| xyzk| MALE| 12-12-2000| 23| Thanh Hoa| +111-11223344| false|  | 189.0| 81.0| ab| CARDIOLOGY

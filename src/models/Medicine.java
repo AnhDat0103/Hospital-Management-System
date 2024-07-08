@@ -68,4 +68,17 @@ public class Medicine  {
     public String toFile() {
         return medicineID + "| " + name + "| " + dosageForm + "| " + strength;
     }
+
+    public static void getHead() {
+        String format = "| %-10s | %-20s | %-15s | %-15s |%n";
+        System.out.println("+-------------+----------------------+-----------------+-----------------+");
+        System.out.printf(format, "Medicine ID", "Name", "Dosage Form", "Strength");
+        System.out.println("+-------------+----------------------+-----------------+-----------------+");
+    }
+
+    public void generateTable() {
+        String format = "| %-10s  | %-20s | %-15s | %-15s |%n";
+        System.out.printf(format, getMedicineID(), getName(), getDosageForm(), getStrength());
+        System.out.println("+-------------+----------------------+-----------------+-----------------+");
+    }
 }
