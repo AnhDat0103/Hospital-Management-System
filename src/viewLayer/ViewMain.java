@@ -4,7 +4,11 @@ import controller.DoctorController;
 import controller.MedicineController;
 import controller.PatientController;
 import exception.HandlingException;
+import fileIO.FileIO;
+import models.enums.Action;
+import validation.Validate;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 
@@ -36,7 +40,7 @@ public class ViewMain {
     }
 
     // Main menu
-    public void authenticationMenuTitle() throws ParseException {
+    public void authenticationMenuTitle() throws ParseException, IOException {
         int choice = 0;
         do {
             System.out.println("Welcome to the hospital management system");
@@ -75,20 +79,24 @@ public class ViewMain {
                     }
                     break;
                 case 2:
-                    while(true){
-                        try{
+                    while(true) {
+                        try {
                             int choice2;
-                            do{
+                            do {
                                 menuTitleForAdministration();
                                 choice2 = HandlingException.getInteger(sc);
                                 if (choice2 == 6) authenticationMenuTitle();
-                            }while (choice2 < 1 || choice2 > 6);
-                            doctorView.doctorRoleOptions(choice2);
+                                if (choice2 == 1 || choice2 == 2 || choice2 == 3 || choice2 == 4 || choice2 == 5) {
+                                    String doctorID = Validate.checkDoctorID(sc, choice2, Action.FIND);
+                                    doctorView.doctorRoleOptions(choice2, doctorID);
+                                }
+                            } while (choice2 < 1 || choice2 > 6);
                             break;
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
                     }
+                    break;
                 case 3:
                     while(true){
                         try{
@@ -97,7 +105,10 @@ public class ViewMain {
                                 menuTitleForAdministration();
                                 choice3 = HandlingException.getInteger(sc);
                                 if (choice3 == 6) authenticationMenuTitle();
-                                if (choice3 == 1 || choice3 == 2 || choice3 == 3 || choice3 == 4 || choice3 == 5) patientView.patientRoleOptions(choice3);
+                                if (choice3 == 1 || choice3 == 2 || choice3 == 3 || choice3 == 4 || choice3 == 5) {
+                                    String IDPatient = Validate.checkPatientID(sc, choice3, Action.FIND);
+                                    patientView.patientRoleOptions(choice3, IDPatient);
+                                }
                             }while (choice3 < 1 || choice3 > 6);
                             break;
                         }catch (Exception e){

@@ -1,1 +1,1 @@
-pent1234| Ngoc Ha| FEMALE| 12-09-2010| 13| Vinh Phuc| +741-85174236| di ung phan hoa| 145.0| 30.0| B| ENT
+pent1234| Ngoc| Ha| FEMALE| 12-09-2010| 13| Vinh Phuc| +741-85174236| true| di ung phan hoa| 145.0| 30.0| B| ENT

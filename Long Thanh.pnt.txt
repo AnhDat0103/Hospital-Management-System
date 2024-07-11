@@ -1,0 +1,2 @@
+2| Omeprazole| TABLETS| 10 mg, 20 mg
+1| Paracetamol| LIQUIDS| 500 mg, 650 mg

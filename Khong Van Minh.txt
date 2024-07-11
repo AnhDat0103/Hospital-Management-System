@@ -1,0 +1,4 @@
+pcdl5577| minh| anh| FEMALE| 10-12-1999| 24| Ha Noi| +123-12345678| false|  | 179.0| 78.0| 0| CARDIOLOGY
+pcdl5432| man| cidan| MALE| 12-12-1998| 25| Cidan| +123-12346578| false|  | 178.0| 80.0| o| CARDIOLOGY
+pcdl2000| minh| que| MALE| 10-10-2000| 23| Ha Noi| +123-12345678| true| di ung nho| 180.0| 72.0| ab| CARDIOLOGY
+pcdl9988| linh| la| FEMALE| 18-02-1999| 25| Ha Noi| +789-67895678| true| di ung chuoi| 189.0| 81.0| ab| CARDIOLOGY

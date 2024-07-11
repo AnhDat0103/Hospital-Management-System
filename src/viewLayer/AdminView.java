@@ -2,6 +2,7 @@ package viewLayer;
 
 import exception.HandlingException;
 import models.Doctor;
+import models.Medicine;
 import models.enums.Action;
 import validation.Validate;
 
@@ -38,7 +39,8 @@ public class AdminView {
                     if (findDoctorByID == null) {
                         System.out.println("Doctor not found");
                     } else {
-                        System.out.println(findDoctorByID);
+                        Doctor.getHead();
+                        findDoctorByID.generateTable();
                     }
                     break;
                 case 4: //Update a doctor by IDNumber
@@ -59,41 +61,40 @@ public class AdminView {
                     }
                     break;
                 case 6:
-                    String IDNumberFindToFind = Validate.checkPatientID(sc, choice, Action.FIND);
-                    viewMain.getPatientController().findPatientByIDNumber(IDNumberFindToFind, choice);
-                    break;
-                case 7:
                      viewMain.getMedicineController().addNewMedicine(choice);
                     break;
-                case 8:
+                case 7:
                     System.out.println("The list medicine: ");
                     viewMain.getMedicineController().showMedicineList(choice);
                     break;
-                case 9:
+                case 8:
                     System.out.println("Enter medicine ID: ");
                     String medicineID = sc.nextLine();
                     if (viewMain.getMedicineController().findMedicine(medicineID, choice) == null) {
                         System.out.println("Medicine not found");
-                    } else System.out.println(viewMain.getMedicineController().findMedicine(medicineID, choice).toString());
+                    } else {
+                        Medicine.getHead();
+                        viewMain.getMedicineController().findMedicine(medicineID, choice).generateTable();
+                    }
                     break;
-                case 10:
+                case 9:
                     System.out.println("Enter medicine ID: ");
                     String medicineID2 = sc.nextLine();
                     viewMain.getMedicineController().updateMedicine(medicineID2, choice);
                     break;
-                case 11:
+                case 10:
                     System.out.println("Enter medicine ID: ");
                     String medicineID3 = sc.nextLine();
                     viewMain.getMedicineController().removeMedicine(medicineID3, choice);
                     break;
-                case 12:
+                case 11:
                     choice1 = 0;
                     viewMain.authenticationMenuTitle();
                     break;
                 default:
                     System.out.println("Invalid choice");
             }
-        } while (choice1 >= 1 && choice1 <= 12);
+        } while (choice1 >= 1 && choice1 <= 11);
     }
 
     // Detail option for all specialization
@@ -103,12 +104,11 @@ public class AdminView {
         System.out.println("3.  Find a doctor by IDNumber");
         System.out.println("4.  Update a doctor by IDNumber");
         System.out.println("5.  Remove doctor by IDNumber");
-        System.out.println("6.  Find a patient by IDNumber");
-        System.out.println("7.  Add the new medicine.");
-        System.out.println("8.  show list medicines.");
-        System.out.println("9.  Find a medicine by IDNumber.");
-        System.out.println("10. Update a medicine by IDNumber.");
-        System.out.println("11. Remove a medicine by IDNumber.");
-        System.out.println("12. Exit");
+        System.out.println("6.  Add the new medicine.");
+        System.out.println("7.  show list medicines.");
+        System.out.println("8.  Find a medicine by IDNumber.");
+        System.out.println("9.  Update a medicine by IDNumber.");
+        System.out.println("10. Remove a medicine by IDNumber.");
+        System.out.println("11. Back to main menu.");
     }
 }

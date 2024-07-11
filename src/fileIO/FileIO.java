@@ -8,7 +8,6 @@ import models.enums.Education;
 import models.enums.Gender;
 import models.enums.Specialization;
 
-import javax.print.Doc;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -67,7 +66,6 @@ public class FileIO {
                 }
             });
         } catch (IOException e) {
-            System.out.println("data is null");
         }
         return doctors;
     }
@@ -80,14 +78,13 @@ public class FileIO {
                writer.newLine();
            }
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
     // read patient data from file text
-    public static List<Patient> getPatients(String fileName, List<Patient> patients) {
+    public static HashMap<String, Patient> getPatients(String fileName, HashMap<String ,Patient> patients) {
         Map<String, Patient> patientMap = new HashMap<>();
-        for (Patient patient : patients) {
+        for (Patient patient : patients.values()) {
             patientMap.put(patient.getIDNumber(), patient);
         }
         try {
@@ -108,7 +105,7 @@ public class FileIO {
                     String bloodType = data[12];
                     Specialization specialization = Specialization.valueOf(data[13]);
                     try {
-                        patients.add(new Patient(ID, firstName, lastName, dob, gender
+                        patients.put(ID, new Patient(ID, firstName, lastName, dob, gender
                                 , address, telephone, height, weight, bloodType, allergies, allergyDetails, specialization));
                     } catch (ParseException e) {
                         throw new RuntimeException(e);
@@ -116,7 +113,6 @@ public class FileIO {
                 }
             });
         } catch (IOException e) {
-            System.out.println("data is null");
         }
         return patients;
     }
@@ -147,11 +143,10 @@ public class FileIO {
                     String name = data[1];
                     DosageForm dosageForm = DosageForm.valueOf(data[2]);
                     String strength = data[3];
-                    medicines.add(new Medicine(name, dosageForm, strength));
+                    medicines.add(new Medicine(ID, name, dosageForm, strength));
                 }
             });
         } catch (IOException e) {
-            System.out.println("data is null");
         }
         return medicines;
     }

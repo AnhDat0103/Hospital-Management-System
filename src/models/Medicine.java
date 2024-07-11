@@ -3,25 +3,13 @@ package models;
 import models.enums.DosageForm;
 
 public class Medicine  {
-    private static int idCounter = 0;
-    private String medicineID ;
+    private final String medicineID ;
     private String name;
     private DosageForm dosageForm;
     private String strength;
 
-
-    public Medicine() {
-        this.medicineID = generateID();
-        this.name = "";
-        this.strength = "";
-    }
-
-    private String generateID() {
-        return String.valueOf(++idCounter);
-    }
-
-    public Medicine(String name, DosageForm dosageForm, String strength) {
-        this.medicineID = generateID();
+    public Medicine(String medicineID,  String name, DosageForm dosageForm, String strength) {
+        this.medicineID = medicineID;
         this.name = name;
         this.dosageForm = dosageForm;
         this.strength = strength;
@@ -67,5 +55,18 @@ public class Medicine  {
 
     public String toFile() {
         return medicineID + "| " + name + "| " + dosageForm + "| " + strength;
+    }
+
+    public static void getHead() {
+        String format = "| %-10s | %-20s | %-15s | %-15s |%n";
+        System.out.println("+-------------+----------------------+-----------------+-----------------+");
+        System.out.printf(format, "Medicine ID", "Name", "Dosage Form", "Strength");
+        System.out.println("+-------------+----------------------+-----------------+-----------------+");
+    }
+
+    public void generateTable() {
+        String format = "| %-10s  | %-20s | %-15s | %-15s |%n";
+        System.out.printf(format, getMedicineID(), getName(), getDosageForm(), getStrength());
+        System.out.println("+-------------+----------------------+-----------------+-----------------+");
     }
 }

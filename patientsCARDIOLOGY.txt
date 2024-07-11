@@ -1,2 +1,12 @@
+pcdl3344| long| thanh| MALE| 04-03-2000| 24| Ha Duong| +125-12345678| true| di ung trung| 170.0| 71.0| o| CARDIOLOGY
+pcdl1144| dsakj| hadjs| MALE| 12-12-2000| 23| Ashdas| +123-12345678| true| asdj| 12.0| 12.0| o| CARDIOLOGY
+pcdl5432| man| cidan| MALE| 12-12-1998| 25| Cidan| +123-12346578| false|  | 178.0| 80.0| o| CARDIOLOGY
+pcdl0001| Manh| Quan| MALE| 09-09-2009| 14| Hai Duong| +123-12345678| false|  | 140.0| 34.0| a| CARDIOLOGY
+pcdl9999| abc| xyz| MALE| 12-12-2000| 23| Hai Duong| +123-45678912| false|  | 180.0| 70.0| a| CARDIOLOGY
+pcdl1200| nam| lien| MALE| 01-12-2000| 23| Hai Phong| +123-12345678| false|  | 179.0| 80.0| ab| CARDIOLOGY
+pcdl8899| lien hop| quoc| MALE| 12-12-2000| 23| Ha Noi| +980-12345678| true| di ung do ngot| 175.0| 69.0| o| CARDIOLOGY
+pcdl9988| linh| la| FEMALE| 18-02-1999| 25| Ha Noi| +789-67895678| true| di ung chuoi| 189.0| 81.0| ab| CARDIOLOGY
 pcdl1234| Ly Thuong| Kiet| MALE| 12-12-2000| 23| Thai Binh| +147-12345678| false|  | 178.0| 78.0| o| CARDIOLOGY
 pcdl2345| Thanh| Nghia| MALE| 03-04-2000| 24| Thanh Hoa| +753-85214796| true| di ung mat ong| 169.0| 56.0| B| CARDIOLOGY
+pcdl5435| linh| oanh| FEMALE| 01-01-1999| 25| Bac Giang| +123-14725896| false|  | 165.0| 57.0| a| CARDIOLOGY
+pcdl6677| linh| nguyen| FEMALE| 12-12-2008| 15| Ha Noi| +567-12345678| false|  | 156.0| 50.0| o| CARDIOLOGY

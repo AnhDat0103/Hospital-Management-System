@@ -1,1 +1,3 @@
-1| Paracetamol | LIQUIDS| 650 mg
+8| Levothyroxine| TABLETS| 50 mcg, 100 mcg
+9| Amlodipine| TABLETS| 5 mg, 10 mg
+10| Simvastatin| TABLETS| 10 mg, 20 mg

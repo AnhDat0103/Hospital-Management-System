@@ -1,3 +1,3 @@
-1| Paracetamol | LIQUIDS| 500 mg, 650 mg
+1| Paracetamol| LIQUIDS| 500 mg, 650 mg
 2| Omeprazole| TABLETS| 10 mg, 20 mg, 40 mg
 3| Amoxicillin| LOZENGES| 250 mg, 500 mg
