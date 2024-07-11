@@ -49,6 +49,7 @@ public class PatientView {
     public static void menuDetails(){
         System.out.println("1. Show your information.");
         System.out.println("2. Show your prescription.");
-        System.out.println("3. Exit.");
+        System.out.println("3. Back to main menu.");
+        System.out.println("0. Exit");
     }
 }

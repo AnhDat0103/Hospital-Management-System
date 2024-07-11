@@ -109,6 +109,6 @@ public class AdminView {
         System.out.println("8.  Find a medicine by IDNumber.");
         System.out.println("9.  Update a medicine by IDNumber.");
         System.out.println("10. Remove a medicine by IDNumber.");
-        System.out.println("11. Exit");
+        System.out.println("11. Back to main menu.");
     }
 }

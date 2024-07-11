@@ -28,6 +28,7 @@ public class DoctorView {
                 mainTitle();
                 System.out.print("Your choice: ");
                 choice3 = HandlingException.getInteger(sc);
+
                 switch (choice3) {
                     case 1:
                         viewMain.getPatientController().addNewPatient(choice, doctor);
@@ -54,18 +55,20 @@ public class DoctorView {
                     default:
                         System.out.println("Invalid choice");
                 }
-        } while (choice3 != 0);
+            } while (choice3 != 0);
+        }
     }
 
-    }
-        public static void mainTitle() {
+
+    public static void mainTitle() {
         System.out.println("1. Add the new Patient.");
         System.out.println("2. Show the list of Patient.");
         System.out.println("3. Find a Patient by IDNumber.");
         System.out.println("4. Update a Patient by IDNumber.");
         System.out.println("5. Delete a Patient by IDNumber.");
         System.out.println("6. Add a Medicine to the Patient.");
-        System.out.println("7. Exit.");
+        System.out.println("7. Back to main menu.");
+        System.out.println("0. Exit");
     }
 }
 
