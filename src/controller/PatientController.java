@@ -312,6 +312,16 @@ public class PatientController {
         }
     }
 
+    public void showMedicineOfPatient(String id, int choice) throws IOException {
+        Patient patient = findPatientByID(choice, id);
+        if (patient == null) System.out.println("Patient not found.");
+        else {
+            String fileName = patient.getFullName() + ".pnt.txt";
+            Medicine.getHead();
+            getSubMedicine(fileName).forEach(Medicine::generateTable);
+        }
+    }
+
     public void addMedicineToPatient(int choice, Doctor doctor) throws IOException {
         System.out.print("Enter the IDNumber of patient you want to search for: ");
         String id = Validate.checkPatientID(sc, choice, Action.FIND);
@@ -413,5 +423,32 @@ public class PatientController {
         else {
             return medicines.stream().filter(i -> i.getMedicineID().matches(id)).findFirst().orElse(null);
         }
+    }
+
+
+    public Patient findPatientByID(int choice, String IDNumber) throws IOException {
+        switch (choice) {
+            case 1:
+                if (FileIO.checkIDInFile(IDNumber, "patientsCARDIOLOGY.txt")) {
+                    return getPatientListOfCARDIOLOGY().get(IDNumber);
+                }
+            case 2:
+                if (FileIO.checkIDInFile(IDNumber, "patientsDERMATOLOGY.txt")) {
+                    return getPatientListOfDERMATOLOGY().get(IDNumber);
+                }
+            case 3:
+                if (FileIO.checkIDInFile(IDNumber, "patientsENT.txt")) {
+                    return getPatientListOfENT().get(IDNumber);
+                }
+            case 4:
+                if (FileIO.checkIDInFile(IDNumber, "patientsNEUROLOGY.txt")) {
+                    return getPatientListOfNEUROLOGY().get(IDNumber);
+                }
+            case 5:
+                if (FileIO.checkIDInFile(IDNumber, "patientsGERIATRIC.txt")) {
+                    return getPatientListOfGERIATRIC().get(IDNumber);
+                }
+        }
+        return null;
     }
 }

@@ -20,12 +20,11 @@ public class DoctorView {
 
     public void doctorRoleOptions(int choice, String doctorID) throws ParseException, IOException {
         int choice3;
-        do {
-            Doctor doctor = viewMain.getDoctorController().findDoctorByID(choice, doctorID);
-            if (doctor == null) {
-                System.out.println("Doctor not found");
-                break;
-            } else{
+        Doctor doctor = viewMain.getDoctorController().findDoctorByID(choice, doctorID);
+        if (doctor == null) {
+            System.out.println("Doctor not found");
+        } else {
+            do {
                 mainTitle();
                 System.out.print("Your choice: ");
                 choice3 = HandlingException.getInteger(sc);
@@ -52,9 +51,12 @@ public class DoctorView {
                         choice3 = 0;
                         viewMain.authenticationMenuTitle();
                         break;
+                    default:
+                        System.out.println("Invalid choice");
                 }
-            }
-        } while (choice3 >= 1 && choice3 <= 7);
+        } while (choice3 != 0);
+    }
+
     }
         public static void mainTitle() {
         System.out.println("1. Add the new Patient.");

@@ -105,8 +105,10 @@ public class ViewMain {
                                 menuTitleForAdministration();
                                 choice3 = HandlingException.getInteger(sc);
                                 if (choice3 == 6) authenticationMenuTitle();
-                                //check id tu file txt truyen id xuong  patientRoleOptions(choice3,id)
-                                if (choice3 == 1 || choice3 == 2 || choice3 == 3 || choice3 == 4 || choice3 == 5) patientView.patientRoleOptions(choice3);
+                                if (choice3 == 1 || choice3 == 2 || choice3 == 3 || choice3 == 4 || choice3 == 5) {
+                                    String IDPatient = Validate.checkPatientID(sc, choice3, Action.FIND);
+                                    patientView.patientRoleOptions(choice3, IDPatient);
+                                }
                             }while (choice3 < 1 || choice3 > 6);
                             break;
                         }catch (Exception e){
