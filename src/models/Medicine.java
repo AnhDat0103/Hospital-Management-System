@@ -3,25 +3,13 @@ package models;
 import models.enums.DosageForm;
 
 public class Medicine  {
-    private static int idCounter = 0;
-    private String medicineID ;
+    private final String medicineID ;
     private String name;
     private DosageForm dosageForm;
     private String strength;
 
-
-    public Medicine() {
-        this.medicineID = generateID();
-        this.name = "";
-        this.strength = "";
-    }
-
-    private String generateID() {
-        return String.valueOf(++idCounter);
-    }
-
-    public Medicine(String name, DosageForm dosageForm, String strength) {
-        this.medicineID = generateID();
+    public Medicine(String medicineID,  String name, DosageForm dosageForm, String strength) {
+        this.medicineID = medicineID;
         this.name = name;
         this.dosageForm = dosageForm;
         this.strength = strength;

@@ -26,38 +26,27 @@ public class DoctorView {
                 System.out.println("Doctor not found");
                 break;
             } else{
-                String IDNumber;
                 mainTitle();
                 System.out.print("Your choice: ");
                 choice3 = HandlingException.getInteger(sc);
                 switch (choice3) {
                     case 1:
-                        viewMain.getPatientController().addNewPatient(choice, doctor); // add bệnh nhân vào khoa  --> ok
-                        // cần một danh sách lưu riêng bệnh nhân của bác sĩ ấy để show bên dưới case 2
+                        viewMain.getPatientController().addNewPatient(choice, doctor);
                         break;
                     case 2:
-                        viewMain.getPatientController().showPatientsList(choice); // tại đây cần danh sách bệnh nhân của bác sĩ đã chỉ định
-                        // không show tất cả bệnh nhân của khoa
+                        viewMain.getPatientController().showPatientsList(doctor);
                         break;
                     case 3:
-                        System.out.println("ENTER ID Patient want to find: ");
-                        IDNumber = sc.nextLine(); // lay ID ben nhan tu fileIO, dung mehthod Validate.checkPatientID()
-                        viewMain.getPatientController().findPatientByIDNumber(IDNumber, choice); //
+                        viewMain.getPatientController().findPatientByIDNumber(choice, doctor);
                         break;
                     case 4:
-                        System.out.println("ENTER ID Patient want to update: ");
-                        IDNumber = sc.nextLine(); // lay ID ben nhan tu fileIO, dung mehthod Validate.checkPatientID()
-                        viewMain.getPatientController().UpdatePatientByID(IDNumber, choice);
+                        viewMain.getPatientController().UpdatePatientByID(choice, doctor);
                         break;
                     case 5:
-                        System.out.println("ENTER ID Patient want to delete: ");
-                        IDNumber = sc.nextLine();  // lay ID ben nhan tu fileIO, dung mehthod Validate.checkPatientID()
-                        viewMain.getPatientController().RemovePatientByID(IDNumber, choice);
+                        viewMain.getPatientController().RemovePatientByID(choice, doctor);
                         break;
                     case 6:
-                        System.out.println("ENTER ID Patient want add Medicine: ");
-                        IDNumber = sc.nextLine(); // lay ID ben nhan tu fileIO, dung mehthod Validate.checkPatientID()
-                        viewMain.getDoctorController().addMedicineToPatient(IDNumber, choice); //nếu bệnh nhân xác định thì ta gọi đến method
+                        viewMain.getPatientController().addMedicineToPatient(choice, doctor);
                         break;
                     case 7:
                         choice3 = 0;

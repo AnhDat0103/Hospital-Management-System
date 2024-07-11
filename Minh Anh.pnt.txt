@@ -1,0 +1,2 @@
+1| Paracetamol| LIQUIDS| 500 mg, 650 mg
+3| Amoxicillin| LOZENGES| 250 mg, 500 mg

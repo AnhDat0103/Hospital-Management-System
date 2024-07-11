@@ -2,6 +2,7 @@ package viewLayer;
 import exception.HandlingException;
 import controller.DoctorController;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 
@@ -14,7 +15,7 @@ public class PatientView {
         this.viewMain = viewMain;
     }
 
-    public  void patientRoleOptions(int choice) throws ParseException {
+    public  void patientRoleOptions(int choice) throws ParseException, IOException {
         int choice3;
         do{
             menuDetails();
@@ -23,14 +24,12 @@ public class PatientView {
             choice3 = HandlingException.getInteger(sc);
             switch (choice3){
                 case 1:
-                    System.out.println("ENTER ID Patient want to find: "); // xoa bo
-                    IDNumber = sc.nextLine(); //  // xoa bo
-                    viewMain.getPatientController().findPatientByIDNumber(IDNumber ,choice);
+//                    viewMain.getPatientController().findPatientByIDNumber(choice);
                     break;
                 case 2:
                     System.out.println("ENTER ID Patient want to find: "); // xoa bo
                     IDNumber = sc.nextLine(); // xoa bo
-                    viewMain.getDoctorController().showMedicineOfPatient(IDNumber , choice);
+//                    viewMain.getDoctorController().showMedicineOfPatient(IDNumber , choice);
                     break;
                 case 3:
                     choice3 = 0;

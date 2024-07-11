@@ -9,20 +9,19 @@ import models.enums.Action;
 import models.enums.Gender;
 import models.enums.Specialization;
 import validation.Validate;
+import viewLayer.ViewMain;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class PatientController {
 
-    private  HashMap<String, Medicine> medicineListOfCARDIOLOGY = new HashMap<>();
-    private  HashMap<String, Medicine> medicineListOfDERMATOLOGY = new HashMap<>();
-    private  HashMap<String, Medicine> medicineListOfENT = new HashMap<>();
-    private  HashMap<String, Medicine> medicineListOfNEUROLOGY = new HashMap<>();
-    private  HashMap<String, Medicine> medicineListOfGERIATRIC = new HashMap<>();
+    private  List<Medicine> medicineListOfCARDIOLOGY = new ArrayList<>();
+    private  List<Medicine> medicineListOfDERMATOLOGY = new ArrayList<>();
+    private  List<Medicine> medicineListOfENT = new ArrayList<>();
+    private  List<Medicine> medicineListOfNEUROLOGY = new ArrayList<>();
+    private  List<Medicine> medicineListOfGERIATRIC = new ArrayList<>();
 
     Scanner sc = new Scanner(System.in);
 
@@ -33,25 +32,26 @@ public class PatientController {
     private  HashMap<String, Patient> patientListOfGERIATRIC = new HashMap<>(); //list of CARDIOLOGY. The list has information of patients, medicine of patients in GERIATRIC.
 
     HashMap<String, Patient> subHashMap = new HashMap<>(); // list patient for each doctor
+    List<Medicine> subMedicine = new ArrayList<>();
 
-    public HashMap<String, Medicine> getMedicineListOfCARDIOLOGY() {
-        return medicineListOfCARDIOLOGY;
+    public List<Medicine> getMedicineListOfCARDIOLOGY() {
+        return FileIO.getMedicines("medicinesOfCARDIOLOGY.txt", medicineListOfCARDIOLOGY);
     }
 
-    public HashMap<String, Medicine> getMedicineListOfDERMATOLOGY() {
-        return medicineListOfDERMATOLOGY;
+    public List<Medicine> getMedicineListOfDERMATOLOGY() {
+        return FileIO.getMedicines("medicinesOfDERMATOLOGY.txt", medicineListOfDERMATOLOGY);
     }
 
-    public HashMap<String, Medicine> getMedicineListOfENT() {
-        return medicineListOfENT;
+    public List<Medicine> getMedicineListOfENT() {
+        return FileIO.getMedicines("medicinesOfENT.txt", medicineListOfENT);
     }
 
-    public HashMap<String, Medicine> getMedicineListOfNEUROLOGY() {
-        return medicineListOfNEUROLOGY;
+    public List<Medicine> getMedicineListOfNEUROLOGY() {
+        return FileIO.getMedicines("medicinesOfNEUROLOGY.txt", medicineListOfNEUROLOGY);
     }
 
-    public HashMap<String, Medicine> getMedicineListOfGERIATRIC() {
-        return medicineListOfGERIATRIC;
+    public List<Medicine> getMedicineListOfGERIATRIC() {
+        return FileIO.getMedicines("medicinesOfGERIATRIC.txt", medicineListOfGERIATRIC);
     }
 
     public HashMap<String, Patient> getPatientListOfCARDIOLOGY() {
@@ -74,17 +74,20 @@ public class PatientController {
         return FileIO.getPatients("patientsGERIATRIC.txt", patientListOfGERIATRIC);
     }
 
-    public HashMap<String, Patient> getSubHashMap(String fileName) {
-        return null;
+    public HashMap<String, Patient> getSubHashMap(Doctor doctor) {
+        String doctorNameFile = doctor.getFullName() + ".txt";
+        return FileIO.getPatients(doctorNameFile, subHashMap);
+    }
+
+    public List<Medicine> getSubMedicine(String fileName) {
+        return FileIO.getMedicines(fileName, subMedicine);
     }
 
     public void addNewPatient(int choice, Doctor doctor) throws ParseException, IOException {
+        String doctorNameFile = doctor.getFullName() + ".txt"; // tạo tên file riêng cho từng doctor
         String allergyDetails = " ";
         int allergiesInt = 0;
         boolean allergies = false;
-
-        Gender gender;
-
         String IDNumber = Validate.checkPatientID(sc, choice, Action.CHECK);
 
         System.out.print("Enter Patient's fist name: ");
@@ -96,7 +99,7 @@ public class PatientController {
 
         String yob = HandlingException.getBirthOfDay(sc);
 
-        gender = HandlingException.getGender(sc);
+        Gender gender = HandlingException.getGender(sc);
 
         System.out.print("Enter Patient's address: ");
         String address = sc.nextLine();
@@ -119,7 +122,7 @@ public class PatientController {
             allergiesInt = HandlingException.getInteger(sc);
             if (allergiesInt == 1) {
                 allergies = true;
-                System.out.print("Show the allergies: ");
+                System.out.print("Input the allergies: ");
                 allergyDetails = sc.nextLine();
                 System.out.println("Allergy details: " + allergyDetails);
             } else if (allergiesInt == 2) {
@@ -129,261 +132,286 @@ public class PatientController {
                 System.out.println("Invalid choice, please enter YES or NO.");
             }
         } while ( allergiesInt != 1 && allergiesInt != 2);
+
+        Patient patient = new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
+                height, weight, bloodType, allergies, allergyDetails, Specialization.CARDIOLOGY);
+
         switch (choice) {
             case 1:
-                // ngoài add vào khoa cần add vào list của bác sĩ riêng là sublist của khoa.
-                // list này chỉ cần lưu id của bệnh nhân tương tự với each case
-                Patient patient = new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
-                        height, weight, bloodType, allergies, allergyDetails, Specialization.CARDIOLOGY);
                 getPatientListOfCARDIOLOGY().put(IDNumber, patient);
                 FileIO.writePatientDataToFile("patientsCARDIOLOGY.txt", patientListOfCARDIOLOGY);
-                subHashMap.put(IDNumber,patientListOfCARDIOLOGY.get(IDNumber));
-                String doctorNameFile = doctor.getLastName() + ".txt"; // tạo tên file riêng cho từng doctor
+                getSubHashMap(doctor).put(IDNumber,patientListOfCARDIOLOGY.get(IDNumber));
                 FileIO.writePatientDataToFile(doctorNameFile, subHashMap);
                 System.out.println("Add New Patient Successfully to Cardiology.");
                 break;
             case 2:
-                getPatientListOfDERMATOLOGY().put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
-                        height, weight, bloodType, allergies, allergyDetails, Specialization.DERMATOLOGY));
+                getPatientListOfDERMATOLOGY().put(IDNumber, patient);
                 FileIO.writePatientDataToFile("patientsDERMATOLOGY.txt", patientListOfDERMATOLOGY);
+                getSubHashMap(doctor).put(IDNumber,patientListOfDERMATOLOGY.get(IDNumber));
+                FileIO.writePatientDataToFile(doctorNameFile, subHashMap);
                 System.out.println("Add New Patient Successfully to Dermatology.");
                 break;
             case 3:
-                getPatientListOfENT().put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
-                        height, weight, bloodType, allergies, allergyDetails, Specialization.ENT));
+                getPatientListOfENT().put(IDNumber, patient);
                 FileIO.writePatientDataToFile("patientsENT.txt", patientListOfENT);
+                getSubHashMap(doctor).put(IDNumber,patientListOfENT.get(IDNumber));
+                FileIO.writePatientDataToFile(doctorNameFile, subHashMap);
                 System.out.println("Add New Patient Successfully to Entrepreneur.");
                 break;
             case 4:
-                getPatientListOfNEUROLOGY().put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
-                        height, weight, bloodType, allergies, allergyDetails, Specialization.NEUROLOGY));
+                getPatientListOfNEUROLOGY().put(IDNumber, patient);
                 FileIO.writePatientDataToFile("patientsNEUROLOGY.txt", patientListOfNEUROLOGY);
-
+                getSubHashMap(doctor).put(IDNumber,patientListOfNEUROLOGY.get(IDNumber));
+                FileIO.writePatientDataToFile(doctorNameFile, subHashMap);
                 System.out.println("Add New Patient Successfully to Neurology.");
                 break;
             case 5:
-                getPatientListOfGERIATRIC().put(IDNumber, new Patient(IDNumber, firstName, lastName, yob, gender, address, telephone,
-                        height, weight, bloodType, allergies, allergyDetails, Specialization.GERIATRIC));
+                getPatientListOfGERIATRIC().put(IDNumber, patient);
                 FileIO.writePatientDataToFile("patientsGERIATRIC.txt", patientListOfGERIATRIC);
-
+                getSubHashMap(doctor).put(IDNumber,patientListOfGERIATRIC.get(IDNumber));
+                FileIO.writePatientDataToFile(doctorNameFile, subHashMap);
                 System.out.println("Add New Patient Successfully to Geriatric.");
                 break;
         }
     }
 
-    public void showPatientsList(int choice) {
+    public void showPatientsList(Doctor doctor) {
         // show sublist bệnh nhân
-        switch (choice) {
-            case 1:
-                if (patientListOfCARDIOLOGY.isEmpty()) {
-                    System.out.println("No patients in CARDIOLOGY.");
-                } else {
-                    for (Map.Entry<String , Patient> entry : patientListOfCARDIOLOGY.entrySet()){
-                        System.out.println(entry.getValue());
-                    }
-                }
-                break;
-            case 2:
-                if(patientListOfDERMATOLOGY.isEmpty()) {
-                    System.out.println("No patients in DERMATOLOGY.");
-                } else{
-                    for (Map.Entry<String , Patient> entry : patientListOfDERMATOLOGY.entrySet()){
-                        System.out.println(entry.getValue());
-                    }
-                }
-                break;
-            case 3:
-                if(patientListOfENT.isEmpty()) {
-                    System.out.println("No patients in ENT.");
-                } else{
-                    for (Map.Entry<String , Patient> entry : patientListOfENT.entrySet()){
-                        System.out.println(entry.getValue());
-                    }
-                }
-                break;
-            case 4:
-                if(patientListOfNEUROLOGY.isEmpty()) {
-                    System.out.println("No patients in NEUROLOGY.");
-                } else{
-                    for (Map.Entry<String , Patient> entry : patientListOfNEUROLOGY.entrySet()){
-                        System.out.println(entry.getValue());
-                    }
-                }
-                break;
-            case 5:
-                if(patientListOfGERIATRIC.isEmpty()) {
-                    System.out.println("No patients in GERIATRIC.");
-                } else{
-                    for (Map.Entry<String , Patient> entry : patientListOfGERIATRIC.entrySet()){
-                        System.out.println(entry.getValue());
-                    }
-                }
-                break;
-            default:
-                System.out.println("Invalid choice");
-                break;
-        }
-
-    }
-
-    public void findPatientByIDNumber(String IDNumber, int choice) {
-        String result = "Patient not found in the selected department.";
-        switch (choice) {
-            case 1:
-                if (patientListOfCARDIOLOGY.containsKey(IDNumber)) {
-                    result = patientListOfCARDIOLOGY.get(IDNumber).toString();
-                    System.out.println("Patient: "+ result);
-                }else{
-                    System.out.println("Patient not found in the CARDIOLOGY list.");
-                }
-                break;
-            case 2:
-                if (patientListOfDERMATOLOGY.containsKey(IDNumber)) {
-                    result = patientListOfDERMATOLOGY.get(IDNumber).toString();
-                    System.out.println("Patient: "+ result);
-                }else{
-                    System.out.println("Patient not found in the Dermatology list.");
-                }
-                break;
-            case 3:
-                if (patientListOfENT.containsKey(IDNumber)) {
-                    result = patientListOfENT.get(IDNumber).toString();
-                    System.out.println("Patient: " + result);
-                }else{
-                    System.out.println("Patient not found in the Entrepreneur list.");
-                }
-                break;
-            case 4:
-                if (patientListOfNEUROLOGY.containsKey(IDNumber)) {
-                    result = patientListOfNEUROLOGY.get(IDNumber).toString();
-                    System.out.println("Patient: "+ result);
-                }else{
-                    System.out.println("Patient not found in the Neurology list.");
-                }
-                break;
-            case 5:
-                if (patientListOfGERIATRIC.containsKey(IDNumber)) {
-                    result = patientListOfGERIATRIC.get(IDNumber).toString();
-                    System.out.println("Patient: "+ result);
-                }else{
-                    System.out.println("Patient not found in the Geriatric list.");
-                }
-                break;
-            default:
-                result = "Invalid choice. Please choose a valid department.";
-                break;
+        Patient.getHead();
+        for (Patient patient : getSubHashMap(doctor).values()) {
+            patient.generateTable();
         }
     }
-    public void UpdatePatientByID(String IDNumber, int choice) {
-        boolean patientFound = false;
+
+    public void findPatientByIDNumber(int choice, Doctor doctor) throws IOException {
+        HashMap<String, Patient> patientHashMap = getSubHashMap(doctor);
+        System.out.print("Enter the IDNumber of patient you want to search for: ");
+        String id = Validate.checkPatientID(sc, choice, Action.FIND);
+        if (patientHashMap.isEmpty()) System.out.println("No one in patient list.");
+        if (patientHashMap.containsKey(id)) {
+            Patient.getHead();
+            patientHashMap.get(id).generateTable();
+        } else {
+            System.out.println("Patient not found.");
+        }
+    }
+    public void UpdatePatientByID(int choice, Doctor  doctor) throws IOException, ParseException {
+        HashMap<String, Patient> patientHashMap = getSubHashMap(doctor);
+        String fileName = doctor.getFullName() + ".txt";
+        boolean allergies = false;
         String allergyDetails = " ";
-        switch (choice){
-            case 1:
-                for (Map.Entry<String, Patient> entry : patientListOfCARDIOLOGY.entrySet()) {
-                    if (entry.getValue().getIDNumber().equals(IDNumber)){
-                        System.out.println("Enter new allergies: ");
-                        allergyDetails = sc.nextLine();
-                        entry.getValue().setAllergyDetails(allergyDetails);
-                        System.out.println("Update Patient Successfully.");
-                        patientFound = true; //danh dau la da tim thay benh nhan qua ID va update thong tin
-                        break;
-                    }
+        int allergiesInt;
+        System.out.print("Enter the IDNumber of patient you want to update for: ");
+        String id = Validate.checkPatientID(sc, choice, Action.FIND);
+        if (patientHashMap.isEmpty()) System.out.println("No one in patient list.");
+        if (patientHashMap.containsKey(id)) {
+            System.out.print("Enter Patient's fist name: ");
+            patientHashMap.get(id).setFirstName(sc.nextLine());
+
+            System.out.print("Enter Patient's last name: ");
+            patientHashMap.get(id).setLastName(sc.nextLine());
+
+            patientHashMap.get(id).setYob(HandlingException.getBirthOfDay(sc));
+            patientHashMap.get(id).setGender(HandlingException.getGender(sc));
+
+            System.out.print("Enter Height of Patient(DV: Centime): ");
+            patientHashMap.get(id).setHeight(HandlingException.getDouble(sc));
+
+            System.out.print("Enter Weight of Patient(DV: Kilogram): ");
+            patientHashMap.get(id).setWeight(HandlingException.getDouble(sc));
+
+            System.out.print("Enter the BloodType of Patient: ");
+            patientHashMap.get(id).setBloodType(sc.nextLine());
+
+            do{
+                System.out.printf("Allergies?: %10s"," ");
+                System.out.printf("%10s|%10s|%10s|%10s","1.YES","2.NO","YOU CHOICE:"," ");
+                allergiesInt = HandlingException.getInteger(sc);
+                if (allergiesInt == 1) {
+                    patientHashMap.get(id).setAllergies(true);
+                    System.out.print("Show the allergies: ");
+                    patientHashMap.get(id).setAllergyDetails(sc.nextLine());
+                } else if (allergiesInt == 2) {
+                    patientHashMap.get(id).setAllergies(allergies);
+                    patientHashMap.get(id).setAllergyDetails(allergyDetails);
+                    System.out.println("The patient has no allergies!!!");
+                } else {
+                    System.out.println("Invalid choice, please enter YES or NO.");
                 }
-                break;
-            case 2:
-                for (Map.Entry<String, Patient> entry : patientListOfDERMATOLOGY.entrySet()) {
-                    if (entry.getValue().getIDNumber().equals(IDNumber)){
-                        System.out.println("Enter new allergies: ");
-                        allergyDetails = sc.nextLine();
-                        entry.getValue().setAllergyDetails(allergyDetails);
-                        System.out.println("Update Patient Successfully.");
-                        patientFound = true; //danh dau la da tim thay benh nhan qua ID va update thong tin
-                        break;
-                    }
-                }
-                break;
-            case 3:
-                for (Map.Entry<String, Patient> entry : patientListOfENT.entrySet()) {
-                    if (entry.getValue().getIDNumber().equals(IDNumber)){
-                        System.out.println("Enter new allergies: ");
-                        allergyDetails = sc.nextLine();
-                        entry.getValue().setAllergyDetails(allergyDetails);
-                        System.out.println("Update Patient Successfully.");
-                        patientFound = true; //danh dau la da tim thay benh nhan qua ID va update thong tin
-                        break;
-                    }
-                }
-                break;
-            case 4:
-                for (Map.Entry<String, Patient> entry : patientListOfNEUROLOGY.entrySet()) {
-                    if (entry.getValue().getIDNumber().equals(IDNumber)){
-                        System.out.println("Enter new allergies: ");
-                        allergyDetails = sc.nextLine();
-                        entry.getValue().setAllergyDetails(allergyDetails);
-                        System.out.println("Update Patient Successfully.");
-                        patientFound = true; //danh dau la da tim thay benh nhan qua ID va update thong tin
-                        break;
-                    }
-                }
-                break;
-            case 5:
-                for (Map.Entry<String, Patient> entry : patientListOfGERIATRIC.entrySet()) {
-                    if (entry.getValue().getIDNumber().equals(IDNumber)){
-                        System.out.println("Enter new allergies: ");
-                        allergyDetails = sc.nextLine();
-                        entry.getValue().setAllergyDetails(allergyDetails);
-                        System.out.println("Update Patient Successfully.");
-                        patientFound = true; //danh dau la da tim thay benh nhan qua ID va update thong tin
-                        break;
-                    }
-                }
-                break;
-            default:
-                if (!patientFound && choice == 1) {
-                    System.out.println("Patient not found.");  // Thông báo nếu không tìm thấy bệnh nhân
-                }
-                break;
+            } while ( allergiesInt != 1 && allergiesInt != 2);
+
+            Patient updatedPatient = patientHashMap.get(id);
+            switch (choice) {
+                case 1:
+                    getPatientListOfCARDIOLOGY().put(id, updatedPatient);
+                    FileIO.writePatientDataToFile(fileName, getSubHashMap(doctor));
+                    FileIO.writePatientDataToFile("patientsCARDIOLOGY.txt", patientListOfCARDIOLOGY);
+                    break;
+                case 2:
+                    getPatientListOfDERMATOLOGY().put(id, updatedPatient);
+                    FileIO.writePatientDataToFile(fileName, getSubHashMap(doctor));
+                    FileIO.writePatientDataToFile("patientsDERMATOLOGY.txt", patientListOfDERMATOLOGY);
+                    break;
+                case 3:
+                    getPatientListOfENT().put(id, updatedPatient);
+                    FileIO.writePatientDataToFile(fileName, getSubHashMap(doctor));
+                    FileIO.writePatientDataToFile("patientsENT.txt", patientListOfENT);
+                    break;
+                case 4:
+                    getPatientListOfNEUROLOGY().put(id, updatedPatient);
+                    FileIO.writePatientDataToFile(fileName, getSubHashMap(doctor));
+                    FileIO.writePatientDataToFile("patientsNEUROLOGY.txt", patientListOfNEUROLOGY);
+                    break;
+                case 5:
+                    getPatientListOfGERIATRIC().put(id, updatedPatient);
+                    FileIO.writePatientDataToFile(fileName, getSubHashMap(doctor));
+                    FileIO.writePatientDataToFile("patientsGERIATRIC.txt", patientListOfGERIATRIC);
+                    break;
+                default: break;
+            }
+        } else {
+            System.out.println("Patient not found.");
         }
     }
-    public void RemovePatientByID(String IDNumber, int choice){
-        switch(choice){
-            case 1:
-                if(patientListOfCARDIOLOGY.containsKey(IDNumber)){
-                    patientListOfCARDIOLOGY.remove(IDNumber);
-                    System.out.println("Remove Patient Successfully.");
-                }
-                break;
-            case 2:
 
-                if(patientListOfDERMATOLOGY.containsKey(IDNumber)){
-                    patientListOfDERMATOLOGY.remove(IDNumber);
-                    System.out.println("Remove Patient Successfully.");
-                }
-                break;
-            case 3:
+    public void RemovePatientByID(int choice, Doctor doctor) throws IOException {
+        HashMap<String, Patient> patientHashMap = getSubHashMap(doctor);
+        System.out.print("Enter the IDNumber of patient you want to search for: ");
+        String id = Validate.checkPatientID(sc, choice, Action.FIND);
+        String fileName = doctor.getFullName() + ".txt";
+        if (patientHashMap.isEmpty()) System.out.println("No one in patient list.");
+        if (patientHashMap.containsKey(id)) {
+            patientHashMap.remove(id);
+            System.out.println("Remove is successful");
+            FileIO.writePatientDataToFile(fileName, patientHashMap);
+            switch (choice) {
+                case 1:
+                    getPatientListOfCARDIOLOGY().remove(id);
+                    FileIO.writePatientDataToFile("patientsCARDIOLOGY.txt", patientListOfCARDIOLOGY);
+                    break;
+                case 2:
+                    getPatientListOfDERMATOLOGY().remove(id);
+                    FileIO.writePatientDataToFile("patientsDERMATOLOGY.txt", patientListOfDERMATOLOGY);
+                    break;
+                case 3:
+                    getPatientListOfENT().remove(id);
+                    FileIO.writePatientDataToFile("patientsENT.txt", patientListOfENT);
+                    break;
+                case 4:
+                    getPatientListOfNEUROLOGY().remove(id);
+                    FileIO.writePatientDataToFile("patientsNEUROLOGY.txt", patientListOfNEUROLOGY);
+                    break;
+                case 5:
+                    getPatientListOfGERIATRIC().remove(id);
+                    FileIO.writePatientDataToFile("patientsGERIATRIC.txt", patientListOfGERIATRIC);
+                    break;
+                default: break;
+            }
+        } else {
+            System.out.println("Patient not found.");
+        }
+    }
 
-                if(patientListOfENT.containsKey(IDNumber)){
-                    patientListOfENT.remove(IDNumber);
-                    System.out.println("Remove Patient Successfully.");
-                }
-                break;
-            case 4:
+    public void addMedicineToPatient(int choice, Doctor doctor) throws IOException {
+        System.out.print("Enter the IDNumber of patient you want to search for: ");
+        String id = Validate.checkPatientID(sc, choice, Action.FIND);
+        String fileName = getSubHashMap(doctor).get(id).getFullName() + ".pnt.txt";
+        FileIO.writeMedicineDataToFile(fileName, subMedicine);
+        String medicineID;
+        if (getSubHashMap(doctor).isEmpty()) System.out.println("No one in patient list.");
+        if (getSubHashMap(doctor).containsKey(id)) {
+            switch (choice) {
+                case 1:
+                    if (getMedicineListOfCARDIOLOGY().isEmpty()) System.out.println("No one in medicine list.");
+                    do {
+                        Medicine.getHead();
+                        getMedicineListOfCARDIOLOGY().forEach(Medicine::generateTable);
+                        System.out.print("Enter ID of medicine you want to add( Enter 0 to finish addition): ");
+                        medicineID = sc.nextLine();
+                        Medicine medicine = findMedicineByID(getMedicineListOfCARDIOLOGY(), medicineID);
+                        if (medicine != null) {
+                            getSubMedicine(fileName).add(medicine);
+                        }
+                    } while (!medicineID.equals("0"));
+                    getSubHashMap(doctor).get(id).addMedicine(getSubMedicine(fileName));
+                    FileIO.writeMedicineDataToFile(fileName, getSubMedicine(fileName));
+                    System.out.println("Medicine added successfully.");
+                    break;
+                case 2:
+                     if (getMedicineListOfDERMATOLOGY().isEmpty()) System.out.println("No one in medicine list.");
+                    do {
+                        Medicine.getHead();
+                        getMedicineListOfENT().forEach(Medicine::generateTable);
+                        System.out.print("Enter ID of medicine you want to add( Enter 0 to finish addition): ");
+                        medicineID = sc.nextLine();
+                        Medicine medicine = findMedicineByID(getMedicineListOfDERMATOLOGY(), medicineID);
+                        if (medicine != null) {
+                            getSubMedicine(fileName).add(medicine);
+                        }
+                    } while (!medicineID.equals("0"));
+                    getSubHashMap(doctor).get(id).addMedicine(getSubMedicine(fileName));
+                    FileIO.writeMedicineDataToFile(fileName, getSubMedicine(fileName));
+                    System.out.println("Medicine added successfully.");
+                    break;
+                case 3:
+                     if (getMedicineListOfENT().isEmpty()) System.out.println("No one in medicine list.");
+                    do {
+                        Medicine.getHead();
+                        getMedicineListOfENT().forEach(Medicine::generateTable);
+                        System.out.print("Enter ID of medicine you want to add( Enter 0 to finish addition): ");
+                        medicineID = sc.nextLine();
+                        Medicine medicine = findMedicineByID(getMedicineListOfENT(), medicineID);
+                        if (medicine != null) {
+                            getSubMedicine(fileName).add(medicine);
+                        }
+                    } while (!medicineID.equals("0"));
+                    getSubHashMap(doctor).get(id).addMedicine(getSubMedicine(fileName));
+                    FileIO.writeMedicineDataToFile(fileName, getSubMedicine(fileName));
+                    System.out.println("Medicine added successfully.");
+                    break;
+                case 4:
+                     if (getMedicineListOfNEUROLOGY().isEmpty()) System.out.println("No one in medicine list.");
+                    do {
+                        Medicine.getHead();
+                        getMedicineListOfNEUROLOGY().forEach(Medicine::generateTable);
+                        System.out.print("Enter ID of medicine you want to add( Enter 0 to finish addition): ");
+                        medicineID = sc.nextLine();
+                        Medicine medicine = findMedicineByID(getMedicineListOfNEUROLOGY(), medicineID);
+                        if (medicine != null) {
+                            getSubMedicine(fileName).add(medicine);
+                        }
+                    } while (!medicineID.equals("0"));
+                    getSubHashMap(doctor).get(id).addMedicine(getSubMedicine(fileName));
+                    FileIO.writeMedicineDataToFile(fileName, getSubMedicine(fileName));
+                    System.out.println("Medicine added successfully.");
+                    break;
+                case 5:
+                     if (getMedicineListOfGERIATRIC().isEmpty()) System.out.println("No one in medicine list.");
+                    do {
+                        Medicine.getHead();
+                        getMedicineListOfGERIATRIC().forEach(Medicine::generateTable);
+                        System.out.print("Enter ID of medicine you want to add( Enter 0 to finish addition): ");
+                        medicineID = sc.nextLine();
+                        Medicine medicine = findMedicineByID(getMedicineListOfGERIATRIC(), medicineID);
+                        if (medicine != null) {
+                            getSubMedicine(fileName).add(medicine);
+                        }
+                    } while (!medicineID.equals("0"));
+                    getSubHashMap(doctor).get(id).addMedicine(getSubMedicine(fileName));
+                    FileIO.writeMedicineDataToFile(fileName, getSubMedicine(fileName));
+                    System.out.println("Medicine added successfully.");
+                    break;
+                default: break;
+            }
+        } else {
+            System.out.println("Patient not found.");
+        }
+    }
 
-                if(patientListOfNEUROLOGY.containsKey(IDNumber)){
-                    patientListOfNEUROLOGY.remove(IDNumber);
-                    System.out.println("Remove Patient Successfully.");
-                }
-                break;
-            case 5:
-
-                if(patientListOfGERIATRIC.containsKey(IDNumber)){
-                    patientListOfGERIATRIC.remove(IDNumber);
-                    System.out.println("Remove Patient Successfully.");
-                }
-                break;
-            default:
-                System.out.println("Invalid choice. Please choose a valid department.");
-                break;
+    public Medicine findMedicineByID(List<Medicine> medicines, String id){
+        if (medicines.isEmpty()) return null;
+        else {
+            return medicines.stream().filter(i -> i.getMedicineID().matches(id)).findFirst().orElse(null);
         }
     }
 }

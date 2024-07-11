@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Doctor extends Person {
-    private int yearsOfExperience; //nam kinh nghiem
+    private int yearsOfExperience;
     private int clinicHours;
     private Education education;
     private Specialization specialization;
@@ -60,9 +60,6 @@ public class Doctor extends Person {
         return specialization;
     }
 
-    public void setSpecialization(Specialization specialization) {
-        this.specialization = specialization;
-    }
 
     public double getConsultationFee() {
         return consultationFee;
@@ -70,14 +67,6 @@ public class Doctor extends Person {
 
     public void setConsultationFee(double consultationFee) {
         this.consultationFee = consultationFee;
-    }
-
-    public HashMap<String, Patient> getPatients() {
-        return patients;
-    }
-
-    public void setPatients(HashMap<String, Patient> patients) {
-        this.patients = patients;
     }
 
     @Override

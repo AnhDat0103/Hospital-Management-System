@@ -1,5 +1,6 @@
 import viewLayer.ViewMain;
 
+import java.io.IOException;
 import java.text.ParseException;
 
 public class Main {
@@ -7,7 +8,7 @@ public class Main {
         try {
             ViewMain controller = new ViewMain();
             controller.authenticationMenuTitle();
-        } catch (ParseException e) {
+        } catch (ParseException | IOException e) {
             throw new RuntimeException(e);
         }
     }

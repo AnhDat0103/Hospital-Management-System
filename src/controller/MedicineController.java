@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class MedicineController {
 
     Scanner sc = new Scanner(System.in);
-    private  List<Medicine> medicinesOfCARDIOLOGY = new ArrayList<>();    // list of CARDIOLOGY. The list has information of medicines in CARDIOLOGY.
+    private List<Medicine> medicinesOfCARDIOLOGY = new ArrayList<>();    // list of CARDIOLOGY. The list has information of medicines in CARDIOLOGY.
     private  List<Medicine> medicinesOfDERMATOLOGY = new ArrayList<>();   // list of DERMATOLOGY. The list has information of medicines in DERMATOLOGY.
     private  List<Medicine> medicinesOfENT = new ArrayList<>();           // list of ENT. The list has information of medicines in ENT.
     private  List<Medicine> medicinesOfNEUROLOGY = new ArrayList<>();     // list of NEUROLOGY. The list has information of medicines in NEUROLOGY.
@@ -42,6 +42,9 @@ public class MedicineController {
 
     // METHOD OF MEDICINE
     public void addNewMedicine(int choice) {
+
+        System.out.print("Enter ID: ");
+        String id = sc.nextLine();
 
         System.out.print("Medicine's name: ");
         String medicineName = sc.nextLine();
@@ -76,27 +79,27 @@ public class MedicineController {
 
         switch (choice) {
             case 1:
-                getMedicinesOfCARDIOLOGY().add( new Medicine(medicineName, dosageForm, strength ));
+                getMedicinesOfCARDIOLOGY().add(new Medicine(id ,medicineName, dosageForm, strength ));
                 FileIO.writeMedicineDataToFile("medicinesOfCARDIOLOGY.txt", medicinesOfCARDIOLOGY);
                 System.out.println("added new medicine.");
                 break;
             case 2:
-                getMedicinesOfDERMATOLOGY().add( new Medicine(medicineName, dosageForm, strength ));
+                getMedicinesOfDERMATOLOGY().add( new Medicine(id, medicineName, dosageForm, strength ));
                 FileIO.writeMedicineDataToFile("medicinesOfDERMATOLOGY.txt", medicinesOfDERMATOLOGY);
                 System.out.println("added new medicine.");
                 break;
             case 3:
-                getMedicinesOfENT().add( new Medicine(medicineName, dosageForm, strength ));
+                getMedicinesOfENT().add( new Medicine(id, medicineName, dosageForm, strength ));
                 FileIO.writeMedicineDataToFile("medicinesOfENT.txt", medicinesOfENT);
                 System.out.println("added new medicine.");
                 break;
             case 4:
-                getMedicinesOfNEUROLOGY().add( new Medicine(medicineName, dosageForm, strength ));
+                getMedicinesOfNEUROLOGY().add( new Medicine(id, medicineName, dosageForm, strength ));
                 FileIO.writeMedicineDataToFile("medicinesOfNEUROLOGY.txt", medicinesOfNEUROLOGY);
                 System.out.println("added new medicine.");
                 break;
             case 5:
-                getMedicinesOfGERIATRIC().add( new Medicine(medicineName, dosageForm, strength ));
+                getMedicinesOfGERIATRIC().add( new Medicine(id, medicineName, dosageForm, strength ));
                 FileIO.writeMedicineDataToFile("medicinesOfGERIATRIC.txt", medicinesOfGERIATRIC);
                 System.out.println("added new medicine.");
                 break;

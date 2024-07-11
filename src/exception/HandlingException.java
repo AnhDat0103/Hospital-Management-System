@@ -1,4 +1,5 @@
 package exception;
+import models.AdminAccount;
 import models.enums.Gender;
 
 import java.text.ParseException;
@@ -37,7 +38,7 @@ public class HandlingException {
         formatter.setLenient(false);
         while (true) {
             try {
-                System.out.print("Enter birth date(DD-MM/-YYYY): ");
+                System.out.print("Enter birth date(DD-MM-YYYY): ");
                 String date = scanner.nextLine();
                 formatter.parse(date);
                 return date;
@@ -70,7 +71,8 @@ public class HandlingException {
 
     // METHOD OF ADMIN
     public static boolean checkAdministration(String userName, String password) throws ParseException {
-        if (userName.matches("admin") && password.matches("admin")) {
+        AdminAccount adminAccount = new AdminAccount();
+        if (userName.matches(adminAccount.getUserName()) && password.matches(adminAccount.getPassword())) {
             return true;
         } else {
             throw new ParseException("user name or password is incorrect", 0);

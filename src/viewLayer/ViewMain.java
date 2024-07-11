@@ -8,6 +8,7 @@ import fileIO.FileIO;
 import models.enums.Action;
 import validation.Validate;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 
@@ -39,7 +40,7 @@ public class ViewMain {
     }
 
     // Main menu
-    public void authenticationMenuTitle() throws ParseException {
+    public void authenticationMenuTitle() throws ParseException, IOException {
         int choice = 0;
         do {
             System.out.println("Welcome to the hospital management system");
@@ -78,24 +79,24 @@ public class ViewMain {
                     }
                     break;
                 case 2:
-                    while(true){
-                        try{
+                    while(true) {
+                        try {
                             int choice2;
-                            do{
+                            do {
                                 menuTitleForAdministration();
                                 choice2 = HandlingException.getInteger(sc);
                                 if (choice2 == 6) authenticationMenuTitle();
                                 if (choice2 == 1 || choice2 == 2 || choice2 == 3 || choice2 == 4 || choice2 == 5) {
-                                    System.out.print("Enter Doctor ID: ");
-                                    String doctorID = Validate.checkDoctorID(sc, choice2,Action.FIND);
+                                    String doctorID = Validate.checkDoctorID(sc, choice2, Action.FIND);
                                     doctorView.doctorRoleOptions(choice2, doctorID);
                                 }
-                            }while (choice2 < 1 || choice2 > 6);
+                            } while (choice2 < 1 || choice2 > 6);
                             break;
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
                     }
+                    break;
                 case 3:
                     while(true){
                         try{

@@ -14,6 +14,7 @@ import validation.Validate;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -211,9 +212,7 @@ public class DoctorController {
 
             doctor.setFullName();
 
-
             doctor.setYob(HandlingException.getBirthOfDay(sc));
-
 
             do {
                 System.out.printf("Gender?: %10s"," ");
@@ -314,197 +313,5 @@ public class DoctorController {
                     break;
             }
         }
-    }
-
-
-    public void addMedicineToPatient(String IDNumber, int choice) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        switch (choice){
-            case 1:
-                if(patientController.getPatientListOfCARDIOLOGY().containsKey(IDNumber)){
-                    Patient patient = patientController.getPatientListOfCARDIOLOGY().get(IDNumber);
-                    System.out.println("Enter new medicine ID: ");
-                    String medicineID = sc.nextLine();
-                    Medicine medicine = medicineController.findMedicine(medicineID, choice);
-                    if(medicine != null){
-                        patient.addMedicine(medicine);
-                        System.out.println(patient.getMedicines());
-                        System.out.println("Add Medicine Successfully.");
-                    }else{
-                        System.out.println("Medicine not found.");
-                    }
-
-                }else{
-                    System.out.println("Medicine not found.");
-                }
-                break;
-            case 2:
-                if(patientController.getPatientListOfDERMATOLOGY().containsKey(IDNumber)){
-                    Patient patient = patientController.getPatientListOfDERMATOLOGY().get(IDNumber);
-                    System.out.println("Enter new medicine ID: ");
-                    String medicineID = sc.nextLine();
-                    Medicine medicine = medicineController.findMedicine(medicineID, choice);
-                    if(medicine != null){
-                        patient.addMedicine(medicine);
-                        System.out.println("Add Medicine Successfully.");
-                    }else{
-                        System.out.println("Medicine not found.");
-                    }
-
-                }else{
-                    System.out.println("Medicine not found.");
-                }
-                break;
-            case 3:
-                if(patientController.getPatientListOfENT().containsKey(IDNumber)){
-                    Patient patient = patientController.getPatientListOfENT().get(IDNumber);
-                    System.out.println("Enter new medicine ID: ");
-                    String medicineID = sc.nextLine();
-                    Medicine medicine = medicineController.findMedicine(medicineID, choice);
-                    if(medicine != null){
-                        patient.addMedicine(medicine);
-                        System.out.println("Add Medicine Successfully.");
-                    }else{
-                        System.out.println("Medicine not found.");
-                    }
-
-                }else{
-                    System.out.println("Medicine not found.");
-                }
-                break;
-            case 4:
-                if(patientController.getPatientListOfNEUROLOGY().containsKey(IDNumber)){
-                    Patient patient = patientController.getPatientListOfNEUROLOGY().get(IDNumber);
-                    System.out.println("Enter new medicine ID: ");
-                    String medicineID = sc.nextLine();
-                    Medicine medicine = medicineController.findMedicine(medicineID, choice);
-                    if(medicine != null){
-                        patient.addMedicine(medicine);
-                        System.out.println("Add Medicine Successfully.");
-                    }else{
-                        System.out.println("Medicine not found.");
-                    }
-
-                }else{
-                    System.out.println("Medicine not found.");
-                }
-                break;
-            case 5:
-                if(patientController.getPatientListOfGERIATRIC().containsKey(IDNumber)){
-                    Patient patient = patientController.getPatientListOfGERIATRIC().get(IDNumber);
-                    System.out.println("Enter new medicine ID: ");
-                    String medicineID = sc.nextLine();
-                    Medicine medicine = medicineController.findMedicine(medicineID, choice);
-                    if(medicine != null){
-                        patient.addMedicine(medicine);
-                        System.out.println("Add Medicine Successfully.");
-                    }else{
-                        System.out.println("Medicine not found.");
-                    }
-
-                }else{
-                    System.out.println("Medicine not found.");
-                }
-                break;
-            default:
-                System.out.println("Invalid choice. Please choose a valid department.");
-                break;
-        }
-    }
-
-    public void showMedicineOfPatient(String IDNumber , int choice) {
-
-        switch (choice) {
-            case 1:
-                if (patientController.getPatientListOfCARDIOLOGY().containsKey(IDNumber)) {
-                    Patient patient = patientController.getPatientListOfCARDIOLOGY().get(IDNumber);
-                    List<Medicine> medicines = patient.getMedicines();
-                    System.out.println("Medicines for Patient " + IDNumber + " in CARDIOLOGY:");
-                    if (medicines.isEmpty()) {
-                        System.out.println("No medicines prescribed.");
-                    } else {
-                        for (Medicine medicine : medicines) {
-                            System.out.println(medicine);
-                        }
-                    }
-                } else {
-                    System.out.println("Patient not found in CARDIOLOGY.");
-                }
-                break;
-            case 2:
-                if (patientController.getPatientListOfDERMATOLOGY().containsKey(IDNumber)) {
-                    Patient patient = patientController.getPatientListOfDERMATOLOGY().get(IDNumber);
-                    List<Medicine> medicines = patient.getMedicines();
-                    System.out.println("Medicines for Patient " + IDNumber + " in DERMATOLOGY:");
-                    if (medicines.isEmpty()) {
-                        System.out.println("No medicines prescribed.");
-                    } else {
-                        for (Medicine medicine : medicines) {
-                            System.out.println(medicine);
-                        }
-                    }
-                } else {
-                    System.out.println("Patient not found in DERMATOLOGY.");
-                }
-                break;
-            case 3:
-                if (patientController.getPatientListOfENT().containsKey(IDNumber)) {
-                    Patient patient = patientController.getPatientListOfENT().get(IDNumber);
-                    List<Medicine> medicines = patient.getMedicines();
-                    System.out.println("Medicines for Patient " + IDNumber + " in ENT:");
-                    if (medicines.isEmpty()) {
-                        System.out.println("No medicines prescribed.");
-                    } else {
-                        for (Medicine medicine : medicines) {
-                            System.out.println(medicine);
-                        }
-                    }
-                } else {
-                    System.out.println("Patient not found in ENT.");
-                }
-                break;
-            case 4:
-                if (patientController.getPatientListOfNEUROLOGY().containsKey(IDNumber)) {
-                    Patient patient = patientController.getPatientListOfNEUROLOGY().get(IDNumber);
-                    List<Medicine> medicines = patient.getMedicines();
-                    System.out.println("Medicines for Patient " + IDNumber + " in NEUROLOGY:");
-                    if (medicines.isEmpty()) {
-                        System.out.println("No medicines prescribed.");
-                    } else {
-                        for (Medicine medicine : medicines) {
-                            System.out.println(medicine);
-                        }
-                    }
-                } else {
-                    System.out.println("Patient not found in NEUROLOGY.");
-                }
-                break;
-            case 5:
-                if (patientController.getPatientListOfGERIATRIC().containsKey(IDNumber)) {
-                    Patient patient = patientController.getPatientListOfGERIATRIC().get(IDNumber);
-                    List<Medicine> medicines = patient.getMedicines();
-                    System.out.println("Medicines for Patient " + IDNumber + " in GERIATRIC:");
-                    if (medicines.isEmpty()) {
-                        System.out.println("No medicines prescribed.");
-                    } else {
-                        for (Medicine medicine : medicines) {
-                            System.out.println(medicine);
-                        }
-                    }
-                } else {
-                    System.out.println("Patient not found in GERIATRIC.");
-                }
-                break;
-            default:
-                System.out.println("Invalid choice!");
-                break;
-        }
-
-
-
-
-
-
-
     }
 }

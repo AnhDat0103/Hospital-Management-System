@@ -5,6 +5,7 @@ import models.enums.Specialization;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Patient extends Person {
@@ -30,6 +31,7 @@ public class Patient extends Person {
         this.height = height;
         this.weight = weight;
         this.bloodType = bloodType;
+        this.medicines = new ArrayList<>();
     }
 
     public String getAllergyDetails() {
@@ -40,28 +42,12 @@ public class Patient extends Person {
         this.allergyDetails = allergyDetails;
     }
 
-    public Boolean isAllergies() {
-        return allergies;
-    }
-
-    public void setAllergies(Boolean allergies) {
-        this.allergies = allergies;
-    }
-
     public double getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
     public double getWeight() {
         return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
     }
 
     public String getBloodType() {
@@ -76,16 +62,8 @@ public class Patient extends Person {
         return medicines;
     }
 
-    public void setMedicines(List<Medicine> medicines) {
-        this.medicines = medicines;
-    }
-
     public Specialization getSpecialization() {
         return specialization;
-    }
-
-    public void setSpecialization(Specialization specialization) {
-        this.specialization = specialization;
     }
 
     public void setHeight(double height) {
@@ -117,21 +95,20 @@ public class Patient extends Person {
                 allergyDetails + "| " + height + "| " + weight + "| " + bloodType + "| " + specialization;
     }
 
-    public void addMedicine(Medicine medicine) {
-        medicines.add(medicine);
-        System.out.println("Medicine " + medicine.getMedicineID() + " has been added");
+    public void addMedicine(List<Medicine> medicines) {
+         this.medicines = medicines;
     }
 
     public static void getHead() {
-        String format = "| %-10s | %-20s | %-6s | %-10s | %-3s | %-25s | %-15s | %-6s | %-6s | %-9s | %-8s | %-30s | %-15s | %-15s |%n";
-        System.out.println("+------------+----------------------+--------+------------+-----+---------------------------+-----------------+--------+--------+-----------+----------+--------------------------------+-----------------+------------------+");
-        System.out.printf(format, "ID", "Full Name", "Gender", "Birth Day", "Age", "Address", "Telephone", "Height", "Weight", "Blood Type", "Allergies", "Allergy Details", "Specialization", "Medicines");
-        System.out.println("+------------+----------------------+--------+------------+-----+---------------------------+-----------------+--------+--------+-----------+----------+--------------------------------+-----------------+------------------+");
+        String format = "|%-8s| %-20s | %-6s | %-3s | %-25s | %-15s | %-6s | %-6s | %-9s | %-30s | %-15s |%n";
+        System.out.println("+--------+----------------------+--------+-----+---------------------------+-----------------+--------+--------+-----------+--------------------------------+-----------------+");
+        System.out.printf(format, "ID", "Full Name", "Gender", "Age", "Address", "Telephone", "Height", "Weight", "Blood Type", "Allergy Details", "Specialization");
+        System.out.println("+--------+----------------------+--------+-----+---------------------------+-----------------+--------+--------+-----------+--------------------------------+-----------------+");
     }
 
     public void generateTable() {
-        String format = "| %-10s | %-20s | %-6s | %-10s | %-3s | %-25s | %-15s | %-6.2f | %-6.2f | %-9s | %-8s | %-30s | %-15s | %-15s |%n";
-        System.out.printf(format, getIDNumber(), getFullName(), getGender(), getYob(), getAge(), getAddress(), getTelephoneNumber(), getHeight(), getWeight(), getBloodType(), isAllergies(), getAllergyDetails(), getSpecialization(), getMedicines());
-        System.out.println("+------------+----------------------+--------+------------+-----+---------------------------+-----------------+--------+--------+-----------+----------+--------------------------------+-----------------+------------------+");
+        String format = "|%-8s| %-20s | %-6s | %-3s | %-25s | %-15s | %-6.2f | %-6.2f | %-9s | %-30s | %-15s |%n";
+        System.out.printf(format, getIDNumber(), getFullName(), getGender(), getAge(), getAddress(), getTelephoneNumber(), getHeight(), getWeight(), getBloodType(), getAllergyDetails(), getSpecialization());
+        System.out.println("+--------+----------------------+--------+-----+---------------------------+-----------------+--------+--------+-----------+--------------------------------+-----------------+");
     }
 }

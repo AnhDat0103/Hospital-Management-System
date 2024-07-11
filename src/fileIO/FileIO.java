@@ -8,7 +8,6 @@ import models.enums.Education;
 import models.enums.Gender;
 import models.enums.Specialization;
 
-import javax.print.Doc;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -67,7 +66,6 @@ public class FileIO {
                 }
             });
         } catch (IOException e) {
-            System.out.println("data is null");
         }
         return doctors;
     }
@@ -80,7 +78,6 @@ public class FileIO {
                writer.newLine();
            }
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -116,7 +113,6 @@ public class FileIO {
                 }
             });
         } catch (IOException e) {
-            System.out.println("data is null");
         }
         return patients;
     }
@@ -147,11 +143,10 @@ public class FileIO {
                     String name = data[1];
                     DosageForm dosageForm = DosageForm.valueOf(data[2]);
                     String strength = data[3];
-                    medicines.add(new Medicine(name, dosageForm, strength));
+                    medicines.add(new Medicine(ID, name, dosageForm, strength));
                 }
             });
         } catch (IOException e) {
-            System.out.println("data is null");
         }
         return medicines;
     }
