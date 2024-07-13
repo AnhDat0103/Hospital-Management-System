@@ -281,7 +281,7 @@ public class Validate {
     }
 
     private static boolean checkBloodType(String bloodType) {
-        String pattern = "A|B|AB|O" ;
+        String pattern = "A|B|AB|o|O|a|b|ab" ;
         return bloodType != null && bloodType.matches(pattern);
     }
     public static String getBloodType(Scanner scanner) {
