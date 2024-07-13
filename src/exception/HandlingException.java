@@ -1,4 +1,6 @@
 package exception;
+import models.AdminAccount;
+import models.enums.Gender;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -36,6 +38,7 @@ public class HandlingException {
         formatter.setLenient(false);
         while (true) {
             try {
+                System.out.print("Enter birth date(DD-MM-YYYY): ");
                 String date = scanner.nextLine();
                 formatter.parse(date);
                 return date;
@@ -45,44 +48,38 @@ public class HandlingException {
         }
     }
 
-    // Calculate age from birthdate
-    public static int toAge(String date) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        formatter.setLenient(false);
-        long diff = new Date().getTime() - formatter.parse(date).getTime();
-        return (int) (TimeUnit.MILLISECONDS.toDays(diff) / 365.25);
+    //METHOD TO TAKE GENDER
+    public static Gender getGender(Scanner sc) {
+        Gender gender = null;
+        int choiceGender;
+        do {
+            System.out.printf("Gender?: %10s"," ");
+            System.out.printf("%10s|%10s|%10s|%10s", "1.MALE", "2.FEMALE ", " Your choice:", " ");
+            choiceGender = HandlingException.getInteger(sc);
+            if (choiceGender == 1) {
+                gender = Gender.MALE;
+            } else if (choiceGender == 2) {
+                gender = Gender.FEMALE;
+            }
+            else {
+                System.out.println("Invalid Gender");
+            }
+        } while ( choiceGender != 1 && choiceGender != 2);
+        return gender;
     }
 
-    // Format name properly
-    public static String formatName(String name) {
-        String[] words = name.toLowerCase().trim().split("\\s+");
-        StringBuilder sb = new StringBuilder();
 
-        for (String word : words) {
-            if (!word.isEmpty()) {
-                sb.append(Character.toUpperCase(word.charAt(0)))
-                        .append(word.substring(1))
-                        .append(" ");
-            }
-        }
-        return sb.toString().trim();
-    }
-
-    // Get valid telephone number
-    public static String getTelephoneNumber(Scanner scanner) {
-        while (true) {
-            String telephone = scanner.nextLine();
-            if (checkTelephone(telephone)) {
-                return telephone;
-            } else {
-                System.out.println("Invalid telephone number. Please enter a valid telephone number in the format +XXX-XXXXXXXX.");
-            }
+    // METHOD OF ADMIN
+    public static boolean checkAdministration(String userName, String password) throws ParseException {
+        AdminAccount adminAccount = new AdminAccount();
+        if (userName.matches(adminAccount.getUserName()) && password.matches(adminAccount.getPassword())) {
+            return true;
+        } else {
+            throw new ParseException("user name or password is incorrect", 0);
         }
     }
 
-    // Check if telephone number is valid
-    private static boolean checkTelephone(String telephone) {
-        String pattern = "\\+\\d{3}-\\d{8}";
-        return telephone != null && telephone.matches(pattern);
-    }
+
+
+
 }

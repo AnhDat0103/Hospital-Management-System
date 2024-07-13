@@ -1,0 +1,3 @@
+2| Paracetamol| LIQUIDS| 500 mg, 650 mg
+3| Ibuprofen| TABLETS| 200 mg, 400 mg
+4| Amoxicillin| TABLETS| 250 mg, 500 mg

@@ -1,0 +1,1 @@
+pcdl4455| phi| long| MALE| 10-10-2020| 3| Hai Phong| +123-14725896| true| di ung tao| 170.0| 65.0| AB| CARDIOLOGY

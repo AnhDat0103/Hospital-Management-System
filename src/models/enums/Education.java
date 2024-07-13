@@ -1,4 +1,4 @@
-package models;
+package models.enums;
 
 public enum Education {
     // Các bằng cấp của bác sĩ trong bệnh viện

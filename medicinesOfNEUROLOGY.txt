@@ -1,0 +1,3 @@
+11| Metoprolol| TABLETS | 50 mg, 100 mg
+12| Atorvastatin| TABLETS | 10 mg, 20 mg
+13| Azithromycin| TABLETS | 250 mg, 500 mg

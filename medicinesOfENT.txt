@@ -1,0 +1,3 @@
+5| Metformin| TABLETS| 500 mg, 850 mg, 1000 mg
+6| Omeprazole| LOZENGES| 20 mg, 40 mg
+7| Lisinopril| TABLETS| 10 mg, 20 mg

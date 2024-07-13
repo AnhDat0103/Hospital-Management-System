@@ -1,0 +1,2 @@
+pcdl8899| lien hop| quoc| MALE| 12-12-2000| 23| Ha Noi| +980-12345678| true| di ung do ngot| 175.0| 69.0| o| CARDIOLOGY
+pcdl6677| linh| nguyen| FEMALE| 12-12-2008| 15| Ha Noi| +567-12345678| false|  | 156.0| 50.0| o| CARDIOLOGY

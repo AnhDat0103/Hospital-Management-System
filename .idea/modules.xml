@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../HE186039-KIMDINHTUAN-SE1910-PRO192-PT2/HE186039-KIMDINHTUAN-SE1910-PRO192-PT2.iml" filepath="$PROJECT_DIR$/../../HE186039-KIMDINHTUAN-SE1910-PRO192-PT2/HE186039-KIMDINHTUAN-SE1910-PRO192-PT2.iml" />
       <module fileurl="file://$PROJECT_DIR$/Hospital-Management-System.iml" filepath="$PROJECT_DIR$/Hospital-Management-System.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../HE186039-KIMDINHTUAN-SE1910-PRO192-PT2/Student/Student.iml" filepath="$PROJECT_DIR$/../../HE186039-KIMDINHTUAN-SE1910-PRO192-PT2/Student/Student.iml" />
     </modules>
   </component>
 </project>
