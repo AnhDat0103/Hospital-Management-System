@@ -106,15 +106,11 @@ public class PatientController {
 
         String telephone = Validate.getTelephoneNumber(sc);
 
-        System.out.print("Enter Height of Patient(DV: Centime): ");
-        double height = HandlingException.getDouble(sc);
+        double height = Validate.getHeight(sc);
 
+        double weight = Validate.getWeight(sc);
 
-        System.out.print("Enter Weight of Patient(DV: Kilogram): ");
-        double weight = HandlingException.getDouble(sc);
-
-        System.out.print("Enter the BloodType of Patient: ");
-        String bloodType = sc.nextLine();
+        String bloodType = Validate.getBloodType(sc);
 
         do{
             System.out.printf("Allergies?: %10s"," ");

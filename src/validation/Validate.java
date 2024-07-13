@@ -1,5 +1,6 @@
 package validation;
 
+import exception.HandlingException;
 import fileIO.FileIO;
 import models.enums.Action;
 
@@ -277,5 +278,61 @@ public class Validate {
             }
         }
         return "";
+    }
+
+    private static boolean checkBloodType(String bloodType) {
+        String pattern = "A|B|AB|O" ;
+        return bloodType != null && bloodType.matches(pattern);
+    }
+    public static String getBloodType(Scanner scanner) {
+        while (true) {
+            System.out.print("Enter blood type: ");
+            String bloodType = scanner.nextLine();
+            if (checkBloodType(bloodType)) {
+                return bloodType;
+            } else{
+                System.out.println("Invalid blood type. Please enter a valid blood type.");
+            }
+        }
+    }
+    private static boolean checkHeight(double height) {
+        final double MIN_HEIGHT = 0;
+        if (height < MIN_HEIGHT) {
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean checkWeight(double weight) {
+        final double MIN_WEIGHT = 0;
+        if (weight < MIN_WEIGHT) {
+            return false;
+        }
+        return true;
+    }
+    public static double getHeight(Scanner scanner) {
+        final double MIN_HEIGHT = 0;
+        while (true) {
+            System.out.print("Enter height (cm): ");
+            double height = HandlingException.getDouble(scanner);
+            if (checkHeight(height)) {
+                return height;
+            }
+            System.out.print("Invalid height. Please enter a value between " + MIN_HEIGHT + "cm.");
+            scanner.nextLine(); // Clear the newline character from the buffer
+        }
+    }
+
+    public static double getWeight(Scanner scanner) {
+        final double MIN_WEIGHT = 0;
+        while (true) {
+            System.out.print("Enter weight (kg): ");
+            double weight = scanner.nextInt();
+            if (checkWeight(weight)) {
+                return weight;
+            }
+            System.out.print("Invalid weight. Please enter a value between " + MIN_WEIGHT +"kg.");
+            scanner.nextLine(); // Clear the newline character from the buffer
+        }
     }
 }

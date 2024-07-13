@@ -1,4 +1,4 @@
-pcdl3344| long| thanh| MALE| 04-03-2000| 24| Ha Duong| +125-12345678| true| di ung trung| 170.0| 71.0| o| CARDIOLOGY
+pcdl4455| phi| long| MALE| 10-10-2020| 3| Hai Phong| +123-14725896| true| di ung tao| 170.0| 65.0| AB| CARDIOLOGY
 pcdl1144| dsakj| hadjs| MALE| 12-12-2000| 23| Ashdas| +123-12345678| true| asdj| 12.0| 12.0| o| CARDIOLOGY
 pcdl5432| man| cidan| MALE| 12-12-1998| 25| Cidan| +123-12346578| false|  | 178.0| 80.0| o| CARDIOLOGY
 pcdl0001| Manh| Quan| MALE| 09-09-2009| 14| Hai Duong| +123-12345678| false|  | 140.0| 34.0| a| CARDIOLOGY

@@ -28,9 +28,6 @@ public class DoctorController {
     private List<Doctor> doctorListOfNEUROLOGY = new ArrayList<>();   // list of NEUROLOGY. The list has information of doctors, patient in NEUROLOGY.
     private List<Doctor> doctorListOfGERIATRIC = new ArrayList<>();// list of GERIATRIC. The list has information of doctors, patient in GERIATRIC.
 
-    PatientController patientController = new PatientController();
-    MedicineController medicineController  = new MedicineController();
-
     public DoctorController() {
     }
 
